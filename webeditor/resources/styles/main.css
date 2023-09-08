@@ -1,0 +1,56 @@
+.highlight {
+    background-color: rgb(192, 192, 192);
+}
+
+.badge {
+    color: aliceblue;
+    background-color: rgb(60, 197, 252);
+
+}
+
+.field-item {
+    background-color: rgb(228, 228, 228);
+    margin-bottom: 0.3em;
+
+}
+
+.field-name {
+    margin-left: 1em;
+    cursor: pointer;
+}
+
+.field-name:active {
+    color: rgb(60, 197, 252);
+}
+
+.active {
+    background-color: rgb(60, 197, 252);
+}
+
+.field-type {
+
+    max-width: 5em;
+}
+
+.list-group-item
+{
+    cursor: pointer;
+}
+
+
+#eventsMenu {
+    background-color: red;
+}
+
+#resetButton
+{
+    background-color: rgb(60, 197, 252);
+    max-height: 2em;
+}
+
+#searchBar
+{
+    width: 40%;
+    height: 50px;
+    margin-left: 35%;
+}

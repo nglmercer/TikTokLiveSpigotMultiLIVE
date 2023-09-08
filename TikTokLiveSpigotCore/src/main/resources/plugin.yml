@@ -1,0 +1,4 @@
+name: TikTokLiveSpigot
+version: '${project.version}'
+main: io.github.jwdeveloper.spigot.tiktok.core.TikTokLiveSpigotMain
+api-version: 1.17

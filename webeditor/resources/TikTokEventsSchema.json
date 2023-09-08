@@ -1,0 +1,555 @@
+[
+  {
+    "javaClassName": "TikTokBarrageMessageEvent",
+    "name": "onBarrageMessage",
+    "fields": {
+      "event.barrageData.eventType": "String",
+      "event.barrageData.label": "String",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long",
+      "event.user.description": "String",
+      "event.user.followers": "Long",
+      "event.user.following": "Long",
+      "event.user.followsHost": "Long",
+      "event.user.nickName": "String",
+      "event.user.uniqueId": "String",
+      "event.user.userId": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokCaptionEvent",
+    "name": "onCaption",
+    "fields": {
+      "event.captionTimeStamp": "Long",
+      "event.iSOLanguage": "String",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.text": "String",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokCommentEvent",
+    "name": "onComment",
+    "fields": {
+      "event.language": "String",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.text": "String",
+      "event.timeStamp": "Long",
+      "event.user.description": "String",
+      "event.user.followers": "Long",
+      "event.user.following": "Long",
+      "event.user.followsHost": "Long",
+      "event.user.nickName": "String",
+      "event.user.uniqueId": "String",
+      "event.user.userId": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokConnectedEvent",
+    "name": "onConnected",
+    "fields": {}
+  },
+  {
+    "javaClassName": "TikTokDetectMessageEvent",
+    "name": "onDetectMessage",
+    "fields": {
+      "event.language": "String",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokDisconnectedEvent",
+    "name": "onDisconnected",
+    "fields": {}
+  },
+  {
+    "javaClassName": "TikTokEmoteEvent",
+    "name": "onEmote",
+    "fields": {
+      "event.emoteId": "String",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long",
+      "event.user.description": "String",
+      "event.user.followers": "Long",
+      "event.user.following": "Long",
+      "event.user.followsHost": "Long",
+      "event.user.nickName": "String",
+      "event.user.uniqueId": "String",
+      "event.user.userId": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokEnvelopeEvent",
+    "name": "onEnvelope",
+    "fields": {
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long",
+      "event.user.description": "String",
+      "event.user.followers": "Long",
+      "event.user.following": "Long",
+      "event.user.followsHost": "Long",
+      "event.user.nickName": "String",
+      "event.user.uniqueId": "String",
+      "event.user.userId": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokErrorEvent",
+    "name": "onError",
+    "fields": {
+      "event.exception.cause": "Throwable",
+      "event.exception.depth": "Int",
+      "event.exception.detailMessage": "String"
+    }
+  },
+  {
+    "javaClassName": "TikTokFollowEvent",
+    "name": "onFollow",
+    "fields": {
+      "event.messageId": "Long",
+      "event.newFollower.description": "String",
+      "event.newFollower.followers": "Long",
+      "event.newFollower.following": "Long",
+      "event.newFollower.followsHost": "Long",
+      "event.newFollower.nickName": "String",
+      "event.newFollower.uniqueId": "String",
+      "event.newFollower.userId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long",
+      "event.totalFollowers": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokGiftBroadcastEvent",
+    "name": "onGiftBroadcast",
+    "fields": {
+      "event.messageId": "Long",
+      "event.notifyEventType": "String",
+      "event.notifyLabel": "String",
+      "event.notifyType": "String",
+      "event.roomId": "Long",
+      "event.shortURL": "String",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokGiftMessageEvent",
+    "name": "onGiftMessage",
+    "fields": {
+      "event.comboCount": "Long",
+      "event.gift.description": "String",
+      "event.gift.diamondCost": "Integer",
+      "event.gift.id": "Long",
+      "event.gift.name": "String",
+      "event.gift.type": "Integer",
+      "event.messageId": "Long",
+      "event.purchaseId": "String",
+      "event.receipt": "String",
+      "event.roomId": "Long",
+      "event.sender.description": "String",
+      "event.sender.followers": "Long",
+      "event.sender.following": "Long",
+      "event.sender.followsHost": "Long",
+      "event.sender.nickName": "String",
+      "event.sender.uniqueId": "String",
+      "event.sender.userId": "Long",
+      "event.streakFinished": "Boolean",
+      "event.streakIndex": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokGoalUpdateEvent",
+    "name": "onGoalUpdate",
+    "fields": {
+      "event.eventType": "String",
+      "event.goalId": "Long",
+      "event.label": "String",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokHeaderEvent",
+    "name": "onHeader",
+    "fields": {
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokIMDeleteEvent",
+    "name": "onIMDelete",
+    "fields": {
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokInRoomBannerEvent",
+    "name": "onInRoomBanner",
+    "fields": {
+      "event.jSON": "String",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokJoinEvent",
+    "name": "onJoin",
+    "fields": {
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long",
+      "event.totalViewers": "Long",
+      "event.user.description": "String",
+      "event.user.followers": "Long",
+      "event.user.following": "Long",
+      "event.user.followsHost": "Long",
+      "event.user.nickName": "String",
+      "event.user.uniqueId": "String",
+      "event.user.userId": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokLikeEvent",
+    "name": "onLike",
+    "fields": {
+      "event.count": "Integer",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.sender.description": "String",
+      "event.sender.followers": "Long",
+      "event.sender.following": "Long",
+      "event.sender.followsHost": "Long",
+      "event.sender.nickName": "String",
+      "event.sender.uniqueId": "String",
+      "event.sender.userId": "Long",
+      "event.timeStamp": "Long",
+      "event.totalLikes": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokLinkLayerMessageEvent",
+    "name": "onLinkLayerMessage",
+    "fields": {
+      "event.link1.id1": "Long",
+      "event.link1.id2": "Long",
+      "event.link2.id1": "Long",
+      "event.link2.id2": "Long",
+      "event.linkId": "Long",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokLinkMessageEvent",
+    "name": "onLinkMessage",
+    "fields": {
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long",
+      "event.token": "String",
+      "event.user.description": "String",
+      "event.user.followers": "Long",
+      "event.user.following": "Long",
+      "event.user.followsHost": "Long",
+      "event.user.nickName": "String",
+      "event.user.uniqueId": "String",
+      "event.user.userId": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokLinkMicArmiesEvent",
+    "name": "onLinkMicArmies",
+    "fields": {
+      "event.battleId": "Long",
+      "event.battleStatus": "Integer",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokLinkMicBattleEvent",
+    "name": "onLinkMicBattle",
+    "fields": {
+      "event.battleId": "Long",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokLinkMicFanTicketEvent",
+    "name": "onLinkMicFanTicket",
+    "fields": {
+      "event.data1": "Integer",
+      "event.data2": "Integer",
+      "event.id": "Long",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokLinkMicMethodEvent",
+    "name": "onLinkMicMethod",
+    "fields": {
+      "event.jSON": "String",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokLiveClientEvent",
+    "name": "onLiveClient",
+    "fields": {}
+  },
+  {
+    "javaClassName": "TikTokLiveEndedEvent",
+    "name": "onLiveEnded",
+    "fields": {}
+  },
+  {
+    "javaClassName": "TikTokLivePausedEvent",
+    "name": "onLivePaused",
+    "fields": {}
+  },
+  {
+    "javaClassName": "TikTokPollMessageEvent",
+    "name": "onPollMessage",
+    "fields": {
+      "event.id": "Long",
+      "event.messageId": "Long",
+      "event.option1.user.description": "String",
+      "event.option1.user.followers": "Long",
+      "event.option1.user.following": "Long",
+      "event.option1.user.followsHost": "Long",
+      "event.option1.user.nickName": "String",
+      "event.option1.user.uniqueId": "String",
+      "event.option1.user.userId": "Long",
+      "event.option2.user.description": "String",
+      "event.option2.user.followers": "Long",
+      "event.option2.user.following": "Long",
+      "event.option2.user.followsHost": "Long",
+      "event.option2.user.nickName": "String",
+      "event.option2.user.uniqueId": "String",
+      "event.option2.user.userId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokQuestionEvent",
+    "name": "onQuestion",
+    "fields": {
+      "event.messageId": "Long",
+      "event.questionId": "Long",
+      "event.roomId": "Long",
+      "event.text": "String",
+      "event.time": "Long",
+      "event.timeStamp": "Long",
+      "event.user.description": "String",
+      "event.user.followers": "Long",
+      "event.user.following": "Long",
+      "event.user.followsHost": "Long",
+      "event.user.nickName": "String",
+      "event.user.uniqueId": "String",
+      "event.user.userId": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokRankTextEvent",
+    "name": "onRankText",
+    "fields": {
+      "event.eventType": "String",
+      "event.label": "String",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokRankUpdateEvent",
+    "name": "onRankUpdate",
+    "fields": {
+      "event.color": "String",
+      "event.eventType": "String",
+      "event.label": "String",
+      "event.messageId": "Long",
+      "event.rank": "String",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokRoomMessageEvent",
+    "name": "onRoomMessage",
+    "fields": {
+      "event.host.description": "String",
+      "event.host.followers": "Long",
+      "event.host.following": "Long",
+      "event.host.followsHost": "Long",
+      "event.host.nickName": "String",
+      "event.host.uniqueId": "String",
+      "event.host.userId": "Long",
+      "event.hostLanguage": "String",
+      "event.message": "String",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokRoomPinMessageEvent",
+    "name": "onRoomPinMessage",
+    "fields": {
+      "event.comment.language": "String",
+      "event.comment.messageId": "Long",
+      "event.comment.roomId": "Long",
+      "event.comment.text": "String",
+      "event.comment.timeStamp": "Long",
+      "event.comment.user.description": "String",
+      "event.comment.user.followers": "Long",
+      "event.comment.user.following": "Long",
+      "event.comment.user.followsHost": "Long",
+      "event.comment.user.nickName": "String",
+      "event.comment.user.uniqueId": "String",
+      "event.comment.user.userId": "Long",
+      "event.messageId": "Long",
+      "event.pinTimeStamp": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokRoomViewerDataEvent",
+    "name": "onRoomViewerData",
+    "fields": {
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long",
+      "event.viewerCount": "Integer"
+    }
+  },
+  {
+    "javaClassName": "TikTokShareEvent",
+    "name": "onShare",
+    "fields": {
+      "event.amount": "Integer",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long",
+      "event.user.description": "String",
+      "event.user.followers": "Long",
+      "event.user.following": "Long",
+      "event.user.followsHost": "Long",
+      "event.user.nickName": "String",
+      "event.user.uniqueId": "String",
+      "event.user.userId": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokShopMessageEvent",
+    "name": "onShopMessage",
+    "fields": {
+      "event.messageId": "Long",
+      "event.price": "String",
+      "event.roomId": "Long",
+      "event.shopName": "String",
+      "event.shopUrl": "String",
+      "event.timeStamp": "Long",
+      "event.title": "String"
+    }
+  },
+  {
+    "javaClassName": "TikTokSubNotifyEvent",
+    "name": "onSubNotify",
+    "fields": {
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long",
+      "event.user.description": "String",
+      "event.user.followers": "Long",
+      "event.user.following": "Long",
+      "event.user.followsHost": "Long",
+      "event.user.nickName": "String",
+      "event.user.uniqueId": "String",
+      "event.user.userId": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokSubscribeEvent",
+    "name": "onSubscribe",
+    "fields": {
+      "event.messageId": "Long",
+      "event.newSubscriber.description": "String",
+      "event.newSubscriber.followers": "Long",
+      "event.newSubscriber.following": "Long",
+      "event.newSubscriber.followsHost": "Long",
+      "event.newSubscriber.nickName": "String",
+      "event.newSubscriber.uniqueId": "String",
+      "event.newSubscriber.userId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long"
+    }
+  },
+  {
+    "javaClassName": "TikTokUnauthorizedMemberEvent",
+    "name": "onUnauthorizedMember",
+    "fields": {
+      "event.data": "String",
+      "event.event.data1": "String",
+      "event.event.data2": "String",
+      "event.messageId": "Long",
+      "event.roomId": "Long",
+      "event.timeStamp": "Long",
+      "event.underlying.data1": "String",
+      "event.underlying.data2": "String"
+    }
+  },
+  {
+    "javaClassName": "TikTokUnhandledControlEvent",
+    "name": "onUnhandledControl",
+    "fields": {}
+  },
+  {
+    "javaClassName": "TikTokUnhandledEvent",
+    "name": "onUnhandled",
+    "fields": {}
+  },
+  {
+    "javaClassName": "TikTokUnhandledMemberEvent",
+    "name": "onUnhandledMember",
+    "fields": {}
+  },
+  {
+    "javaClassName": "TikTokUnhandledSocialEvent",
+    "name": "onUnhandledSocial",
+    "fields": {}
+  },
+  {
+    "javaClassName": "TikTokUnhandledWebsocketMessageEvent",
+    "name": "onUnhandledWebsocketMessage",
+    "fields": {}
+  },
+  {
+    "javaClassName": "TikTokWebsocketMessageEvent",
+    "name": "onWebsocketMessage",
+    "fields": {}
+  }
+]
