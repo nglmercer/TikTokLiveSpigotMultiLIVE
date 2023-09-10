@@ -3,18 +3,21 @@ package io.github.jwdeveloper.spigot.tiktok.core.profiles.interpreter;
 import io.github.jwdeveloper.ff.core.common.java.StringUtils;
 import io.github.jwdeveloper.ff.core.injector.api.annotations.Injection;
 import io.github.jwdeveloper.ff.core.injector.api.enums.LifeTime;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.CodeBlock;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.ProfileEventCommand;
 import io.github.jwdeveloper.spigot.tiktok.core.profiles.deserializer.models.ProfileElementModel;
 import io.github.jwdeveloper.spigot.tiktok.core.profiles.deserializer.models.ProfileModel;
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.ParameterType;
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.ProfileCommandParameter;
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.ProfileEventCommand;
+import io.github.jwdeveloper.spigot.tiktok.core.profiles.interpreter.blocks.Expression;
+import io.github.jwdeveloper.spigot.tiktok.core.profiles.interpreter.blocks.IfExpressionBlock;
+import io.github.jwdeveloper.spigot.tiktok.core.profiles.interpreter.blocks.PrimitiveExpression;
+import io.github.jwdeveloper.spigot.tiktok.core.profiles.interpreter.blocks.RepeatBlock;
+import io.github.jwdeveloper.spigot.tiktok.core.profiles.interpreter.blocks.switchh.CaseSwitchBlock;
+import io.github.jwdeveloper.spigot.tiktok.core.profiles.interpreter.blocks.switchh.SwitchExpressionBlock;
+import io.github.jwdeveloper.tiktok.events.TikTokEvent;
 
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Injection(lifeTime = LifeTime.TRANSIENT)
@@ -62,26 +65,14 @@ public class ProfileInterpreter {
     private ProfileEventCommand getSingleCommand(Class<?> clazz, String stringCommand) {
 
 
-        var parametersString = extractBetweenDelimiters(stringCommand);
+        var codeContent = extractBetweenDelimiters(stringCommand);
 
-        var parameters = new ArrayList<ProfileCommandParameter>();
+        var blocks = new ArrayList<CodeBlock>();
         var index = 0;
-        for (var parameterString : parametersString) {
-            var parameter = new ProfileCommandParameter();
-
-            var type = ParameterType.Unknown;
-            if (parameterString.startsWith("tiktok")) {
-                type = ParameterType.TikTok;
-            }
-            if (parameterString.startsWith("event")) {
-                type = ParameterType.Event;
-            }
-
-            parameter.setType(type);
-            parameter.setIndex(index);
-            parameter.setPath(parameterString);
-
-            parameters.add(parameter);
+        for (var content : codeContent) {
+            var block = getCodeBlock(content);
+            block.setBlockIndex(index);
+            blocks.add(block);
             index++;
         }
 
@@ -90,9 +81,110 @@ public class ProfileInterpreter {
         var command = new ProfileEventCommand();
         command.setCommandString(formattedCommand);
         command.setEventClass(clazz);
-        command.setParameters(parameters);
+        command.setCodeBlocks(blocks);
 
         return command;
+    }
+
+
+    private CodeBlock getCodeBlock(String content) {
+        if (content.startsWith("if")) {
+            return getIfExpression(content);
+        }
+        if(content.startsWith("repeat"))
+        {
+            return getRepeatBlock(content);
+        }
+        return getPrimitive(content);
+    }
+
+    private Expression getPrimitive(String content)
+    {
+        if(content.startsWith("event"))
+        {
+            return new PrimitiveExpression(content, TikTokEvent.class);
+        }
+
+        if(Objects.equals(content, "true") || Objects.equals(content, "false"))
+        {
+            return new PrimitiveExpression(content, boolean.class);
+        }
+        var regex = "-?\\d+(\\.\\d+)?";
+        var pattern = Pattern.compile(regex);
+        var matcher = pattern.matcher(content);
+        if(matcher.find())
+        {
+            return new PrimitiveExpression(content, float.class);
+        }
+
+        return new PrimitiveExpression(content, String.class);
+    }
+
+    private CodeBlock getRepeatBlock(String content)
+    {
+        String regex = "\\brepeat\\s+(\\d+)\\b";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(content);
+
+        if (!matcher.find())
+        {
+            return new RepeatBlock(1);
+        }
+
+        String numberStr = matcher.group(1);
+        var value =  Integer.parseInt(numberStr);
+        return new RepeatBlock(value);
+    }
+
+    private IfExpressionBlock getIfExpression(String content) {
+        var regex = "if\\s+(.+)\\s+(==|>=|<=|>|<)\\s+(.+)";
+        var pattern = Pattern.compile(regex);
+
+        var matcher = pattern.matcher(content);
+
+        if (!matcher.find()) {
+            throw new RuntimeException("Bad If implementation: " + content);
+        }
+        var valueLeft = matcher.group(1);
+        var operator = matcher.group(2);
+        var valueRight = matcher.group(3);
+        return new IfExpressionBlock(getPrimitive(valueLeft), operator, getPrimitive(valueRight));
+    }
+
+    private SwitchExpressionBlock getSwitchExpression(String content)
+    {
+        String regex = "switch\\s+([^\\s]+)\\s+(.+?)(?=(?:\\s*case\\s+\"[^\"]+\")|\\s*default|$)";
+        var pattern = Pattern.compile(regex);
+
+        var matcher = pattern.matcher(content);
+
+        if (!matcher.find()) {
+            throw new RuntimeException("Bad Switch implementation: " + content);
+        }
+
+        var inputValue = matcher.group(1);
+        var switchBodyValue = matcher.group(2);
+        return new SwitchExpressionBlock(getPrimitive(inputValue), getSwitchCaseses(switchBodyValue));
+    }
+
+
+    private List<CaseSwitchBlock> getSwitchCaseses(String content)
+    {
+        var result = new ArrayList<CaseSwitchBlock>();
+        var regex = "case\\s+\"(.+)\"\\s+([^]+?)(?=\\bcase\\b|\\bdefault\\b|$)";
+
+        // Compile the regex pattern
+        var pattern = Pattern.compile(regex, Pattern.DOTALL);
+
+        // Create a matcher for the input
+        var matcher = pattern.matcher(content);
+
+        while (matcher.find()) {
+            var caseValue = matcher.group(1).trim();
+            var caseCommand = matcher.group(2).trim();
+            result.add(new CaseSwitchBlock(false, caseValue,getCodeBlock(caseCommand)));
+        }
+        return result;
     }
 
     private List<String> extractBetweenDelimiters(String text) {

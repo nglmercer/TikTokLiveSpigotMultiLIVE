@@ -3,14 +3,15 @@ package io.github.jwdeveloper.spigot.tiktok.core.profiles.processor;
 import io.github.jwdeveloper.ff.core.common.java.StringUtils;
 import io.github.jwdeveloper.ff.core.injector.api.annotations.Injection;
 import io.github.jwdeveloper.ff.core.injector.api.enums.LifeTime;
+import io.github.jwdeveloper.spigot.tiktok.core.profiles.interpreter.blocks.IfExpressionBlock;
+import io.github.jwdeveloper.spigot.tiktok.core.profiles.interpreter.blocks.RepeatBlock;
 import io.github.jwdeveloper.spigot.tiktok.core.profiles.processor.models.ProfileProcessorResult;
 import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.ProfileCommandParameter;
 import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.ProfileEventCommand;
 import io.github.jwdeveloper.tiktok.events.TikTokEvent;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.List;
 
 @Injection(lifeTime = LifeTime.TRANSIENT)
 public class ProfileProcessor {
@@ -24,61 +25,55 @@ public class ProfileProcessor {
 
         var commands = events.get(eventClass);
         var processedCommands = new ArrayList<String>();
-        for (var command : commands) {
+        for (var command : commands)
+        {
             var processedCmd = processCommand(tikTokEvent, command);
-            processedCommands.add(processedCmd);
+            processedCommands.addAll(processedCmd);
         }
         return new ProfileProcessorResult(tikTokEvent, profile, processedCommands);
     }
 
-    private String processCommand(TikTokEvent event, ProfileEventCommand command) {
-        var processedParameters = new Object[command.getParameters().size()];
-        for (var parameter : command.getParameters()) {
-            var processedParameter = processEventParameter(event, parameter);
-            processedParameters[parameter.getIndex()] = processedParameter;
+    private List<String> processCommand(TikTokEvent event, ProfileEventCommand command) {
+        var processedParameters = new Object[command.getCodeBlocks().size()];
+        var repetitions = 1;
+        for (var codeBlock : command.getCodeBlocks())
+        {
+            if(codeBlock instanceof IfExpressionBlock)
+            {
+                var result = (boolean) codeBlock.execute(event);
+                if(!result)
+                {
+                    return List.of();
+                }
+                processedParameters[codeBlock.getBlockIndex()] = StringUtils.EMPTY;
+                continue;
+            }
+            if(codeBlock instanceof RepeatBlock)
+            {
+                repetitions = (int)codeBlock.execute(event);
+                processedParameters[codeBlock.getBlockIndex()] = StringUtils.EMPTY;
+                continue;
+            }
+            processedParameters[codeBlock.getBlockIndex()] = codeBlock.execute(event);
         }
 
         var commandStr = command.getCommandString();
-        if (commandStr.startsWith("/")) {
-            commandStr = commandStr.replace("/", StringUtils.EMPTY);
+
+        var cmdOutput = String.format(commandStr, processedParameters);
+        if (cmdOutput.contains("/")) {
+            cmdOutput = cmdOutput.replace("/", StringUtils.EMPTY);
         }
 
-        return String.format(commandStr, processedParameters);
-    }
-
-
-    private String processEventParameter(TikTokEvent tikTokEvent, ProfileCommandParameter parameter) {
-        var value = getFieldValueByPath(tikTokEvent, parameter.getPath(), true);
-        return value;
-    }
-
-
-    private String getFieldValueByPath(Object object, String path, boolean skipFirst) {
-        var tokenizer = new StringTokenizer(path, ".");
-        var currentObject = object;
-
-        var isSkipped = false;
-        while (tokenizer.hasMoreTokens()) {
-            if (skipFirst && !isSkipped) {
-                tokenizer.nextToken();
-                isSkipped = true;
-                continue;
-            }
-
-            try {
-                var currentField = tokenizer.nextToken();
-                var field = currentObject.getClass().getDeclaredField(currentField);
-                field.setAccessible(true);
-                currentObject = field.get(currentObject);
-
-                if (currentObject == null) {
-                    return "NULL";
-                }
-            } catch (Exception e) {
-                return "NULL";
-            }
+        var output = new ArrayList<String>();
+        for(var i =0;i<repetitions;i++)
+        {
+            output.add(cmdOutput);
         }
-
-        return currentObject.toString();
+        return output;
     }
+
+
+
+
+
 }

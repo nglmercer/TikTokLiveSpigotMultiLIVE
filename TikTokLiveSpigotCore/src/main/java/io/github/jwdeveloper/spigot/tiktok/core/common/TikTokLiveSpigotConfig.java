@@ -7,15 +7,15 @@ import lombok.Data;
 @Data
 public class TikTokLiveSpigotConfig
 {
-    @YamlSection(name = "auto-reload-profiles")
-    private boolean reloadProfiles = true;
+    @YamlSection(name = "auto-reload-profiles", description = "Dynamic reloads profiles when `profile.yml` file got changed")
+    private boolean reloadProfiles;
 
-    @YamlSection(name = "auto-connect")
-    private boolean autoConnectOnStart = false;
+    @YamlSection(name = "auto-connect", description = "Connects to live when server starts")
+    private boolean autoConnectOnStart;
 
-    @YamlSection(name = "tiktok-user")
-    private String tiktokUser = StringUtils.EMPTY;
+    @YamlSection(name = "tiktok-user" , description = "Default tiktok user")
+    private String tiktokUser;
 
-    @YamlSection(name = "profile")
-    private String profile  = "default";
+    @YamlSection(name = "profile" , description = "Default  profile")
+    private String profile;
 }

@@ -9,11 +9,5 @@ import java.util.List;
 @Data
 public class TikTokLiveSpigotMeta
 {
-
-    private String currentProfile = StringUtils.EMPTY;
-
-    private String currentHost = StringUtils.EMPTY;
-
     private List<String> hosts = new ArrayList<>();
-
 }

@@ -3,22 +3,21 @@ package io.github.jwdeveloper.spigot.tiktok.core.commands;
 import io.github.jwdeveloper.ff.core.spigot.commands.api.enums.ArgumentDisplay;
 import io.github.jwdeveloper.ff.extension.commands.api.annotations.Argument;
 import io.github.jwdeveloper.ff.extension.commands.api.annotations.Command;
+import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotPermissions;
-import io.github.jwdeveloper.spigot.tiktok.core.TikTokLiveSpigotClient;
-import io.github.jwdeveloper.spigot.tiktok.core.services.ProfileService;
 import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
 @Command(name = "tiktoklive")
-public class TikTokLiveSpigotCommands {
-    private final ProfileService profileService;
-    private final TikTokLiveSpigotClient tikTokSpigotClient;
+public class TikTokLiveSpigotCommands
+{
+    private final TikTokLiveSpigotApi tiktokApi;
 
-    public TikTokLiveSpigotCommands(ProfileService profileService, TikTokLiveSpigotClient client) {
-        this.profileService = profileService;
-        this.tikTokSpigotClient = client;
+    public TikTokLiveSpigotCommands(TikTokLiveSpigotApi profileService)
+    {
+        this.tiktokApi = profileService;
     }
 
     @Command(name = "connect", permissions = {TikTokLiveSpigotPermissions.CONNECT})
@@ -27,12 +26,12 @@ public class TikTokLiveSpigotCommands {
             onTabComplete = "onTikTokUserComplete")
     public void connect(Player player, String name)
     {
-        tikTokSpigotClient.connect(name);
+        tiktokApi.connect(player, name);
     }
 
-    public List<String> onTikTokUserComplete()
-    {
-        return profileService.getProfiles().stream().map(Profile::getName).toList();
+    @Command(name = "disconnect", permissions = {TikTokLiveSpigotPermissions.DISCONNECT})
+    public void disconnect(Player player) {
+        tiktokApi.disconnect(player);
     }
 
 
@@ -40,32 +39,26 @@ public class TikTokLiveSpigotCommands {
     @Argument(name = "profile-name",
             displayMode = ArgumentDisplay.TAB_COMPLETE,
             onTabComplete = "onProfileTabComplete")
-    private void onProfile(Player player, String name)
+    private void setProfile(Player player, String name)
     {
-        var result = profileService.setCurrentProfile(name);
-        if (result.isSuccess()) {
-            player.sendMessage(result.getMessage());
-        } else {
-            player.sendMessage(result.getMessage());
-        }
+        tiktokApi.setProfile(player,name);
     }
 
-    public List<String> onProfileTabComplete()
+    @Command(name = "profile-editor", permissions = {TikTokLiveSpigotPermissions.EDITOR})
+    public void openEditor(Player player)
     {
-        return profileService.getProfiles().stream().map(Profile::getName).toList();
+        tiktokApi.openProfileEditor(player);
     }
 
 
-
-
-    @Command(name = "profile-editor")
-    public void editor() {
-
+    private List<String> onTikTokUserComplete()
+    {
+        return tiktokApi.getRecentHostsNames();
     }
 
-    @Command(name = "disconnect", permissions = {TikTokLiveSpigotPermissions.DISCONNECT})
-    public void disconnect() {
-        tikTokSpigotClient.disconnect();
-    }
 
+    private List<String> onProfileTabComplete()
+    {
+        return tiktokApi.getAvailableProfiles().stream().map(Profile::getName).toList();
+    }
 }

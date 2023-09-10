@@ -9,7 +9,7 @@ public class ProfileEventCommand
 {
     private Class<?> eventClass;
 
-    private List<ProfileCommandParameter> parameters;
+    private List<CodeBlock> codeBlocks;
 
     private String commandString;
 }
