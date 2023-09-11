@@ -44,6 +44,15 @@ public class TikTokSpigotEventListener implements TikTokEventListener {
     @TikTokEventHandler
     public void onEvent(LiveClient liveClient, TikTokEvent tikTokEvent)
     {
+
+        for(var entry : liveClient.getGiftManager().getGiftsInfo().entrySet())
+        {
+            var giftId = entry.getKey();
+            var giftInfo = entry.getValue();
+
+            System.out.println(giftInfo.getName());
+        }
+
         var currentProfile = profileService.getCurrentProfile();
         var result = profileProcessor.processProfile(tikTokEvent, currentProfile);
         var commands = result.getProcessedCommands();
