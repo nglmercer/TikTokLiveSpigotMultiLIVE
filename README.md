@@ -14,14 +14,14 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 
 <a href="google.com" target="blank" >
 
-<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/541f2c75-ae42-4385-a3cc-ecc222542004"  width="300" >
+<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/541f2c75-ae42-4385-a3cc-ecc222542004"  width="30%" >
 </img>
 </a>
 
 
 <a href="google.com" target="blank" >
 
-<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/541f2c75-ae42-4385-a3cc-ecc222542004"  width="300" >
+<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/541f2c75-ae42-4385-a3cc-ecc222542004"  width="30%" >
 </img>
 </a>
 
@@ -29,7 +29,7 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 
 <a href="google.com" target="blank" >
 
-<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/541f2c75-ae42-4385-a3cc-ecc222542004"  width="300" >
+<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/541f2c75-ae42-4385-a3cc-ecc222542004"  width="30%" >
 </img>
 </a>
 
