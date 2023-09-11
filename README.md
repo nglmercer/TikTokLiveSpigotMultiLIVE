@@ -14,7 +14,7 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 
 <a href="google.com" target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/discord.png" width = "100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/discord.png"  width="300" >
 </img>
 </a>
 
@@ -22,7 +22,7 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 
 <a href="google.com" target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/github.png" width = "100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/github.png"  width="300" >
 </img>
 </a>
 
@@ -30,7 +30,7 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 
 <a href="google.com" target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/support.png" width = "100%">
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/support.png"  width="300">
 </img>
 </a>
 
