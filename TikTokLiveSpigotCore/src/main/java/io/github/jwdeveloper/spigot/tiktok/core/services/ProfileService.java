@@ -14,12 +14,14 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 @Injection
 public class ProfileService implements TikTokProfileService {
     private final List<Profile> profiles;
     private final FluentConfigFile<TikTokLiveSpigotConfig> config;
     private final FluentFile<ProfilesFileWatcher> fileWatcher;
+    private Consumer<List<Profile>> onUpdated;
 
     public ProfileService(FluentConfigFile<TikTokLiveSpigotConfig> config,
                           FluentFile<ProfilesFileWatcher> fileWatcher) {
@@ -27,6 +29,7 @@ public class ProfileService implements TikTokProfileService {
         this.config = config;
         this.fileWatcher = fileWatcher;
         this.fileWatcher.getTarget().onProfilesUpdate(this::updateProfiles);
+        this.onUpdated = (e)-> {};
     }
 
     @Override
@@ -79,10 +82,19 @@ public class ProfileService implements TikTokProfileService {
         return profiles.get(0);
     }
 
-    private void updateProfiles(List<Profile> newProfiles) {
+    private void updateProfiles(List<Profile> newProfiles)
+    {
+        if(!config.get().isReloadProfiles())
+        {
+            return;
+        }
         profiles.clear();
         profiles.addAll(newProfiles);
+        onUpdated.accept(profiles);
+    }
 
-
+    public void onProfilesUpdated(Consumer<List<Profile>> profiles)
+    {
+        onUpdated = profiles;
     }
 }

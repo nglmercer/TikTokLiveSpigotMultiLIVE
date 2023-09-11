@@ -1,12 +1,13 @@
 package io.github.jwdeveloper.spigot.tiktok.core;
 
-import io.github.jwdeveloper.ff.core.logger.plugin.FluentLogger;
 import io.github.jwdeveloper.ff.extension.files.api.FluentFileType;
 import io.github.jwdeveloper.ff.plugin.FluentPlugin;
+import io.github.jwdeveloper.ff.plugin.FluentPluginBuilder;
 import io.github.jwdeveloper.spigot.tiktok.core.commands.TikTokLiveSpigotCommands;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConst;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotMeta;
 import io.github.jwdeveloper.spigot.tiktok.core.services.ProfilesFileWatcher;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 ///gamerule sendCommandFeedback false
@@ -15,9 +16,16 @@ public final class TikTokLiveSpigotMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        useFluentFramework(this).create();
+    }
 
+    public static FluentPluginBuilder useFluentFramework(Plugin plugin) {
+        return useFluentFramework(plugin, FluentPlugin.initialize(plugin));
+    }
 
-        FluentPlugin.initialize(this)
+    public static FluentPluginBuilder useFluentFramework(Plugin plugin, FluentPluginBuilder builder) {
+        return builder
+                .withTranslator()
                 .withExtension(new TikTokLiveSpigotExtension())
                 .withBstatsMetrics(TikTokLiveSpigotConst.STATISTIC_ID)
                 .withFiles(options ->
@@ -26,7 +34,7 @@ public final class TikTokLiveSpigotMain extends JavaPlugin {
                     options.addFluentFile(model ->
                     {
                         model.setAllowAutomaticSaving(false);
-                        model.setCustomPath(this.getDataFolder().getAbsolutePath());
+                        model.setCustomPath(plugin.getDataFolder().getAbsolutePath());
                         model.setType(FluentFileType.FileWatcher);
                         model.setClassType(ProfilesFileWatcher.class);
                     });
@@ -40,7 +48,6 @@ public final class TikTokLiveSpigotMain extends JavaPlugin {
                     e.getGithubOptionsBuilder()
                             .setGithubUserName("jwdeveloper")
                             .setRepositoryName("TikTokLiveSpigot");
-                })
-                .create();
+                });
     }
 }

@@ -1,6 +1,6 @@
 package io.github.jwdeveloper.spigot.tiktok.core.common;
 
-import io.github.jwdeveloper.ff.core.common.java.StringUtils;
+
 import io.github.jwdeveloper.ff.core.files.yaml.api.annotations.YamlSection;
 import lombok.Data;
 

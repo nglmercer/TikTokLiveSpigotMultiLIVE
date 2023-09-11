@@ -17,6 +17,8 @@ public class TikTokLiveSpigotExtension implements FluentApiExtension
 
         builder.loggerConfiguration();
         builder.container().registerSigleton(TikTokLiveSpigotApi.class, TikTokLiveSpigotApiImpl.class);
+
+        builder.permissions().setBasePermissionName("TikTokLiveSpigot");
     }
 
 
@@ -26,7 +28,12 @@ public class TikTokLiveSpigotExtension implements FluentApiExtension
         var client = fluentAPI.container().findInjection(TikTokLiveSpigotClient.class);
         var profileService =fluentAPI.container().findInjection(ProfileService.class);
         var config = fluentAPI.container().findInjection(TikTokLiveSpigotConfig.class);
-        profileService.reloadProfiles();
+
+        if(profileService != null)
+        {
+            profileService.reloadProfiles();
+        }
+
         if(config.isAutoConnectOnStart())
         {
             client.connect(config.getTiktokUser());
