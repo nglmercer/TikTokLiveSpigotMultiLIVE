@@ -7,28 +7,26 @@
 
 <div align="center" >
 
-
-<a href="https://www.buymeacoffee.com/jwdev" target="blank" >
-
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.svg" width="30%" height="100%" >
+<a href="https://www.spigotmc.org/members/jacekwoln.869774/" target="blank" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/spigot.svg" width="32%" height="100%" >
 </img>
 </a>
+
+<a href="https://www.buymeacoffee.com/jwdev" target="blank" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.svg" width="32%" height="100%" >
+</img>
+</a>
+
 
 
 
 <a href="https://discord.gg/fk3W4e3K" target="blank" >
-
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/discord.svg" width="30%" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/discord.svg" width="32%" height="100%" >
 </img>
 </a>
 
 
 
-<a href="https://www.spigotmc.org/members/jacekwoln.869774/" target="blank" >
-
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/spigot.svg" width="30%" height="100%" >
-</img>
-</a>
 
 </div>
 
@@ -46,23 +44,23 @@
 <div align="center" >
 
 <h1>Introdution</h1>
-
 </div>
 
 
 
+<a href="https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW" target="blank" >
 
-<a href="https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW" target="blank"  >
-
-<img src="https://img.youtube.com/vi/0KSN7dfi7PQ/0.jpg" width="20%" align ="right"  >
+<img src="https://img.youtube.com/vi/0KSN7dfi7PQ/0.jpg" width="20%" >
 </img>
 </a>
 
+> Integrate your minecraft server with TikTok live in 10 seconds!
 
- > Integrate your minecraft server with TikTok live in 10 seconds!
 
 
-Ever wanted to bring the excitement of TikTok Lives directly into your Minecraft world? With TikTokLiveSpigot, now you can! Recieve TikTok events such as,**Likes**,**Gifts**,**Follows**,etc.. and trigger them as minecraft commands everything is configurable in yaml fileEver wanted to bring the excitement of TikTok Lives directly into your Minecraft world? With TikTokLiveSpigot, now you can! Recieve TikTok events such as,**Likes**,**Gifts**,**Follows**,etc.. and trigger them as minecraft commands everything is configurable in yaml file
+
+Ever wanted to bring the excitement of TikTok Lives directly into your Minecraft world? With TikTokLiveSpigot, now you can! Recieve TikTok events such as,**Likes**,**Gifts**,**Follows**,etc.. and trigger them as minecraft commands everything is configurable in yaml file
+
 
 <div align="center" >
 
