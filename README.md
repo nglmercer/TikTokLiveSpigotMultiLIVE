@@ -52,7 +52,7 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/permissions.svg" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/permissions.svg" width="80%" height="100%" >
 </img>
 </a>
 
@@ -102,7 +102,7 @@ permissions:
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/config.svg" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/config.svg" width="80%" height="100%" >
 </img>
 </a>
 
@@ -202,7 +202,7 @@ tiktok-live:
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/commands.svg" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/commands.svg" width="80%" height="100%" >
 </img>
 </a>
 
