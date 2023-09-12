@@ -1,9 +1,9 @@
 
-
-
 <div align="center" >
- <h1>TikTokLiveSpigot</h1>
+
+<h1>TikTokLiveJava</h1>
 </div>
+
 
 <div align="center" >
 
@@ -47,21 +47,22 @@
 
 <h1>Introdution</h1>
 
-
-<a href="https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW" target="blank" >
-
-<img src="https://img.youtube.com/vi/0KSN7dfi7PQ/0.jpg" width="20%" >
-</img>
-</a>
-
 </div>
 
 
 
 
+<a href="https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW" target="blank"  >
 
-Ever wanted to bring the excitement of TikTok Lives directly into your Minecraft world? With TikTokLiveSpigot, now you can! Recieve TikTok events such as,**Likes**,**Gifts**,**Follows**,etc.. and trigger them as minecraft commands everything is configurable in yaml file
+<img src="https://img.youtube.com/vi/0KSN7dfi7PQ/0.jpg" width="20%" align ="right"  >
+</img>
+</a>
 
+
+ > Integrate your minecraft server with TikTok live in 10 seconds!
+
+
+Ever wanted to bring the excitement of TikTok Lives directly into your Minecraft world? With TikTokLiveSpigot, now you can! Recieve TikTok events such as,**Likes**,**Gifts**,**Follows**,etc.. and trigger them as minecraft commands everything is configurable in yaml fileEver wanted to bring the excitement of TikTok Lives directly into your Minecraft world? With TikTokLiveSpigot, now you can! Recieve TikTok events such as,**Likes**,**Gifts**,**Follows**,etc.. and trigger them as minecraft commands everything is configurable in yaml file
 
 <div align="center" >
 
@@ -199,7 +200,24 @@ permissions:
 
 
 ```yaml
-# ##<UpdaterConfig>
+# ##<TikTokLiveSpigotConfig>
+# 
+# tiktok-live.auto-reload-profiles
+#  Dynamic reloads profiles when `profile.yml` file got changed
+# 
+# 
+# tiktok-live.auto-connect
+#  Connects to live when server starts
+# 
+# 
+# tiktok-live.tiktok-user
+#  Default tiktok user
+# 
+# 
+# tiktok-live.profile
+#  Default  profile
+# 
+# </TikTokLiveSpigotConfig>#<UpdaterConfig>
 # 
 # plugin.updater.force-update
 #  if there is new update, it is downloaded and installed
@@ -222,24 +240,7 @@ permissions:
 #  Determinate how frequent data is saved to files, value in minutes
 # 
 # 
-# </FluentFilesConfig>#<TikTokLiveSpigotConfig>
-# 
-# tiktok-live.auto-reload-profiles
-#  Dynamic reloads profiles when `profile.yml` file got changed
-# 
-# 
-# tiktok-live.auto-connect
-#  Connects to live when server starts
-# 
-# 
-# tiktok-live.tiktok-user
-#  Default tiktok user
-# 
-# 
-# tiktok-live.profile
-#  Default  profile
-# 
-# </TikTokLiveSpigotConfig>#<TranslatorConfig>
+# </FluentFilesConfig>#<TranslatorConfig>
 # 
 # plugin.translator.language
 #  If you want add your language open `languages` folder copy `en.yml`
