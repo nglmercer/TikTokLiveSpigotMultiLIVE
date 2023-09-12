@@ -45,10 +45,22 @@
 Ever wanted to bring the excitement of TikTok Lives directly into your Minecraft world? With TikTokLiveSpigot, now you can! Recieve TikTok events such as,**Likes**,**Gifts**,**Follows**,etc.. and trigger them as minecraft commands everything is configurable in yaml file
 
 
+<div align="center" >
+
+
+<a href="https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW" target="blank" >
+
+<img src="https://img.youtube.com/vi/0KSN7dfi7PQ/0.jpg" >
+</img>
+</a>
+
+</div>
+
+
 <h2>Key Features</h2>
 
 
-**🎁 Gift Acknowledgment 🎁**
+**🎁 Gifts 🎁**
 
 > Receive a gift on TikTok Live? Your Minecraft server will thank the sender by name and even spawn creepers if the gift is extravagant!
 
@@ -265,8 +277,8 @@ commands:
       - language
       - connect
       - profile
-      - profile-editor
       - disconnect
+      - profile-editor
       - updater
     permissions: 
       - 
@@ -315,17 +327,17 @@ commands:
       - profile-name:
           type: text
 
-# profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.editor
-    can-use: 
-      - command_sender
-
 # disconnect
   disconnect: 
     permissions: 
       - tiktoklivespigot.disconnect
+    can-use: 
+      - command_sender
+
+# profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.editor
     can-use: 
       - command_sender
 
