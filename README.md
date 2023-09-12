@@ -46,6 +46,8 @@ Ever wanted to bring the excitement of TikTok Lives directly into your Minecraft
 
 
 <h2>Key Features</h2>
+
+
 **🎁 Gift Acknowledgment 🎁**
 
 > Receive a gift on TikTok Live? Your Minecraft server will thank the sender by name and even spawn creepers if the gift is extravagant!
