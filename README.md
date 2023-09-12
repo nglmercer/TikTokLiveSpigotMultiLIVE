@@ -43,6 +43,8 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 </div>
 
 
+<div align="center" >
+
 
 <a target="blank" >
 
@@ -52,7 +54,7 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 
 
 <details>
-<summary align="center">open config</summary>
+<summary>open config</summary>
 
 
 ```yml
@@ -134,6 +136,10 @@ tiktok-live:
 
 </details>
 
+</div>
+
+
+<div align="center" >
 
 
 <a target="blank" >
@@ -176,6 +182,10 @@ permissions:
 
 </details>
 
+</div>
+
+
+<div align="center" >
 
 
 <a target="blank" >
@@ -202,8 +212,8 @@ commands:
       - language
       - connect
       - profile
-      - disconnect
       - profile-editor
+      - disconnect
       - updater
     permissions: 
       - 
@@ -252,17 +262,17 @@ commands:
       - profile-name:
           type: text
 
-# disconnect
-  disconnect: 
-    permissions: 
-      - tiktoklivespigot.disconnect
-    can-use: 
-      - command_sender
-
 # profile-editor
   profile-editor: 
     permissions: 
       - tiktoklivespigot.editor
+    can-use: 
+      - command_sender
+
+# disconnect
+  disconnect: 
+    permissions: 
+      - tiktoklivespigot.disconnect
     can-use: 
       - command_sender
 
@@ -278,4 +288,6 @@ commands:
 ```
 
 </details>
+
+</div>
 
