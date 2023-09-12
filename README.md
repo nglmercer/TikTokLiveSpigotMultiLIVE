@@ -37,15 +37,9 @@
 
 
 
-
-
-<h2>Integrate your minecraft server with TikTok live in 10 seconds!</h2>
-
-
-Ever wanted to bring the excitement of TikTok Lives directly into your Minecraft world? With TikTokLiveSpigot, now you can! Recieve TikTok events such as,**Likes**,**Gifts**,**Follows**,etc.. and trigger them as minecraft commands everything is configurable in yaml file
-
-
 <div align="center" >
+
+<h1>Integrate your minecraft server with TikTok live in 10 seconds!</h1>
 
 
 <a href="https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW" target="blank" >
@@ -57,29 +51,63 @@ Ever wanted to bring the excitement of TikTok Lives directly into your Minecraft
 </div>
 
 
-<h2>Key Features</h2>
 
 
-**🎁 Gifts 🎁**
+
+Ever wanted to bring the excitement of TikTok Lives directly into your Minecraft world? With TikTokLiveSpigot, now you can! Recieve TikTok events such as,**Likes**,**Gifts**,**Follows**,etc.. and trigger them as minecraft commands everything is configurable in yaml file
+
+
+<div align="center" >
+
+<h1>Key Features</h1>
+</div>
+
+
+
+
+<div align="center" >
+
+
+**🎁 Gifts 🎁**</div>
+
+
 
 > Receive a gift on TikTok Live? Your Minecraft server will thank the sender by name and even spawn creepers if the gift is extravagant!
 
 
 
 
-**💬 Real-Time Comments 💬**
+
+<div align="center" >
+
+
+**💬 Real-Time Comments 💬**</div>
+
+
 
 > When someone comments on your TikTok Live, watch as a zombie named after the commenter spawns in your Minecraft world!
 
 
 
 
-**🤯 Live Reactions 🤯**
+
+<div align="center" >
+
+
+**🤯 Live Reactions 🤯**</div>
+
+
 
 > Get instant health boosts or other in-game perks whenever someone likes your TikTok Live.
 
 
 
+
+
+<div align="center" >
+
+<h1>Video Tutorial</h1>
+</div>
 
 
 <h1>Events configuration</h1>
@@ -277,8 +305,8 @@ commands:
       - language
       - connect
       - profile
-      - disconnect
       - profile-editor
+      - disconnect
       - updater
     permissions: 
       - 
@@ -327,17 +355,17 @@ commands:
       - profile-name:
           type: text
 
-# disconnect
-  disconnect: 
-    permissions: 
-      - tiktoklivespigot.disconnect
-    can-use: 
-      - command_sender
-
 # profile-editor
   profile-editor: 
     permissions: 
       - tiktoklivespigot.editor
+    can-use: 
+      - command_sender
+
+# disconnect
+  disconnect: 
+    permissions: 
+      - tiktoklivespigot.disconnect
     can-use: 
       - command_sender
 
