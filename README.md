@@ -44,7 +44,7 @@
 
 <a href="https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW" target="blank" >
 
-<img src="https://img.youtube.com/vi/0KSN7dfi7PQ/0.jpg" >
+<img src="https://img.youtube.com/vi/0KSN7dfi7PQ/0.jpg" width="20%" >
 </img>
 </a>
 
@@ -193,24 +193,7 @@ permissions:
 
 
 ```yaml
-# ##<TikTokLiveSpigotConfig>
-# 
-# tiktok-live.auto-reload-profiles
-#  Dynamic reloads profiles when `profile.yml` file got changed
-# 
-# 
-# tiktok-live.auto-connect
-#  Connects to live when server starts
-# 
-# 
-# tiktok-live.tiktok-user
-#  Default tiktok user
-# 
-# 
-# tiktok-live.profile
-#  Default  profile
-# 
-# </TikTokLiveSpigotConfig>#<UpdaterConfig>
+# ##<UpdaterConfig>
 # 
 # plugin.updater.force-update
 #  if there is new update, it is downloaded and installed
@@ -233,7 +216,24 @@ permissions:
 #  Determinate how frequent data is saved to files, value in minutes
 # 
 # 
-# </FluentFilesConfig>#<TranslatorConfig>
+# </FluentFilesConfig>#<TikTokLiveSpigotConfig>
+# 
+# tiktok-live.auto-reload-profiles
+#  Dynamic reloads profiles when `profile.yml` file got changed
+# 
+# 
+# tiktok-live.auto-connect
+#  Connects to live when server starts
+# 
+# 
+# tiktok-live.tiktok-user
+#  Default tiktok user
+# 
+# 
+# tiktok-live.profile
+#  Default  profile
+# 
+# </TikTokLiveSpigotConfig>#<TranslatorConfig>
 # 
 # plugin.translator.language
 #  If you want add your language open `languages` folder copy `en.yml`
@@ -305,8 +305,8 @@ commands:
       - language
       - connect
       - profile
-      - profile-editor
       - disconnect
+      - profile-editor
       - updater
     permissions: 
       - 
@@ -355,17 +355,17 @@ commands:
       - profile-name:
           type: text
 
-# profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.editor
-    can-use: 
-      - command_sender
-
 # disconnect
   disconnect: 
     permissions: 
       - tiktoklivespigot.disconnect
+    can-use: 
+      - command_sender
+
+# profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.editor
     can-use: 
       - command_sender
 
