@@ -12,7 +12,7 @@
 
 <a href="https://www.buymeacoffee.com/jwdev" target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/support.png" width="30%" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners2/support.svg" width="30%" height="100%" >
 </img>
 </a>
 
@@ -20,7 +20,7 @@
 
 <a href="https://discord.gg/fk3W4e3K" target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/discord.png" width="30%" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners2/discord.svg" width="30%" height="100%" >
 </img>
 </a>
 
@@ -28,7 +28,7 @@
 
 <a href="https://www.spigotmc.org/members/jacekwoln.869774/" target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/spigot.png" width="30%" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners2/spigot.svg" width="30%" height="100%" >
 </img>
 </a>
 
@@ -52,7 +52,7 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/permissions.png" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners2/permissions.svg" height="100%" >
 </img>
 </a>
 
@@ -102,7 +102,7 @@ permissions:
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/config.png" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners2/config.svg" height="100%" >
 </img>
 </a>
 
@@ -202,7 +202,7 @@ tiktok-live:
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/commands.png" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners2/commands.svg" height="100%" >
 </img>
 </a>
 
@@ -226,8 +226,8 @@ commands:
       - language
       - connect
       - profile
-      - profile-editor
       - disconnect
+      - profile-editor
       - updater
     permissions: 
       - 
@@ -276,17 +276,17 @@ commands:
       - profile-name:
           type: text
 
-# profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.editor
-    can-use: 
-      - command_sender
-
 # disconnect
   disconnect: 
     permissions: 
       - tiktoklivespigot.disconnect
+    can-use: 
+      - command_sender
+
+# profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.editor
     can-use: 
       - command_sender
 
