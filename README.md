@@ -56,6 +56,8 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 <details>
 <summary>open config</summary>
 
+<div align="left" >
+
 
 ```yml
 # ##<TikTokLiveSpigotConfig>
@@ -133,6 +135,8 @@ tiktok-live:
   profile: ''
  
 ```
+</div>
+
 
 </details>
 
@@ -151,6 +155,8 @@ tiktok-live:
 
 <details>
 <summary>open permissions</summary>
+
+<div align="left" >
 
 
 ```yml
@@ -179,6 +185,8 @@ permissions:
 
  
 ```
+</div>
+
 
 </details>
 
@@ -197,6 +205,8 @@ permissions:
 
 <details>
 <summary>open commands</summary>
+
+<div align="left" >
 
 
 ```yml
@@ -286,6 +296,8 @@ commands:
 
  
 ```
+</div>
+
 
 </details>
 
