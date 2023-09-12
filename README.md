@@ -46,23 +46,24 @@ Ever wanted to bring the excitement of TikTok Lives directly into your Minecraft
 
 
 <h2>Key Features</h2>
-
-
- - **🎁 Gift Acknowledgment 🎁**
+**🎁 Gift Acknowledgment 🎁**
 
 > Receive a gift on TikTok Live? Your Minecraft server will thank the sender by name and even spawn creepers if the gift is extravagant!
 
 
 
- - **💬 Real-Time Comments 💬**
+
+**💬 Real-Time Comments 💬**
 
 > When someone comments on your TikTok Live, watch as a zombie named after the commenter spawns in your Minecraft world!
 
 
 
- - **🤯 Live Reactions 🤯**
+
+**🤯 Live Reactions 🤯**
 
 > Get instant health boosts or other in-game perks whenever someone likes your TikTok Live.
+
 
 
 
