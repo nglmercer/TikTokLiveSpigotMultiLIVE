@@ -12,7 +12,7 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 
 <a href="https://www.buymeacoffee.com/jwdev" target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/support.png" width="32%" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/support.png" width="33%" height="100%" >
 </img>
 </a>
 
