@@ -26,14 +26,6 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 
 
 
-<a href="https://github.com/jwdeveloper/TikTokLiveSpigot" target="blank" >
-
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/github.png" width="30%" height="100%" >
-</img>
-</a>
-
-
-
 <a href="https://www.spigotmc.org/members/jacekwoln.869774/" target="blank" >
 
 <img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/spigot.png" width="30%" height="100%" >
@@ -222,8 +214,8 @@ commands:
       - language
       - connect
       - profile
-      - profile-editor
       - disconnect
+      - profile-editor
       - updater
     permissions: 
       - 
@@ -272,17 +264,17 @@ commands:
       - profile-name:
           type: text
 
-# profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.editor
-    can-use: 
-      - command_sender
-
 # disconnect
   disconnect: 
     permissions: 
       - tiktoklivespigot.disconnect
+    can-use: 
+      - command_sender
+
+# profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.editor
     can-use: 
       - command_sender
 
