@@ -7,9 +7,10 @@
 
 <div align="center" >
 
+
 <a href="https://www.buymeacoffee.com/jwdev" target="blank" >
 
-<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/4305c8ee-c796-4bb0-a3f6-e78208328e84" width="30%" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.gif" width="30%" height="100%" >
 </img>
 </a>
 
@@ -31,7 +32,13 @@
 
 </div>
 
-![jw-guitar banner (4)](https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/310cc153-ca38-49da-bf1d-b2f200eaa063)
+
+
+<a target="blank" >
+
+<img src="https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.png" height="100%" >
+</img>
+</a>
 
 
 
@@ -303,9 +310,9 @@ commands:
     children: 
       - language
       - connect
-      - profile
-      - disconnect
       - profile-editor
+      - disconnect
+      - profile
       - updater
     permissions: 
       - tiktoklivespigot
@@ -335,7 +342,6 @@ commands:
     description: Changes plugin languages, changes will be applied after server reload. Change be use both be player or console
     usage: /tiktoklive language <language>
 
-
 # /tiktoklive connect
   connect: 
     permissions: 
@@ -347,6 +353,22 @@ commands:
           type: text
     usage: /tiktoklive connect
 
+# /tiktoklive profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.editor
+    can-use: 
+      - command_sender
+    usage: /tiktoklive profile-editor
+
+# /tiktoklive disconnect
+  disconnect: 
+    permissions: 
+      - tiktoklivespigot.disconnect
+    can-use: 
+      - command_sender
+    usage: /tiktoklive disconnect
+
 # /tiktoklive profile
   profile: 
     permissions: 
@@ -357,22 +379,6 @@ commands:
       - profile-name:
           type: text
     usage: /tiktoklive profile
-
-# /tiktoklive disconnect
-  disconnect: 
-    permissions: 
-      - tiktoklivespigot.disconnect
-    can-use: 
-      - command_sender
-    usage: /tiktoklive disconnect
-
-# /tiktoklive profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.editor
-    can-use: 
-      - command_sender
-    usage: /tiktoklive profile-editor
 
 # /tiktoklive updater
   updater: 
