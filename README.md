@@ -7,10 +7,9 @@
 
 <div align="center" >
 
-
 <a href="https://www.buymeacoffee.com/jwdev" target="blank" >
 
-<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/1300920a-044b-4b29-8ea2-9b2a5b3bb065" width="30%" height="100%" >
+<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/4305c8ee-c796-4bb0-a3f6-e78208328e84" width="30%" height="100%" >
 </img>
 </a>
 
