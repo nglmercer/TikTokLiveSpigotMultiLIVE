@@ -36,7 +36,7 @@
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.png" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.gif" height="100%" >
 </img>
 </a>
 
@@ -310,9 +310,9 @@ commands:
     children: 
       - language
       - connect
+      - profile
       - profile-editor
       - disconnect
-      - profile
       - updater
     permissions: 
       - tiktoklivespigot
@@ -353,6 +353,17 @@ commands:
           type: text
     usage: /tiktoklive connect
 
+# /tiktoklive profile
+  profile: 
+    permissions: 
+      - tiktoklivespigot.profile.set
+    can-use: 
+      - command_sender
+    arguments: 
+      - profile-name:
+          type: text
+    usage: /tiktoklive profile
+
 # /tiktoklive profile-editor
   profile-editor: 
     permissions: 
@@ -368,17 +379,6 @@ commands:
     can-use: 
       - command_sender
     usage: /tiktoklive disconnect
-
-# /tiktoklive profile
-  profile: 
-    permissions: 
-      - tiktoklivespigot.profile.set
-    can-use: 
-      - command_sender
-    arguments: 
-      - profile-name:
-          type: text
-    usage: /tiktoklive profile
 
 # /tiktoklive updater
   updater: 

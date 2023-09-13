@@ -2,7 +2,7 @@
 
 [CENTER][URL='https://www.buymeacoffee.com/jwdev'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.gif[/IMG][/URL][URL='https://discord.gg/fk3W4e3K'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/discord.svg[/IMG][/URL][URL='https://github.com/jwdeveloper/TikTokLiveSpigot'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/github.svg[/IMG][/URL][/CENTER]
 
-[IMG]https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.png[/IMG]
+[IMG]https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.gif[/IMG]
 
 
 
@@ -154,9 +154,9 @@ commands:
     children: 
       - language
       - connect
+      - profile
       - profile-editor
       - disconnect
-      - profile
       - updater
     permissions: 
       - tiktoklivespigot
@@ -197,6 +197,17 @@ commands:
           type: text
     usage: /tiktoklive connect
 
+# /tiktoklive profile
+  profile: 
+    permissions: 
+      - tiktoklivespigot.profile.set
+    can-use: 
+      - command_sender
+    arguments: 
+      - profile-name:
+          type: text
+    usage: /tiktoklive profile
+
 # /tiktoklive profile-editor
   profile-editor: 
     permissions: 
@@ -212,17 +223,6 @@ commands:
     can-use: 
       - command_sender
     usage: /tiktoklive disconnect
-
-# /tiktoklive profile
-  profile: 
-    permissions: 
-      - tiktoklivespigot.profile.set
-    can-use: 
-      - command_sender
-    arguments: 
-      - profile-name:
-          type: text
-    usage: /tiktoklive profile
 
 # /tiktoklive updater
   updater: 
