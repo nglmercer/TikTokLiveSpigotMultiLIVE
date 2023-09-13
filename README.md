@@ -104,6 +104,14 @@ What's next? Transform Tiktok events into Minecraft commands using configuration
 <h1>Events configuration</h1>
 </div>
 
+
+
+<a target="blank" >
+
+<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/7870cf29-31f1-4cb6-b2a6-ba10263268f1" >
+</img>
+</a>
+
 To start working go to[webeditor](https://jwdeveloper.github.io/TikTokLiveSpigot/webeditor/) and find TikTok event you are interested in
 <h5>How to add new profile?</h5>
 Remember before every command must start with dash
@@ -118,6 +126,12 @@ o inject data you need to open create code block ${ }And set as its content prop
 ```yaml
  example-profile: onLike: - /say ${event.user.nickName} thank you for like!  
 ```
+
+<div align="center" >
+
+<h1>Spigot documentation</h1>
+</div>
+
 
 <div align="center" >
 
@@ -298,8 +312,8 @@ commands:
       - language
       - connect
       - profile
-      - profile-editor
       - disconnect
+      - profile-editor
       - updater
     permissions: 
       - 
@@ -348,17 +362,17 @@ commands:
       - profile-name:
           type: text
 
-# profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.editor
-    can-use: 
-      - command_sender
-
 # disconnect
   disconnect: 
     permissions: 
       - tiktoklivespigot.disconnect
+    can-use: 
+      - command_sender
+
+# profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.editor
     can-use: 
       - command_sender
 
