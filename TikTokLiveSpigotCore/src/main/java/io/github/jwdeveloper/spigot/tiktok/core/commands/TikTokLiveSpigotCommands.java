@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-@Command(name = "tiktoklive")
+@Command(name = "tiktoklive", permissions = {TikTokLiveSpigotPermissions.TIKTOKLIVESPIGOT})
 public class TikTokLiveSpigotCommands
 {
     private final TikTokLiveSpigotApi tiktokApi;
@@ -20,10 +20,11 @@ public class TikTokLiveSpigotCommands
         this.tiktokApi = profileService;
     }
 
-    @Command(name = "connect", permissions = {TikTokLiveSpigotPermissions.CONNECT})
+
     @Argument(name = "tiktok-user",
             displayMode = ArgumentDisplay.TAB_COMPLETE,
             onTabComplete = "onTikTokUserComplete")
+    @Command(name = "connect", permissions = {TikTokLiveSpigotPermissions.CONNECT})
     public void connect(Player player, String name)
     {
         tiktokApi.connect(player, name);
@@ -35,10 +36,11 @@ public class TikTokLiveSpigotCommands
     }
 
 
-    @Command(name = "profile", permissions = {TikTokLiveSpigotPermissions.SET_PROFILE})
+
     @Argument(name = "profile-name",
             displayMode = ArgumentDisplay.TAB_COMPLETE,
             onTabComplete = "onProfileTabComplete")
+    @Command(name = "profile", permissions = {TikTokLiveSpigotPermissions.SET_PROFILE})
     private void setProfile(Player player, String name)
     {
         tiktokApi.setProfile(player,name);
