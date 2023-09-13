@@ -32,11 +32,7 @@
 
 </div>
 
-![jw-guitar banner](https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/411be87d-2ae9-4c00-9584-ee4b18871643)
-
-
-
-
+![jw-guitar banner (4)](https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/310cc153-ca38-49da-bf1d-b2f200eaa063)
 
 
 <div align="center" >
