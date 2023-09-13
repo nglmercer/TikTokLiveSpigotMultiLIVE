@@ -10,7 +10,7 @@
 
 <a href="https://www.buymeacoffee.com/jwdev" target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.gif" width="30%" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support_old.gif" width="30%" height="100%" >
 </img>
 </a>
 
@@ -154,25 +154,62 @@ o inject data you need to open create code block ${ }And set as its content prop
 ```yaml
 permissions: 
 
-# ======================================== ANNOTATION PermissionGroup NOT PRESENT ===
-  ANNOTATION PermissionGroup NOT PRESENT.*: 
+# ======================================== tiktoklivespigot =========================
+  tiktoklivespigot.*: 
     description: full access
 
-  ANNOTATION PermissionGroup NOT PRESENT.updater: 
+  tiktoklivespigot.commands: 
+    description: default
+
+# ======================================== tiktoklivespigot.gui =====================
+  tiktoklivespigot.gui.*: 
+    description: full access
+
+  tiktoklivespigot.gui.admin: 
+    description: default
+
+# ======================================== tiktoklivespigot.live ====================
+  tiktoklivespigot.live.*: 
+    description: full access
+
+  tiktoklivespigot.live.connect: 
+    description: user can connect to TikTokLive
+
+  tiktoklivespigot.live.disconnect: 
+    description: user can disconnect TikTokLive
+
+# ======================================== tiktoklivespigot.profiles ================
+  tiktoklivespigot.profiles.*: 
+    description: full access
+
+  tiktoklivespigot.profiles.change: 
+    description: user can change profiles
+
+  tiktoklivespigot.profiles.profile-editor: 
+    description: user can open ProfileEditor
+
+# ======================================== tiktoklivespigot.config ==================
+  tiktoklivespigot.config.*: 
+    description: full access
+
+  tiktoklivespigot.config.change: 
+    description: user can update config
+
+  tiktoklivespigot.updater: 
     description: Players with this permission can update plugin
 
-# ======================================== ANNOTATION PermissionGroup NOT PRESENT.TikTokLiveSpigot 
-  ANNOTATION PermissionGroup NOT PRESENT.TikTokLiveSpigot.*: 
+# ======================================== tiktoklivespigot.TikTokLiveSpigot ========
+  tiktoklivespigot.TikTokLiveSpigot.*: 
     description: full access
 
-# ======================================== ANNOTATION PermissionGroup NOT PRESENT.TikTokLiveSpigot.commands 
-  ANNOTATION PermissionGroup NOT PRESENT.TikTokLiveSpigot.commands.*: 
+# ======================================== tiktoklivespigot.TikTokLiveSpigot.commands 
+  tiktoklivespigot.TikTokLiveSpigot.commands.*: 
     description: full access
 
-  ANNOTATION PermissionGroup NOT PRESENT.TikTokLiveSpigot.commands.language: 
+  tiktoklivespigot.TikTokLiveSpigot.commands.language: 
     description: Change plugin language
 
-  ANNOTATION PermissionGroup NOT PRESENT.TikTokLiveSpigot.gui: 
+  tiktoklivespigot.TikTokLiveSpigot.gui: 
     description: default
 
  
@@ -202,24 +239,7 @@ permissions:
 
 
 ```yaml
-# ##<TikTokLiveSpigotConfig>
-# 
-# tiktok-live.auto-reload-profiles
-#  Dynamic reloads profiles when `profile.yml` file got changed
-# 
-# 
-# tiktok-live.auto-connect
-#  Connects to live when server starts
-# 
-# 
-# tiktok-live.tiktok-user
-#  Default tiktok user
-# 
-# 
-# tiktok-live.profile
-#  Default  profile
-# 
-# </TikTokLiveSpigotConfig>#<UpdaterConfig>
+# ##<UpdaterConfig>
 # 
 # plugin.updater.force-update
 #  if there is new update, it is downloaded and installed
@@ -242,7 +262,24 @@ permissions:
 #  Determinate how frequent data is saved to files, value in minutes
 # 
 # 
-# </FluentFilesConfig>#<TranslatorConfig>
+# </FluentFilesConfig>#<TikTokLiveSpigotConfig>
+# 
+# tiktok-live.auto-reload-profiles
+#  Dynamic reloads profiles when `profile.yml` file got changed
+# 
+# 
+# tiktok-live.auto-connect
+#  Connects to live when server starts
+# 
+# 
+# tiktok-live.tiktok-user
+#  Default tiktok user
+# 
+# 
+# tiktok-live.profile
+#  Default  profile
+# 
+# </TikTokLiveSpigotConfig>#<TranslatorConfig>
 # 
 # plugin.translator.language
 #  If you want add your language open `languages` folder copy `en.yml`
@@ -302,6 +339,15 @@ tiktok-live:
 
 
 ```yaml
+# Commands
+# /tiktoklive
+# /tiktoklive language <language>
+# /tiktoklive connect
+# /tiktoklive profile
+# /tiktoklive disconnect
+# /tiktoklive admin
+# /tiktoklive profile-editor
+# /tiktoklive updater
 
 
 commands: 
@@ -311,8 +357,9 @@ commands:
       - language
       - connect
       - profile
-      - profile-editor
       - disconnect
+      - admin
+      - profile-editor
       - updater
     permissions: 
       - tiktoklivespigot
@@ -364,14 +411,6 @@ commands:
           type: text
     usage: /tiktoklive profile
 
-# /tiktoklive profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.editor
-    can-use: 
-      - command_sender
-    usage: /tiktoklive profile-editor
-
 # /tiktoklive disconnect
   disconnect: 
     permissions: 
@@ -379,6 +418,22 @@ commands:
     can-use: 
       - command_sender
     usage: /tiktoklive disconnect
+
+# /tiktoklive admin
+  admin: 
+    permissions: 
+      - tiktoklivespigotgui.config
+    can-use: 
+      - command_sender
+    usage: /tiktoklive admin
+
+# /tiktoklive profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.editor
+    can-use: 
+      - command_sender
+    usage: /tiktoklive profile-editor
 
 # /tiktoklive updater
   updater: 
@@ -388,6 +443,7 @@ commands:
     usage: /tiktoklive updater
 
 
+: 
  
 ```
 </div>
