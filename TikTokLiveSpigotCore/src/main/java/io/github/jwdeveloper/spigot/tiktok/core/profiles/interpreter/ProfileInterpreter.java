@@ -114,7 +114,7 @@ public class ProfileInterpreter {
         var matcher = pattern.matcher(content);
         if(matcher.find())
         {
-            return new PrimitiveExpression(content, float.class);
+            return new PrimitiveExpression(content, Number.class);
         }
 
         return new PrimitiveExpression(content, String.class);
@@ -122,18 +122,17 @@ public class ProfileInterpreter {
 
     private CodeBlock getRepeatBlock(String content)
     {
-        String regex = "\\brepeat\\s+(\\d+)\\b";
+        String regex = "^repeat (\\d+|event.*)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(content);
-
         if (!matcher.find())
         {
             return new RepeatBlock(1);
         }
 
-        String numberStr = matcher.group(1);
-        var value =  Integer.parseInt(numberStr);
-        return new RepeatBlock(value);
+        var contentValue = matcher.group(1);
+        var primitive = getPrimitive(contentValue);
+        return new RepeatBlock(primitive);
     }
 
     private IfExpressionBlock getIfExpression(String content) {

@@ -1,22 +1,28 @@
+
+
+[CENTER][URL='https://www.buymeacoffee.com/jwdev'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.svg[/IMG][/URL][URL='https://discord.gg/fk3W4e3K'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/discord.svg[/IMG][/URL][URL='https://github.com/jwdeveloper/TikTokLiveSpigot'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/github.svg[/IMG][/URL][/CENTER]
+
 [IMG]https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.png[/IMG]
 
-[CENTER][URL='https://www.buymeacoffee.com/jwdev'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/support.png[/IMG][/URL][URL='https://discord.gg/fk3W4e3K'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/discord.png[/IMG][/URL][URL='https://github.com/jwdeveloper/TikTokLiveSpigot'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/github.png[/IMG][/URL][/CENTER]
+
+
+[CENTER][SIZE=8]Introdution[SIZE=8]Introdution[/SIZE][/SIZE][/CENTER]
+
+Ever wanted to bring the excitement of TikTok Lives directly into Minecraft? With TikTokLiveSpigot, now you can![B]Integrate your minecraft server with TikTok live in 10 seconds![/B]It is as simple as using
+[QUOTE]
+/tiktoklive connect MyTikTokUser
+[/QUOTE]
+
+
+What's next? Transform Tiktok events into Minecraft commands using[URL='https://github.com/jwdeveloper/TikTokLiveSpigot#events-configuration']event configuration[/URL]
 
 
 
+[CENTER][URL='https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW'][IMG]https://img.youtube.com/vi/0KSN7dfi7PQ/0.jpg[/IMG][/URL][/CENTER]
 
 
 
-
-
-
-
-
-A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live stream events such as comments and gifts in realtime from TikTok LIVE by connecting to TikTok's internal WebCast push service. The package includes a wrapper that connects to the WebCast service using just the username (uniqueId). This allows you to connect to your own live chat as well as the live chat of other streamers. No credentials are required. Besides Chat Comments, other events such as Members Joining, Gifts, Subscriptions, Viewers, Follows, Shares, Questions, Likes and Battles can be tracked. You can also send automatic messages into the chat by providing your Session ID.
-
-
-
-[CENTER][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/permissions.png[/IMG][SPOILER=open permissions]
+[CENTER][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/permissions.svg[/IMG][SPOILER=open permissions]
 
 
 [LEFT][CODE=yaml]
@@ -51,7 +57,7 @@ permissions:
 
 
 
-[CENTER][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/config.png[/IMG][SPOILER=open config]
+[CENTER][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/config.svg[/IMG][SPOILER=open config]
 
 
 [LEFT][CODE=yaml]
@@ -136,7 +142,7 @@ tiktok-live:
 
 
 
-[CENTER][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/commands.png[/IMG][SPOILER=open commands]
+[CENTER][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/commands.svg[/IMG][SPOILER=open commands]
 
 
 [LEFT][CODE=yaml]
@@ -152,8 +158,8 @@ commands:
       - language
       - connect
       - profile
-      - profile-editor
       - disconnect
+      - profile-editor
       - updater
     permissions: 
       - 
@@ -202,17 +208,17 @@ commands:
       - profile-name:
           type: text
 
-# profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.editor
-    can-use: 
-      - command_sender
-
 # disconnect
   disconnect: 
     permissions: 
       - tiktoklivespigot.disconnect
+    can-use: 
+      - command_sender
+
+# profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.editor
     can-use: 
       - command_sender
 

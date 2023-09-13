@@ -7,6 +7,8 @@ import io.github.jwdeveloper.ff.plugin.implementation.FluentApiSpigot;
 import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConfig;
 import io.github.jwdeveloper.spigot.tiktok.core.services.ProfileService;
+import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
 
 public class TikTokLiveSpigotExtension implements FluentApiExtension
 {
@@ -38,6 +40,11 @@ public class TikTokLiveSpigotExtension implements FluentApiExtension
         {
             client.connect(config.getTiktokUser());
         }
+
+        for(var world : Bukkit.getWorlds())
+        {
+            world.setGameRule(GameRule.SEND_COMMAND_FEEDBACK,false);
+        }
     }
 
     @Override
@@ -50,6 +57,10 @@ public class TikTokLiveSpigotExtension implements FluentApiExtension
         catch (Exception e)
         {
             FluentLogger.LOGGER.warning("Error while disconnecting client");
+        }
+        for(var world : Bukkit.getWorlds())
+        {
+            world.setGameRule(GameRule.SEND_COMMAND_FEEDBACK,true);
         }
     }
 }

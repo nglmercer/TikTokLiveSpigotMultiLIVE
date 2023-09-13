@@ -3,6 +3,7 @@ package io.github.jwdeveloper.spigot.tiktok.core.profiles.processor;
 import io.github.jwdeveloper.ff.core.common.java.StringUtils;
 import io.github.jwdeveloper.ff.core.injector.api.annotations.Injection;
 import io.github.jwdeveloper.ff.core.injector.api.enums.LifeTime;
+import io.github.jwdeveloper.ff.core.logger.plugin.FluentLogger;
 import io.github.jwdeveloper.spigot.tiktok.core.profiles.interpreter.blocks.IfExpressionBlock;
 import io.github.jwdeveloper.spigot.tiktok.core.profiles.interpreter.blocks.RepeatBlock;
 import io.github.jwdeveloper.spigot.tiktok.core.profiles.processor.models.ProfileProcessorResult;
@@ -35,7 +36,7 @@ public class ProfileProcessor {
 
     private List<String> processCommand(TikTokEvent event, ProfileEventCommand command) {
         var processedParameters = new Object[command.getCodeBlocks().size()];
-        var repetitions = 1;
+        var repetitions = 1f;
         for (var codeBlock : command.getCodeBlocks())
         {
             if(codeBlock instanceof IfExpressionBlock)
@@ -60,10 +61,18 @@ public class ProfileProcessor {
         var commandStr = command.getCommandString();
 
         var cmdOutput = String.format(commandStr, processedParameters);
+
         if (cmdOutput.contains("/")) {
             cmdOutput = cmdOutput.replace("/", StringUtils.EMPTY);
         }
+        var index = 0;
+        while (index < cmdOutput.length() && cmdOutput.charAt(index) == 32) {
+            index++;
+        }
+        cmdOutput = cmdOutput.substring(index);
 
+
+     //   FluentLogger.LOGGER.info("CHAR ZERO: ",first,(int)first);
         var output = new ArrayList<String>();
         for(var i =0;i<repetitions;i++)
         {

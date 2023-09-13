@@ -1,4 +1,38 @@
 
+<div align="center" >
+
+<h1>TikTokLiveJava</h1>
+</div>
+
+
+<div align="center" >
+
+
+<a href="https://www.buymeacoffee.com/jwdev" target="blank" >
+
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.svg" width="30%" height="100%" >
+</img>
+</a>
+
+
+
+<a href="https://discord.gg/fk3W4e3K" target="blank" >
+
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/discord.svg" width="30%" height="100%" >
+</img>
+</a>
+
+
+
+<a href="https://www.spigotmc.org/members/jacekwoln.869774/" target="blank" >
+
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/spigot.svg" width="30%" height="100%" >
+</img>
+</a>
+
+</div>
+
+
 
 <a target="blank" >
 
@@ -7,44 +41,98 @@
 </a>
 
 
+
+
+<div align="center" >
+
+<h1>Introdution</h1>
+</div>
+
+Ever wanted to bring the excitement of TikTok Lives directly into Minecraft? With TikTokLiveSpigot, now you can!**Integrate your minecraft server with TikTok live in 10 seconds!**It is as simple as using> /tiktoklive connect MyTikTokUser
+
+
+What's next? Transform Tiktok events into Minecraft commands using[event configuration](https://github.com/jwdeveloper/TikTokLiveSpigot#events-configuration) 
+
+
+
+<a href="https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW" align="right" target="blank" >
+
+<img src="https://img.youtube.com/vi/0KSN7dfi7PQ/hqdefault.jpg" width="38%" align="right" >
+</img>
+</a>
+
+
+
+
 <div align="center" >
 
 
-<a href="https://www.buymeacoffee.com/jwdev" target="blank" >
-
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/support.png" width="30%" height="100%" >
-</img>
-</a>
+**🎁 Gifts 🎁**</div>
 
 
 
-<a href="https://discord.gg/fk3W4e3K" target="blank" >
-
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/discord.png" width="30%" height="100%" >
-</img>
-</a>
+> Receive a gift on TikTok Live? Your Minecraft server will thank the sender by name and even spawn creepers if the gift is extravagant!
 
 
 
-<a href="https://www.spigotmc.org/members/jacekwoln.869774/" target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/spigot.png" width="30%" height="100%" >
-</img>
-</a>
 
+<div align="center" >
+
+
+**💬 Real-Time Comments 💬**</div>
+
+
+
+> When someone comments on your TikTok Live, watch as a zombie named after the commenter spawns in your Minecraft world!
+
+
+
+
+
+<div align="center" >
+
+
+**🤯 Live Reactions 🤯**</div>
+
+
+
+> Get instant health boosts or other in-game perks whenever someone likes your TikTok Live.
+
+
+
+<div align="center" >
+
+<h1>Events configuration</h1>
 </div>
 
 
 
+<a target="blank" >
 
+<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/7870cf29-31f1-4cb6-b2a6-ba10263268f1" >
+</img>
+</a>
 
+To start working go to[webeditor](https://jwdeveloper.github.io/TikTokLiveSpigot/webeditor/) and find TikTok event you are interested in
+<h5>How to add new profile?</h5>
+Remember before every command must start with dash
 
+```yaml
+ [profile name]: [tiktok event name]: - [command]  
+```
 
+<h5>How to inject event data?</h5>
+o inject data you need to open create code block ${ }And set as its content property of TikTok event you want to useAll available properties can be found[here](https://jwdeveloper.github.io/TikTokLiveSpigot/webeditor/) 
 
+```yaml
+ example-profile: onLike: - /say ${event.user.nickName} thank you for like!  
+```
 
+<div align="center" >
 
-
-A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live stream events such as comments and gifts in realtime from TikTok LIVE by connecting to TikTok's internal WebCast push service. The package includes a wrapper that connects to the WebCast service using just the username (uniqueId). This allows you to connect to your own live chat as well as the live chat of other streamers. No credentials are required. Besides Chat Comments, other events such as Members Joining, Gifts, Subscriptions, Viewers, Follows, Shares, Questions, Likes and Battles can be tracked. You can also send automatic messages into the chat by providing your Session ID.
+<h1>Spigot documentation</h1>
+</div>
 
 
 <div align="center" >
@@ -52,7 +140,7 @@ A Java library based on TikTokLive and TikTokLiveSharp. Use it to receive live s
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/permissions.png" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/permissions.svg" height="100%" >
 </img>
 </a>
 
@@ -102,7 +190,7 @@ permissions:
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/config.png" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/config.svg" height="100%" >
 </img>
 </a>
 
@@ -202,7 +290,7 @@ tiktok-live:
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/commands.png" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/commands.svg" height="100%" >
 </img>
 </a>
 
@@ -226,8 +314,8 @@ commands:
       - language
       - connect
       - profile
-      - profile-editor
       - disconnect
+      - profile-editor
       - updater
     permissions: 
       - 
@@ -276,17 +364,17 @@ commands:
       - profile-name:
           type: text
 
-# profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.editor
-    can-use: 
-      - command_sender
-
 # disconnect
   disconnect: 
     permissions: 
       - tiktoklivespigot.disconnect
+    can-use: 
+      - command_sender
+
+# profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.editor
     can-use: 
       - command_sender
 
