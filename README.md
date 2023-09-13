@@ -48,9 +48,10 @@
 <h1>Introdution</h1>
 </div>
 
-**Integrate your minecraft server with TikTok live in 10 seconds!**.Ever wanted to bring the excitement of TikTok Lives directly into your Minecraft world? With TikTokLiveSpigot, now you can! Recieve TikTok events such as,**Likes**,**Gifts**,**Follows**,etc.. and trigger them as minecraft commands everything is configurable in yaml file
+Ever wanted to bring the excitement of TikTok Lives directly into Minecraft? With TikTokLiveSpigot, now you can!**Integrate your minecraft server with TikTok live in 10 seconds!**It is as simple as using> /tiktoklive connect MyTikTokUser
 
 
+What's next? Transform Tiktok events into Minecraft commands using configuration file
 
 <a href="https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW" align="right" target="blank" >
 
@@ -98,7 +99,11 @@
 
 
 
+<div align="center" >
+
 <h1>Events configuration</h1>
+</div>
+
 To start working go to[webeditor](https://jwdeveloper.github.io/TikTokLiveSpigot/webeditor/) and find TikTok event you are interested in
 <h5>How to add new profile?</h5>
 Remember before every command must start with dash
@@ -293,8 +298,8 @@ commands:
       - language
       - connect
       - profile
-      - disconnect
       - profile-editor
+      - disconnect
       - updater
     permissions: 
       - 
@@ -343,17 +348,17 @@ commands:
       - profile-name:
           type: text
 
-# disconnect
-  disconnect: 
-    permissions: 
-      - tiktoklivespigot.disconnect
-    can-use: 
-      - command_sender
-
 # profile-editor
   profile-editor: 
     permissions: 
       - tiktoklivespigot.editor
+    can-use: 
+      - command_sender
+
+# disconnect
+  disconnect: 
+    permissions: 
+      - tiktoklivespigot.disconnect
     can-use: 
       - command_sender
 
