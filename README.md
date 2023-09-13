@@ -9,10 +9,8 @@
 
 
 <a href="https://www.buymeacoffee.com/jwdev" target="blank" >
- 
 
-
-<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/37bd2617-5514-4c35-bb44-c716df838ff4" width="30%" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.gif" width="30%" height="100%" >
 </img>
 </a>
 
@@ -38,7 +36,7 @@
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.png" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.gif" height="100%" >
 </img>
 </a>
 
@@ -312,9 +310,9 @@ commands:
     children: 
       - language
       - connect
+      - profile
       - profile-editor
       - disconnect
-      - profile
       - updater
     permissions: 
       - tiktoklivespigot
@@ -355,6 +353,17 @@ commands:
           type: text
     usage: /tiktoklive connect
 
+# /tiktoklive profile
+  profile: 
+    permissions: 
+      - tiktoklivespigot.profile.set
+    can-use: 
+      - command_sender
+    arguments: 
+      - profile-name:
+          type: text
+    usage: /tiktoklive profile
+
 # /tiktoklive profile-editor
   profile-editor: 
     permissions: 
@@ -370,17 +379,6 @@ commands:
     can-use: 
       - command_sender
     usage: /tiktoklive disconnect
-
-# /tiktoklive profile
-  profile: 
-    permissions: 
-      - tiktoklivespigot.profile.set
-    can-use: 
-      - command_sender
-    arguments: 
-      - profile-name:
-          type: text
-    usage: /tiktoklive profile
 
 # /tiktoklive updater
   updater: 
