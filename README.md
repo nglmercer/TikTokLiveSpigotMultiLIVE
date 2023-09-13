@@ -9,8 +9,10 @@
 
 
 <a href="https://www.buymeacoffee.com/jwdev" target="blank" >
+ 
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.svg" width="30%" height="100%" >
+
+<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/37bd2617-5514-4c35-bb44-c716df838ff4" width="30%" height="100%" >
 </img>
 </a>
 
@@ -51,7 +53,9 @@
 Ever wanted to bring the excitement of TikTok Lives directly into Minecraft? With TikTokLiveSpigot, now you can!**Integrate your minecraft server with TikTok live in 10 seconds!**It is as simple as using> /tiktoklive connect MyTikTokUser
 
 
-What's next? Transform Tiktok events into Minecraft commands using configuration file
+What's next? Transform Tiktok events into Minecraft commands using[event configuration](https://github.com/jwdeveloper/TikTokLiveSpigot#events-configuration) 
+
+
 
 <a href="https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW" align="right" target="blank" >
 
@@ -303,22 +307,20 @@ tiktok-live:
 
 
 commands: 
-# debbug
-  debbug: 
-
-# tiktoklive
+# /tiktoklive
   tiktoklive: 
     children: 
       - language
       - connect
-      - profile
-      - disconnect
       - profile-editor
+      - disconnect
+      - profile
       - updater
     permissions: 
-      - 
+      - tiktoklivespigot
     can-use: 
       - command_sender
+    usage: /tiktoklive
 # /tiktoklive language <language>
   language: 
     permissions: 
@@ -342,7 +344,7 @@ commands:
     description: Changes plugin languages, changes will be applied after server reload. Change be use both be player or console
     usage: /tiktoklive language <language>
 
-# connect
+# /tiktoklive connect
   connect: 
     permissions: 
       - tiktoklivespigot.connect
@@ -351,8 +353,25 @@ commands:
     arguments: 
       - tiktok-user:
           type: text
+    usage: /tiktoklive connect
 
-# profile
+# /tiktoklive profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.editor
+    can-use: 
+      - command_sender
+    usage: /tiktoklive profile-editor
+
+# /tiktoklive disconnect
+  disconnect: 
+    permissions: 
+      - tiktoklivespigot.disconnect
+    can-use: 
+      - command_sender
+    usage: /tiktoklive disconnect
+
+# /tiktoklive profile
   profile: 
     permissions: 
       - tiktoklivespigot.profile.set
@@ -361,20 +380,7 @@ commands:
     arguments: 
       - profile-name:
           type: text
-
-# disconnect
-  disconnect: 
-    permissions: 
-      - tiktoklivespigot.disconnect
-    can-use: 
-      - command_sender
-
-# profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.editor
-    can-use: 
-      - command_sender
+    usage: /tiktoklive profile
 
 # /tiktoklive updater
   updater: 
