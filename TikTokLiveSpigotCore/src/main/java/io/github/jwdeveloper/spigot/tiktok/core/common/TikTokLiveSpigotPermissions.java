@@ -10,5 +10,7 @@ public class TikTokLiveSpigotPermissions
 
     public final static String DISCONNECT =  TIKTOKLIVESPIGOT +".disconnect";
 
+    public final static String CONFIG =  TIKTOKLIVESPIGOT +"gui.config";
+
     public final static String EDITOR =  TIKTOKLIVESPIGOT +".editor";
 }

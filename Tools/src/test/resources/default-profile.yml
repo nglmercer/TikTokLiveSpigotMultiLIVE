@@ -3,10 +3,12 @@
 
 
 default:
+  onMessage:
+    - /powiedz cześć ${wiadomsc.urzytownik.imie} ${event.sender.userId}
   onJoin:
     - /say §2${event.user.nickName} §7joined to §3Tik§cTok §2Live!
   onLike:
-    - /execute at @p run particle minecraft:heart ~1 ~1 ~
+    - /execute ${event.messageId} at @p run particle minecraft:heart ~1 ~1 ~
   onGiftMessage:
     - /title @p clear
     - /title @p title "§2${event.sender.nickName}"

@@ -5,13 +5,12 @@ import io.github.jwdeveloper.ff.core.logger.plugin.FluentLogger;
 import io.github.jwdeveloper.ff.core.spigot.tasks.api.FluentTaskFactory;
 import io.github.jwdeveloper.ff.plugin.api.logger.PlayerLogger;
 import io.github.jwdeveloper.spigot.tiktok.api.events.TikTokLiveSpigotEvent;
-import io.github.jwdeveloper.spigot.tiktok.core.profiles.processor.ProfileProcessor;
-import io.github.jwdeveloper.spigot.tiktok.core.services.ProfileService;
+import io.github.jwdeveloper.spigot.tiktok.core.commands.MapTest;
+import io.github.jwdeveloper.spigot.tiktok.core.profile.TikTokProfileExecutorImpl;
+import io.github.jwdeveloper.spigot.tiktok.core.profile.ProfileService;
 import io.github.jwdeveloper.tiktok.annotations.TikTokEventHandler;
 import io.github.jwdeveloper.tiktok.events.TikTokEvent;
-import io.github.jwdeveloper.tiktok.events.messages.TikTokConnectedEvent;
-import io.github.jwdeveloper.tiktok.events.messages.TikTokDisconnectedEvent;
-import io.github.jwdeveloper.tiktok.events.messages.TikTokErrorEvent;
+import io.github.jwdeveloper.tiktok.events.messages.*;
 import io.github.jwdeveloper.tiktok.exceptions.TikTokLiveOfflineHostException;
 import io.github.jwdeveloper.tiktok.listener.TikTokEventListener;
 import io.github.jwdeveloper.tiktok.live.LiveClient;
@@ -22,19 +21,19 @@ import org.bukkit.plugin.Plugin;
 @Injection
 public class TikTokSpigotEventListener implements TikTokEventListener {
     private final ProfileService profileService;
-    private final ProfileProcessor profileProcessor;
+    private final TikTokProfileExecutorImpl profileExecutor;
     private final FluentTaskFactory fluentTaskFactory;
     private final Plugin plugin;
     private final PlayerLogger playerLogger;
 
 
     public TikTokSpigotEventListener(ProfileService profileService,
-                                     ProfileProcessor profileProcessor,
+                                     TikTokProfileExecutorImpl profileProcessor,
                                      FluentTaskFactory fluentTaskFactory,
                                      Plugin plugin,
                                      PlayerLogger playerLogger) {
         this.profileService = profileService;
-        this.profileProcessor = profileProcessor;
+        this.profileExecutor = profileProcessor;
         this.fluentTaskFactory = fluentTaskFactory;
         this.plugin = plugin;
         this.playerLogger = playerLogger;
@@ -43,27 +42,16 @@ public class TikTokSpigotEventListener implements TikTokEventListener {
 
     @TikTokEventHandler
     public void onEvent(LiveClient liveClient, TikTokEvent tikTokEvent) {
-
-        for (var entry : liveClient.getGiftManager().getGiftsInfo().entrySet()) {
-            var giftId = entry.getKey();
-            var giftInfo = entry.getValue();
-
-            System.out.println(giftInfo.getName());
-        }
-
         var currentProfile = profileService.getCurrentProfile();
-        var result = profileProcessor.processProfile(tikTokEvent, currentProfile);
-        var commands = result.getProcessedCommands();
-
-        if (!plugin.isEnabled()) {
+        var commands = profileExecutor.execute(tikTokEvent, currentProfile);
+        if (commands.size() == 0) {
             return;
         }
-        if (commands.size() == 0) {
+        if (!plugin.isEnabled()) {
             return;
         }
         fluentTaskFactory.task(() ->
         {
-
             for (var command : commands) {
                 FluentLogger.LOGGER.info(command);
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
@@ -72,6 +60,28 @@ public class TikTokSpigotEventListener implements TikTokEventListener {
             Bukkit.getServer().getPluginManager().callEvent(event);
         });
     }
+
+    @TikTokEventHandler
+    public void onGift(LiveClient liveClient, TikTokCommentEvent tikTokEvent) {
+
+        var imageUrl = tikTokEvent.getUser().getProfilePicture().getUrls().get(0);
+        FluentLogger.LOGGER.info("Downloading URL: ",imageUrl);
+        fluentTaskFactory.taskAsync(() ->
+        {
+            var image = MapTest.downloadImage(imageUrl);
+            if(image == null)
+            {
+                FluentLogger.LOGGER.error("Image is null: "+imageUrl);
+               return;
+            }
+            fluentTaskFactory.task(() ->
+            {
+                var player = Bukkit.getOnlinePlayers().stream().toList().get(0);
+                MapTest.giveMapToPlayer(player, image);
+            });
+        });
+    }
+
 
     @TikTokEventHandler
     public void onConnect(LiveClient liveClient, TikTokConnectedEvent tikTokEvent) {

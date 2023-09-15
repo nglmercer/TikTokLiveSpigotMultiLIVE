@@ -8,6 +8,7 @@ import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConfig;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotMeta;
 import io.github.jwdeveloper.spigot.tiktok.core.listeners.TikTokSpigotEventListener;
 import io.github.jwdeveloper.tiktok.TikTokLive;
+import io.github.jwdeveloper.tiktok.live.ConnectionState;
 import io.github.jwdeveloper.tiktok.live.LiveClient;
 
 import java.util.logging.Level;
@@ -30,6 +31,22 @@ public class TikTokLiveSpigotClient {
         this.taskFactory = taskFactory;
         this.configFile = configFile;
     }
+
+
+    public String getRecentHost()
+    {
+        return configFile.get().getTiktokUser();
+    }
+
+    public ConnectionState getConnectionState()
+    {
+        if(client == null)
+        {
+            return ConnectionState.DISCONNECTED;
+        }
+        return client.getRoomInfo().getConnectionState();
+    }
+
 
     public void connect(String userName) {
 

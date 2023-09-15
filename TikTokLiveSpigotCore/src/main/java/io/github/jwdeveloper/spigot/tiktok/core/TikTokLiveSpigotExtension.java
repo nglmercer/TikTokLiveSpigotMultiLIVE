@@ -6,7 +6,10 @@ import io.github.jwdeveloper.ff.plugin.api.extention.FluentApiExtension;
 import io.github.jwdeveloper.ff.plugin.implementation.FluentApiSpigot;
 import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConfig;
-import io.github.jwdeveloper.spigot.tiktok.core.services.ProfileService;
+import io.github.jwdeveloper.spigot.tiktok.core.profile.ProfileService;
+import io.github.jwdeveloper.spigot.tiktok.profiles.deserializer.ProfileDeserializer;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.ProfileInterpreter;
+import io.github.jwdeveloper.spigot.tiktok.profiles.processor.ProfileProcessor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 
@@ -18,9 +21,16 @@ public class TikTokLiveSpigotExtension implements FluentApiExtension
         builder.bindToConfig(TikTokLiveSpigotConfig.class,"tiktok-live");
 
         builder.loggerConfiguration();
-        builder.container().registerSigleton(TikTokLiveSpigotApi.class, TikTokLiveSpigotApiImpl.class);
 
-        builder.permissions().setBasePermissionName("TikTokLiveSpigot");
+
+        var container = builder.container();
+
+        container.registerSigleton(TikTokLiveSpigotApi.class, TikTokLiveSpigotApiImpl.class);
+        container.registerSigleton(ProfileDeserializer.class);
+        container.registerSigleton(ProfileInterpreter.class);
+        container.registerSigleton(ProfileProcessor.class);
+
+      //  builder.permissions().setBasePermissionName("TikTokLiveSpigot");
     }
 
 
