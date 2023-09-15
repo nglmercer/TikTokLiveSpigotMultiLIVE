@@ -1,0 +1,45 @@
+#Documentation
+#https://github.com/jwdeveloper/TikTokLiveSpigot#events-configuration
+
+#https://www.youtube.com/watch?v=DEXO2a5upDI&ab_channel=McCarter
+const:
+  PLAYER_NAME: 123
+  PLAYERNICK: "asddad"
+
+
+default:
+  onJoin:
+    - /execute at @p run summon minecraft:zombie ~1 ~ ~1 {CustomName:"{\"text\":\"§6§l${event.user.nickName}\"}"}
+    - /execute at @p run summon minecraft:creeper ~1 ~ ~1 {CustomName:"{\"text\":\"§6§l${event.user.nickName}\"}"}
+    - /say §2${event.user.nickName} §7joined to §3Tik§cTok §2Live!
+  onComment:
+    - /execute at @p run summon minecraft:ender_dragon ~ ~ ~ {CustomName:"{\"text\":\"§2${event.user.nickName}\"}"}
+    - /say §2${event.user.nickName} §2${event.text}
+  onLike:
+    - /effect give @p minecraft:health_boost 60 1
+    - /say §2Dzięki za życko ${event.sender.nickName} ${PLAYER_NAME}
+    - /execute at @p run particle minecraft:heart ~1 ~1 ~
+    - /effect give @p minecraft:instant_health 1 0
+  onGiftMessage:
+    - /playsound minecraft:entity.horse.death master @p ~ ~ ~ 1 1 1
+    - ${if event.gift.name == "TikTok"} /kill @e[type=minecraft:zombie, type=minecraft:creeper]
+    - /playsound minecraft:entity.horse.death master @p ~ ~ ~ 1 1
+    - /title @p clear
+    - /title @p title "§2${event.sender.nickName}"
+    - /title @p subtitle "§7Dzięki za gowno ${event.comboCount} §2${event.gift.name}"
+    - /playsound minecraft:entity.zombie_villager.cure block @p ~ ~ ~ 1 1
+    - ${repeat 100} /execute at @p run summon minecraft:creeper ~2 ~ ~2 {CustomName:"{\"text\":\"§2${event.sender.nickName}\"}"}
+test:
+  onJoin:
+    - /execute at @p run summon minecraft:zombie ~1 ~ ~1 {CustomName:"{\"text\":\"§6§l${event.user.nickName}\"}"}
+    - ${say "Dziękuja za ${say  ${random 3 2} } róże" }
+    - ${audio "a.b.c.d.mp3"}
+    - ${java.ImageTest.play(1,2,3,4,5,6)}
+    - ${if name is adam and age is 12
+                then "/say true ${event.name}"
+                else "/say false" 
+      }
+
+empty:
+  onComment:
+

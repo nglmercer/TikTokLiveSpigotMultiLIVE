@@ -1,0 +1,9 @@
+
+- assign permissions
+
+
+
+- documentation for profiles
+- record video tutorial
+- load default config
+- check updater
