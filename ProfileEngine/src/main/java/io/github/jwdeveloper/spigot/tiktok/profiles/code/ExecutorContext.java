@@ -4,9 +4,7 @@ import io.github.jwdeveloper.spigot.tiktok.profiles.common.definitions.ConstDefi
 import io.github.jwdeveloper.spigot.tiktok.profiles.common.definitions.MethodDefinition;
 import io.github.jwdeveloper.tiktok.events.TikTokEvent;
 import lombok.Data;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Data

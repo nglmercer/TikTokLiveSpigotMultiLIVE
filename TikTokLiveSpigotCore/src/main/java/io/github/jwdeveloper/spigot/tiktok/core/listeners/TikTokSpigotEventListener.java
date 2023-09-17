@@ -5,6 +5,7 @@ import io.github.jwdeveloper.ff.core.logger.plugin.FluentLogger;
 import io.github.jwdeveloper.ff.core.spigot.tasks.api.FluentTaskFactory;
 import io.github.jwdeveloper.ff.plugin.api.logger.PlayerLogger;
 import io.github.jwdeveloper.spigot.tiktok.api.events.TikTokLiveSpigotEvent;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileEditor;
 import io.github.jwdeveloper.spigot.tiktok.core.commands.MapTest;
 import io.github.jwdeveloper.spigot.tiktok.core.profile.TikTokProfileExecutorImpl;
 import io.github.jwdeveloper.spigot.tiktok.core.profile.ProfileService;
@@ -21,14 +22,14 @@ import org.bukkit.plugin.Plugin;
 @Injection
 public class TikTokSpigotEventListener implements TikTokEventListener {
     private final ProfileService profileService;
-    private final TikTokProfileExecutorImpl profileExecutor;
+    private final TikTokProfileEditor profileExecutor;
     private final FluentTaskFactory fluentTaskFactory;
     private final Plugin plugin;
     private final PlayerLogger playerLogger;
 
 
     public TikTokSpigotEventListener(ProfileService profileService,
-                                     TikTokProfileExecutorImpl profileProcessor,
+                                     TikTokProfileEditor profileProcessor,
                                      FluentTaskFactory fluentTaskFactory,
                                      Plugin plugin,
                                      PlayerLogger playerLogger) {
@@ -61,7 +62,7 @@ public class TikTokSpigotEventListener implements TikTokEventListener {
         });
     }
 
-    @TikTokEventHandler
+    //@TikTokEventHandler
     public void onGift(LiveClient liveClient, TikTokCommentEvent tikTokEvent) {
 
         var imageUrl = tikTokEvent.getUser().getProfilePicture().getUrls().get(0);

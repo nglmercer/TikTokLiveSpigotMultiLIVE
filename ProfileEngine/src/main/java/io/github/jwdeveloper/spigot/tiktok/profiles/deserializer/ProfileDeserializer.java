@@ -1,64 +1,77 @@
 package io.github.jwdeveloper.spigot.tiktok.profiles.deserializer;
 
 import io.github.jwdeveloper.spigot.tiktok.profiles.common.definitions.ConstDefinition;
+import io.github.jwdeveloper.spigot.tiktok.profiles.common.definitions.MethodDefinition;
 import io.github.jwdeveloper.spigot.tiktok.profiles.deserializer.models.ProfileElementModel;
 import io.github.jwdeveloper.spigot.tiktok.profiles.deserializer.models.ProfileModel;
 import io.github.jwdeveloper.spigot.tiktok.profiles.deserializer.models.ProfilesDeserialization;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.Tokenizer;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.functions.FunctionBlockInterpreter;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.literals.LiteralInterpreter;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.CodeLineInterpeter;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProfileDeserializer
-{
+public class ProfileDeserializer {
 
-    private final String CONSTS = "const";
+    private String PROFILES = "profiles";
+    private String INCLUDES = "include";
 
-    public List<ConstDefinition> getConstances(ConfigurationSection configuration)
-    {
-        if(!configuration.isConfigurationSection(CONSTS))
-        {
-            return List.of();
-        }
-
-        var result = new ArrayList<ConstDefinition>();
-        var constsSections = configuration.getConfigurationSection(CONSTS);
-        var keys = constsSections.getKeys(false);
-        for(var key : keys)
-        {
-            var value = constsSections.get(key);
-            result.add(new ConstDefinition(key,value));
-        }
-        return result;
-    }
     public ProfilesDeserialization getProfilesModel(ConfigurationSection configuration) {
 
         var profiles = new ArrayList<ProfileModel>();
+        var includes = new ArrayList<String>();
+        var consts = new ArrayList<ConstDefinition>();
+        var methods = new ArrayList<MethodDefinition>();
         var keys = configuration.getKeys(false);
-        for (var key : keys)
-        {
-            if(key.equals(CONSTS))
-            {
-                continue;
-            }
+
+
+        for (var key : keys) {
             if (!configuration.isConfigurationSection(key)) {
-                continue;
-            }
+                var value = configuration.get(key);
+                if (value instanceof String va && va.contains("=>")) {
 
+                    methods.add(getFunctions(key, va));
+                    continue;
+                } else {
+                    consts.add(new ConstDefinition(key, value));
+                }
+            }
             var section = configuration.getConfigurationSection(key);
-            if(section == null)
-            {
-                continue;
+            if (key.equals(PROFILES)) {
+                profiles.addAll(handleProfiles(section));
+            }
+            if (key.equals(INCLUDES)) {
+                var includeElements = configuration.getStringList(key);
+                includes.addAll(includeElements);
             }
 
-            var profile = getSingleProfile(key, section);
-            profiles.add(profile);
         }
-        var constances = getConstances(configuration);
-        return new ProfilesDeserialization(profiles, constances);
+        return new ProfilesDeserialization(profiles, methods, consts);
     }
 
+    private List<ProfileModel> handleProfiles(ConfigurationSection configurationSection) {
+        var reuslt = new ArrayList<ProfileModel>();
+        for (var key : configurationSection.getKeys(false)) {
+            var section = configurationSection.getConfigurationSection(key);
+            var profiel = getSingleProfile(key, section);
+            reuslt.add(profiel);
+        }
+        return reuslt;
+    }
+
+
+    private MethodDefinition getFunctions(String name, String content) {
+        var tokenizer = new Tokenizer(content);
+        var textLine = new CodeLineInterpeter();
+        var literal = new LiteralInterpreter(tokenizer, textLine);
+        var interpreter = new FunctionBlockInterpreter(literal, tokenizer, textLine, content, name);
+        var definition = interpreter.getMethodDefinition();
+        return definition;
+    }
 
     private ProfileModel getSingleProfile(String profileName, ConfigurationSection configuration) {
         var elements = new ArrayList<ProfileElementModel>();
@@ -78,8 +91,7 @@ public class ProfileDeserializer
         return profile;
     }
 
-    private ProfileElementModel getProfileElement(String elementName, ConfigurationSection configuration)
-    {
+    private ProfileElementModel getProfileElement(String elementName, ConfigurationSection configuration) {
 
         var commands = configuration.getStringList(elementName);
 

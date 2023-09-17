@@ -5,7 +5,6 @@ import io.github.jwdeveloper.ff.tools.FluentFrameworkTask;
 import io.github.jwdeveloper.ff.tools.GenerateDescriptionTask;
 import io.github.jwdeveloper.spigot.tiktok.core.TikTokLiveSpigotMain;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConfig;
-import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotPermissions;
 
 //https://github.com/matiassingers/awesome-readme
 //https://github.com/amplication/amplication#readme

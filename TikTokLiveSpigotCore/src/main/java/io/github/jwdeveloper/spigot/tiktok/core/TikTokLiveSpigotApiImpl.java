@@ -6,7 +6,7 @@ import io.github.jwdeveloper.ff.extension.files.api.fluent_files.FluentFile;
 import io.github.jwdeveloper.ff.extension.gui.api.InventoryApi;
 import io.github.jwdeveloper.ff.plugin.api.logger.PlayerLogger;
 import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileExecutor;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileEditor;
 import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotMeta;
 import io.github.jwdeveloper.spigot.tiktok.core.gui.TikTokSpigotLiveAdminGUI;
@@ -20,7 +20,7 @@ import java.util.List;
 public class TikTokLiveSpigotApiImpl implements TikTokLiveSpigotApi {
     private final ProfileService profileService;
     private final TikTokLiveSpigotClient tikTokSpigotClient;
-    private final TikTokProfileExecutor tikTokProfileExecutor;
+    private final TikTokProfileEditor tikTokProfileExecutor;
     private final FluentFile<TikTokLiveSpigotMeta> metaFluentFile;
     private final PlayerLogger playerLogger;
     private final InventoryApi inventoryApi;
@@ -30,7 +30,7 @@ public class TikTokLiveSpigotApiImpl implements TikTokLiveSpigotApi {
                                    FluentFile<TikTokLiveSpigotMeta> metaFluentFile,
                                    PlayerLogger playerLogger,
                                    InventoryApi inventoryApi,
-                                   TikTokProfileExecutor tikTokProfileExecutor) {
+                                   TikTokProfileEditor tikTokProfileExecutor) {
         this.profileService = profileService;
         this.tikTokSpigotClient = tikTokSpigotClient;
         this.metaFluentFile = metaFluentFile;
@@ -110,7 +110,7 @@ public class TikTokLiveSpigotApiImpl implements TikTokLiveSpigotApi {
     }
 
     @Override
-    public TikTokProfileExecutor getProfileExecutor() {
+    public TikTokProfileEditor getProfileExecutor() {
         return tikTokProfileExecutor;
     }
 

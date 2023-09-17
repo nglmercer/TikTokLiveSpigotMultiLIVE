@@ -1,17 +1,16 @@
 package io.github.jwdeveloper.spigot.tiktok.core.commands;
 
-import io.github.jwdeveloper.ff.core.logger.plugin.FluentLogger;
 import io.github.jwdeveloper.ff.core.spigot.commands.api.enums.ArgumentDisplay;
 import io.github.jwdeveloper.ff.extension.commands.api.annotations.Argument;
 import io.github.jwdeveloper.ff.extension.commands.api.annotations.Command;
 import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
-import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotPermissions;
+import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
-@Command(name = "tiktoklive", permissions = {TikTokLiveSpigotPermissions.TIKTOKLIVESPIGOT})
+@Command(name = "tiktoklive")
 public class TikTokLiveSpigotCommands {
     private final TikTokLiveSpigotApi tiktokApi;
 
@@ -23,18 +22,18 @@ public class TikTokLiveSpigotCommands {
     @Argument(name = "tiktok-user",
             displayMode = ArgumentDisplay.TAB_COMPLETE,
             onTabComplete = "onTikTokUserComplete")
-    @Command(name = "connect", permissions = {TikTokLiveSpigotPermissions.CONNECT})
+    @Command(name = "connect", permissions = {TikTokLiveSpigotPermissions.LIVE.CONNECT})
     public void connect(Player player, String name) {
         tiktokApi.connect(player, name);
     }
 
-    @Command(name = "disconnect", permissions = {TikTokLiveSpigotPermissions.DISCONNECT})
+    @Command(name = "disconnect", permissions = {TikTokLiveSpigotPermissions.LIVE.DISCONNECT})
     public void disconnect(Player player) {
         tiktokApi.disconnect(player);
     }
 
 
-    @Command(name = "admin", permissions = {TikTokLiveSpigotPermissions.CONFIG})
+    @Command(name = "admin", permissions = {TikTokLiveSpigotPermissions.GUI.ADMIN})
     public void adminPanel(Player player) {
         tiktokApi.openConfigGui(player);
     }
@@ -43,26 +42,16 @@ public class TikTokLiveSpigotCommands {
     @Argument(name = "profile-name",
             displayMode = ArgumentDisplay.TAB_COMPLETE,
             onTabComplete = "onProfileTabComplete")
-    @Command(name = "profile", permissions = {TikTokLiveSpigotPermissions.SET_PROFILE})
+    @Command(name = "profile", permissions = {TikTokLiveSpigotPermissions.PROFILES.CHANGE})
     private void setProfile(Player player, String name) {
         tiktokApi.setProfile(player, name);
     }
 
-    @Command(name = "profile-editor", permissions = {TikTokLiveSpigotPermissions.EDITOR})
+    @Command(name = "profile-editor", permissions = {TikTokLiveSpigotPermissions.PROFILES.PROFILE_EDITOR})
     public void openEditor(Player player) {
         tiktokApi.openProfileEditor(player);
     }
 
-
-    @Command(name = "dupa")
-    public void showAvater(Player player) {
-        try {
-
-        } catch (Exception e) {
-            FluentLogger.LOGGER.error("Error dupa", e);
-        }
-
-    }
 
     private List<String> onTikTokUserComplete() {
         return tiktokApi.getRecentHostsNames();

@@ -1,5 +1,6 @@
 package profiles;
 
+import io.github.jwdeveloper.ff.core.logger.plugin.SimpleLogger;
 import io.github.jwdeveloper.spigot.tiktok.profiles.code.ExecutorContext;
 import io.github.jwdeveloper.spigot.tiktok.profiles.common.definitions.ConstDefinition;
 import io.github.jwdeveloper.spigot.tiktok.profiles.common.definitions.MethodDefinition;
@@ -48,7 +49,7 @@ public class ProfileProcessingFullTest {
         var deserializer = new ProfileDeserializer();
         var deserialization = deserializer.getProfilesModel(yaml);
 
-        var interpreter = new ProfileInterpreter();
+        var interpreter = new ProfileInterpreter(new SimpleLogger());
         var profiles = interpreter.getProfiles(deserialization.getProfileModels());
 
         var processor = new ProfileProcessor();
@@ -63,7 +64,13 @@ public class ProfileProcessingFullTest {
                 .stream()
                 .collect(Collectors.toMap(ConstDefinition::getName, i -> i));
 
-        var context = new ExecutorContext(event, getMethods(), constsMap);
+        var methodsMap = deserialization
+                .getMethodDefinitions()
+                .stream()
+                .collect(Collectors.toMap(MethodDefinition::getName, i -> i));
+
+        methodsMap.putAll(getMethods());
+        var context = new ExecutorContext(event,methodsMap, constsMap);
         var output = processor.processProfile(context, profile);
         var outputCommands = output.getProcessedCommands();
 
@@ -82,19 +89,19 @@ public class ProfileProcessingFullTest {
             var random = new Random();
             var randomValue = random.nextInt(to)+from;
             return randomValue;
-        });
+        },false);
 
         var method2 = new MethodDefinition("say",(e)->
         {
             System.out.println(e.get(0));
             return null;
-        });
+        },false);
 
         var method3 = new MethodDefinition("regex",(e)->
         {
             var pattern = Pattern.compile((String)e.get(0));
             return  pattern.matcher((String)e.get(1)).find();
-        });
+        },false);
 
         var result = new HashMap<String,MethodDefinition>();
         result.put(method1.getName(),method1);
@@ -131,32 +138,49 @@ public class ProfileProcessingFullTest {
 
     private String getInput() {
         return """
-                const:
-                  NAME: "mark"
-                  POWER: 200
-                  ACCEPT_EVENT: true
-                default:
-                  onComment:
+                
+                Array: [1,"123",3,"1213",5]
+                NAME: "mark"
+                POWER: 200
+                sayHello: (a) => /say I will say ${a}
+                ACCEPT_EVENT: true
+                GIFT_NAME: event.gift.name
+                
+                profiles:
+                 default:
+                   onComment:
+                    - ${sayHello("hello world")}
+                    - ${repeat 1} /say siema
                     - ${if 1 == 2} /say siemka
                     - ${java.profiles.ProfileProcessingFullTest.TEST_STRING}
                     - ${java.profiles.ProfileProcessingFullTest.TESTING_METHOD("siema")}
                     - ${java.profiles.ProfileProcessingFullTest.TESTING_METHOD_VOID("siema 2")}
                     - ${random(0,20)}
                     - ${say("MOWIE Z KOMENDY")}
-                    - ${
-                        if regex("asdasdas","siema") then
-                         "/say tak"
+                    - ${if ACCEPT_EVENT then
+                         "/say mowie TAK"
                         else
-                          "/say nie"
+                          "/say mowie nie!"
                        }
-                    - ${
-                        switch event.user.nickName
+                    - ${switch event.user.nickName
                          case "Mark" then "/say siema Marek"
                          case "adam" then  "/say siema Adam"
                         }
-                  onGiftMessage:
-                     - ${if event.streakFinished == ACCEPT_EVENT}  /title @p subtitle FINISHED "§7Thank you for ${event.comboCount} "
-                  onJoin:
+                    - ${repeat 2} ${
+                         wait(2)
+                         run("siema marek")
+                         wait(5)
+                         run("siema eniu tutaj dzwoni debilek")
+                         "adasd"
+                        }
+                   onGiftMessage:
+                     - ${if event.streakFinished then
+                            "/title @p subtitle FINISHED "§7Thank you for ${giftName} ${GIFT_NAME}"
+                         else
+                            "/title @p subtitle COMBO "§7x ${event.comboCount}"
+                         }
+                      - ${wait(1)} ${repeat 2} /say my name
+                   onJoin:
                     - ${if event.totalViewers == 123} /execute at @p run summon minecraft:sheep ~ ~ ~ {CustomName:"{\\"text\\":\\"${event.user.nickName}\\"}"}
                     - ${if event.user.nickName == "Mark"} /execute at @p run summon minecraft:sheep ~ ~ ~ {CustomName:"{\\"text\\":\\"${event.user.nickName}\\"}"}
                     - ${repeat(10,10)} /say Siema from ${event.user.nickName}  

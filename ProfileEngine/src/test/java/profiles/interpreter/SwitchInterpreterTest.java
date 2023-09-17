@@ -3,8 +3,8 @@ package profiles.interpreter;
 import io.github.jwdeveloper.spigot.tiktok.profiles.code.blocks.switch_blocks.SwitchBlock;
 import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.Tokenizer;
 import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.literals.LiteralInterpreter;
-import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.SwitchInterpeter;
-import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.literals.TextLineInterpeter;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.statements.SwitchInterpeter;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.CodeLineInterpeter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class SwitchInterpreterTest
 
     public static SwitchBlock getSwitch(String code) {
         var tokenizer = new Tokenizer(code);
-        var methodInterpeter = new SwitchInterpeter( tokenizer,new LiteralInterpreter(tokenizer, new TextLineInterpeter()));
+        var methodInterpeter = new SwitchInterpeter( tokenizer,new LiteralInterpreter(tokenizer, new CodeLineInterpeter()));
         return methodInterpeter.getCodeBlock();
     }
 

@@ -8,13 +8,15 @@ import io.github.jwdeveloper.ff.core.observer.implementation.ObserverBag;
 import io.github.jwdeveloper.ff.extension.gui.api.InventoryApi;
 import io.github.jwdeveloper.ff.extension.gui.api.InventoryDecorator;
 import io.github.jwdeveloper.ff.extension.gui.api.references.ButtonRef;
+import io.github.jwdeveloper.ff.extension.gui.prefab.components.implementation.common.BorderComponent;
 import io.github.jwdeveloper.ff.extension.gui.prefab.simple.SimpleGUI;
 import io.github.jwdeveloper.ff.plugin.api.logger.PlayerLogger;
 import io.github.jwdeveloper.ff.plugin.implementation.config.options.FluentConfigFile;
 import io.github.jwdeveloper.ff.plugin.implementation.listeners.ChatInputListener;
 import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
-import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConfig;
+import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotPermissions;
+import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
 import io.github.jwdeveloper.tiktok.live.ConnectionState;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -25,6 +27,8 @@ public class TikTokSpigotLiveAdminGUI extends SimpleGUI {
     private final FluentConfigFile<TikTokLiveSpigotConfig> configFile;
     private final ChatInputListener inputListener;
     private final PlayerLogger playerLogger;
+
+    private BorderComponent borderComponent;
 
     public TikTokSpigotLiveAdminGUI(TikTokLiveSpigotApi tokLiveSpigotApi,
                                     FluentConfigFile<TikTokLiveSpigotConfig> config,
@@ -37,8 +41,9 @@ public class TikTokSpigotLiveAdminGUI extends SimpleGUI {
 
     @Override
     public void onInit(InventoryDecorator decorator, InventoryApi inventoryApi) {
+        decorator.withPermissions(TikTokLiveSpigotPermissions.GUI.ADMIN);
         createTitle(decorator, inventoryApi);
-        createBorder(decorator, inventoryApi);
+        borderComponent = createBorder(decorator, inventoryApi);
         createProfileSelectButton(inventoryApi);
         createBoolButton(inventoryApi);
         changeDefaultLiveHost(inventoryApi);
@@ -47,17 +52,19 @@ public class TikTokSpigotLiveAdminGUI extends SimpleGUI {
 
     private void createTitle(InventoryDecorator decorator, InventoryApi inventoryApi) {
         var titleComponent = decorator.withComponent(inventoryApi.components().title());
-        titleComponent.addTitleModel("default", () -> "TikTokLive Configuration");
+        titleComponent.addTitleModel("default", () -> ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "TikTokLive "+ChatColor.RESET+""+  ChatColor.DARK_GREEN +"admin");
         titleComponent.enableTitleModel("default");
     }
 
-    private void createBorder(InventoryDecorator decorator, InventoryApi inventoryApi) {
+    private BorderComponent createBorder(InventoryDecorator decorator, InventoryApi inventoryApi) {
         var component = decorator.withComponent(inventoryApi.components().border());
-        component.setBorderMaterial(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
+        component.setBorderMaterial(Material.LIME_STAINED_GLASS_PANE);
+        return component;
     }
 
     private void createProfileSelectButton(InventoryApi inventoryApi) {
         var btn = button("Select Profile", Material.BOOK, 2, 4);
+        btn.withPermissions(TikTokLiveSpigotPermissions.PROFILES.CHANGE);
         inventoryApi.buttons().<Profile>contentList(btn, contentListOptions ->
         {
             contentListOptions.setContentSource(tokLiveSpigotApi::getAvailableProfiles);
@@ -71,16 +78,24 @@ public class TikTokSpigotLiveAdminGUI extends SimpleGUI {
     }
 
     private void createBoolButton(InventoryApi inventoryApi) {
-        var btn = button("Options", Material.REPEATER, 2, 2);
+        var btn = button("Config", Material.REPEATER, 2, 2);
+        btn.withPermissions(TikTokLiveSpigotPermissions.CONFIG.BASE);
         inventoryApi.buttons().checkBoxList(btn, checkBoxOptions ->
         {
-            checkBoxOptions.addCheckBox("Reload Profiles", configObserver("reloadProfiles"));
-            checkBoxOptions.addCheckBox("Connect on plugin start", configObserver("autoConnectOnStart"));
+            checkBoxOptions.addCheckBox(
+                    "Reload Profiles",
+                    configObserver("reloadProfiles"),
+                    TikTokLiveSpigotPermissions.CONFIG.IS_PROFILE_RELOADING);
+
+            checkBoxOptions.addCheckBox("Connect on plugin start",
+                    configObserver("autoConnectOnStart"),
+                    TikTokLiveSpigotPermissions.CONFIG.IS_AUTO_CONNECTING);
         });
     }
 
     private void changeDefaultLiveHost(InventoryApi inventoryApi) {
         var btn = button("Recent TikTok users", Material.PLAYER_HEAD, 2, 6);
+        btn.withPermissions(TikTokLiveSpigotPermissions.LIVE.CHANGE_HOST);
         inventoryApi.buttons().<String>contentList(btn, contentListOptions ->
         {
             contentListOptions.setContentSource(tokLiveSpigotApi::getRecentHostsNames);
@@ -99,14 +114,14 @@ public class TikTokSpigotLiveAdminGUI extends SimpleGUI {
 
     private void connectButton(InventoryDecorator decorator, InventoryApi inventoryApi) {
         var ref = new ButtonRef();
-        var btn = button(ChatColor.DARK_RED +ConnectionState.DISCONNECTED.name(), Material.RED_CONCRETE, 8, 4);
+        var btn = button(ChatColor.DARK_RED + ConnectionState.DISCONNECTED.name(), Material.RED_CONCRETE, 8, 4);
+        btn.withPermissions(TikTokLiveSpigotPermissions.LIVE.BASE);
         btn.withOnLeftClick(event ->
         {
             if (tokLiveSpigotApi.getClientState() == ConnectionState.CONNECTED) {
                 tokLiveSpigotApi.disconnect(event.getPlayer());
                 return;
             }
-
 
             if (StringUtils.isNullOrEmpty(tokLiveSpigotApi.getRecentHost())) {
                 this.close();
@@ -137,22 +152,23 @@ public class TikTokSpigotLiveAdminGUI extends SimpleGUI {
                     switch (state) {
                         case CONNECTED -> {
                             ref.get().setMaterial(Material.GREEN_CONCRETE);
+                            borderComponent.setBorderMaterial(Material.LIME_STAINED_GLASS_PANE);
                             styleRendererOptionsDecorator.withTitle(ChatColor.DARK_GREEN + state.name());
                         }
                         case CONNECTING -> {
                             ref.get().setMaterial(Material.YELLOW_CONCRETE);
+                            borderComponent.setBorderMaterial(Material.YELLOW_STAINED_GLASS_PANE);
                             styleRendererOptionsDecorator.withTitle(ChatColor.YELLOW + state.name());
                         }
                         case DISCONNECTED -> {
                             ref.get().setMaterial(Material.RED_CONCRETE);
+                            borderComponent.setBorderMaterial(Material.RED_STAINED_GLASS_PANE);
                             styleRendererOptionsDecorator.withTitle(ChatColor.DARK_RED + state.name());
                         }
                     }
 
 
                 });
-
-
                 guiTickEvent.getInventory().buttons().refresh(ref.get());
             });
         });

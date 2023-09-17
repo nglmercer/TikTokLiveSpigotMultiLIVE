@@ -4,15 +4,15 @@ import io.github.jwdeveloper.spigot.tiktok.profiles.code.ExecutorContext;
 import io.github.jwdeveloper.spigot.tiktok.profiles.code.blocks.ExpressionBlock;
 import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.Tokenizer;
 import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.BlockInterpreter;
-import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.IfInterpreter;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.statements.IfInterpreter;
 import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.literals.LiteralInterpreter;
-import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.literals.TextLineInterpeter;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.CodeLineInterpeter;
 import org.junit.Test;
 
 public class IfInterpreterTest {
     public ExpressionBlock getIfBlock(String code) {
         var tokenizer = new Tokenizer(code);
-        return new IfInterpreter(tokenizer, new BlockInterpreter(tokenizer), new LiteralInterpreter(tokenizer, new TextLineInterpeter())).getCodeBlock();
+        return new IfInterpreter(tokenizer, new BlockInterpreter(tokenizer), new LiteralInterpreter(tokenizer, new CodeLineInterpeter())).getCodeBlock();
     }
 
 

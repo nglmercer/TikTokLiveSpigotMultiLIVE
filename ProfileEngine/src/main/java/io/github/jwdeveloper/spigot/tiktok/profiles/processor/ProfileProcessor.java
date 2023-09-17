@@ -46,12 +46,7 @@ public class ProfileProcessor
     }
 
     private List<String> processCommand(ExecutorContext context, ProfileEventCommand command) {
-       var commandStr = command.getTextLineBlock().execute(context);
-       if(StringUtils.isNullOrEmpty(commandStr))
-       {
-           return List.of();
-       }
-       return List.of(commandStr);
+       return command.getTextLineBlock().execute(context);
     }
 
 

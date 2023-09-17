@@ -3,7 +3,7 @@ package profiles.interpreter;
 import io.github.jwdeveloper.spigot.tiktok.profiles.code.blocks.literals.LiteralBlock;
 import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.Tokenizer;
 import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.literals.LiteralInterpreter;
-import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.literals.TextLineInterpeter;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.CodeLineInterpeter;
 import io.github.jwdeveloper.tiktok.events.TikTokEvent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class LiteralInterpeterTest {
     public LiteralBlock getLiteral(String code)
     {
         var tokenizer = new Tokenizer(code);
-        return new LiteralInterpreter(tokenizer, new TextLineInterpeter()).getCodeBlock();
+        return new LiteralInterpreter(tokenizer, new CodeLineInterpeter()).getCodeBlock();
     }
     
     

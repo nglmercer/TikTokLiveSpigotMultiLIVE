@@ -10,8 +10,11 @@ public class PermissionsTemplate
     @PermissionGroup(group = "config")
     public static class CONFIG
     {
-        @PermissionProperty(description = "user can update config")
-        public static String change = "change";
+        @PermissionProperty(description = "enable auto reloading profiles")
+        public static String isProfileReloading = "is-profile-reloading";
+
+        @PermissionProperty(description = "enable auto connecting to live")
+        public static String isAutoConnecting = "is-auto-connecting";
     }
 
     @PermissionGroup(group = "profiles")
@@ -28,6 +31,9 @@ public class PermissionsTemplate
     @PermissionGroup(group = "live")
     public static class LIVE
     {
+        @PermissionProperty(description = "changes host of tiktok live")
+        public static String changeHost ="change-host";
+
         @PermissionProperty(description = "user can connect to TikTokLive")
         public static String connect= "connect";
 
@@ -43,11 +49,5 @@ public class PermissionsTemplate
         {
 
         }
-    }
-
-    @PermissionGroup(group = "commands")
-    public static class COMMANDS
-    {
-
     }
 }

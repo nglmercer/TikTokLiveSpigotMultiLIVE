@@ -9,7 +9,12 @@ import java.util.function.Function;
 @Value
 public class MethodDefinition
 {
-    private String name;
+     String name;
 
-    private Function<List<Object>,Object> onInvoke;
+     Function<List<Object>,Object> onInvoke;
+
+     boolean isDefault;
+
+
+
 }

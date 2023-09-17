@@ -13,9 +13,9 @@ public class TikTokLiveSpigotConfig
     @YamlSection(name = "auto-connect", description = "Connects to live when server starts")
     private boolean autoConnectOnStart;
 
-    @YamlSection(name = "tiktok-user" , description = "Default tiktok user")
+    @YamlSection(name = "active-tiktok-user" , description = "Active tiktok user")
     private String tiktokUser;
 
-    @YamlSection(name = "profile" , description = "Default  profile")
-    private String profile;
+    @YamlSection(name = "active-profile" , description = "Active profile")
+    private String activeProfile;
 }

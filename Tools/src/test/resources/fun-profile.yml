@@ -20,7 +20,7 @@ default:
     - /say §2Dzięki za życko ${event.sender.nickName} ${PLAYER_NAME}
     - /execute at @p run particle minecraft:heart ~1 ~1 ~
     - /effect give @p minecraft:instant_health 1 0
-  onGiftMessage:
+  onGift:
     - /playsound minecraft:entity.horse.death master @p ~ ~ ~ 1 1 1
     - ${if event.gift.name == "TikTok"} /kill @e[type=minecraft:zombie, type=minecraft:creeper]
     - /playsound minecraft:entity.horse.death master @p ~ ~ ~ 1 1

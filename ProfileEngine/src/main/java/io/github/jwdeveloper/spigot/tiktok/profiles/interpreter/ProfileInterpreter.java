@@ -1,18 +1,25 @@
 package io.github.jwdeveloper.spigot.tiktok.profiles.interpreter;
 
 import io.github.jwdeveloper.ff.core.common.java.StringUtils;
+import io.github.jwdeveloper.ff.core.logger.plugin.PluginLogger;
 import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
 import io.github.jwdeveloper.spigot.tiktok.profiles.common.ProfileEventCommand;
 import io.github.jwdeveloper.spigot.tiktok.profiles.deserializer.models.ProfileElementModel;
 import io.github.jwdeveloper.spigot.tiktok.profiles.deserializer.models.ProfileModel;
-import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.literals.TextLineInterpeter;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.CodeLineInterpeter;
+import io.github.jwdeveloper.tiktok.events.TikTokEvent;
+import io.github.jwdeveloper.tiktok.events.messages.TikTokGiftMessageEvent;
 
 import java.util.*;
 
 
-public class ProfileInterpreter
-{
-     TextLineInterpeter stringLineInterpreter = new TextLineInterpeter();
+public class ProfileInterpreter {
+    CodeLineInterpeter stringLineInterpreter = new CodeLineInterpeter();
+
+    PluginLogger pluginLogger;
+    public ProfileInterpreter(PluginLogger pluginLogger) {
+        this.pluginLogger = pluginLogger;
+    }
 
     public List<Profile> getProfiles(List<ProfileModel> models) {
         var result = new ArrayList<Profile>();
@@ -45,27 +52,40 @@ public class ProfileInterpreter
 
     private List<ProfileEventCommand> getEventCommands(ProfileElementModel elementModels) {
         var result = new ArrayList<ProfileEventCommand>();
-        var classType = getEventClass(elementModels.getEventName());
+        var optional = getEventClass(elementModels.getEventName());
+
+        if(optional.isEmpty())
+        {
+            return result;
+        }
+
+        var classType = optional.get();
+
         for (var command : elementModels.getCommands()) {
             var codeBlock = stringLineInterpreter.getCodeBlock(command);
-            var commandEvent =  new ProfileEventCommand(classType, codeBlock);
-            result.add(commandEvent);
+            result.add(new ProfileEventCommand(classType, codeBlock));
         }
         return result;
     }
 
-    private Class<?> getEventClass(String name) {
+    private Optional<Class<?>> getEventClass(String name) {
+        if (name.equals("onGift")) {
+            return Optional.of(TikTokGiftMessageEvent.class);
+        }
+        if (name.equals("onEvent")) {
+            return Optional.of(TikTokEvent.class);
+        }
         var classBase = "io.github.jwdeveloper.tiktok.events.messages.";
         var eventName = name.replace("On", StringUtils.EMPTY);
         eventName = name.replace("on", StringUtils.EMPTY);
         eventName = "TikTok" + eventName + "Event";
         var fullName = classBase + eventName;
         try {
-            return Class.forName(fullName);
+            return Optional.of(Class.forName(fullName));
         } catch (Exception e) {
-            throw new RuntimeException("Class not found for event name: " + name, e);
+            pluginLogger.warning("Event with name " + name + " is invalid try something different");
         }
-
+        return Optional.empty();
     }
 
 }

@@ -1,7 +1,7 @@
 package io.github.jwdeveloper.spigot.tiktok.api;
 
 
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileExecutor;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileEditor;
 import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
 import io.github.jwdeveloper.tiktok.live.ConnectionState;
 import org.bukkit.entity.Player;
@@ -26,6 +26,6 @@ public interface TikTokLiveSpigotApi
      String getRecentHost();
      ConnectionState getClientState();
 
-     TikTokProfileExecutor getProfileExecutor();
+     TikTokProfileEditor getProfileExecutor();
      void clearHostsNames();
 }

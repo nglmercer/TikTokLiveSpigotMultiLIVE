@@ -11,8 +11,6 @@ import io.github.jwdeveloper.spigot.tiktok.core.profile.ProfilesFileWatcher;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-///gamerule sendCommandFeedback false
-
 public final class TikTokLiveSpigotMain extends JavaPlugin {
 
     @Override

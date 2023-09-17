@@ -1,11 +1,11 @@
 package profiles.interpreter;
 
-import io.github.jwdeveloper.spigot.tiktok.profiles.code.blocks.literals.MethodBlock;
+import io.github.jwdeveloper.spigot.tiktok.profiles.code.blocks.functions.FunctionExpression;
 import io.github.jwdeveloper.spigot.tiktok.profiles.common.exceptions.ProfileEngineException;
 import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.Tokenizer;
 import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.literals.LiteralInterpreter;
-import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.MethodInterpeter;
-import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.literals.TextLineInterpeter;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.functions.FunctionCallInterpreter;
+import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.code.CodeLineInterpeter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,16 +14,16 @@ import static org.junit.Assert.assertThrows;
 public class MethodInterpeterTest {
 
 
-    public static MethodBlock getMethod(String code) {
+    public static FunctionExpression getMethod(String code) {
         var tokenizer = new Tokenizer(code);
-        var methodInterpeter = new MethodInterpeter(new LiteralInterpreter(tokenizer, new TextLineInterpeter()), tokenizer);
+        var methodInterpeter = new FunctionCallInterpreter(new LiteralInterpreter(tokenizer, new CodeLineInterpeter()), tokenizer);
         return methodInterpeter.getCodeBlock();
     }
 
 
     @Test
     public void shouldCreateMethod() {
-        var method1 = (MethodBlock)getMethod("random arg1 arg2");
+        var method1 = (FunctionExpression)getMethod("random arg1 arg2");
 
 
         Assert.assertEquals("random", method1.getContent());

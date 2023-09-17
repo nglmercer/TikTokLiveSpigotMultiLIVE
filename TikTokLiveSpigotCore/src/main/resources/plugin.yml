@@ -1,4 +1,63 @@
 name: TikTokLiveSpigot
-version: '${project.version}'
+version: ${project.version}
 main: io.github.jwdeveloper.spigot.tiktok.core.TikTokLiveSpigotMain
+author: JW
+description: TikTok live integration for Minecraft servers
 api-version: 1.17
+permissions: 
+
+# ======================================== tiktoklivespigot =========================
+  tiktoklivespigot.*: 
+    description: full access
+
+# ======================================== tiktoklivespigot.gui =====================
+  tiktoklivespigot.gui.*: 
+    description: full access
+
+  tiktoklivespigot.gui.admin: 
+    description: default
+
+# ======================================== tiktoklivespigot.live ====================
+  tiktoklivespigot.live.*: 
+    description: full access
+
+  tiktoklivespigot.live.change-host: 
+    description: changes host of tiktok live
+
+  tiktoklivespigot.live.connect: 
+    description: user can connect to TikTokLive
+
+  tiktoklivespigot.live.disconnect: 
+    description: user can disconnect TikTokLive
+
+# ======================================== tiktoklivespigot.profiles ================
+  tiktoklivespigot.profiles.*: 
+    description: full access
+
+  tiktoklivespigot.profiles.change: 
+    description: user can change profiles
+
+  tiktoklivespigot.profiles.profile-editor: 
+    description: user can open ProfileEditor
+
+# ======================================== tiktoklivespigot.config ==================
+  tiktoklivespigot.config.*: 
+    description: full access
+
+  tiktoklivespigot.config.is-profile-reloading: 
+    description: enable auto reloading profiles
+
+  tiktoklivespigot.config.is-auto-connecting: 
+    description: enable auto connecting to live
+
+# ======================================== tiktoklivespigot.MockPlugin ==============
+  tiktoklivespigot.MockPlugin.*: 
+    description: full access
+
+  tiktoklivespigot.MockPlugin.commands: 
+    description: default
+
+  tiktoklivespigot.MockPlugin.gui: 
+    description: default
+
+

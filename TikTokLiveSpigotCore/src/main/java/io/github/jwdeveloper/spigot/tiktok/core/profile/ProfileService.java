@@ -5,10 +5,12 @@ import io.github.jwdeveloper.ff.core.common.java.StringUtils;
 import io.github.jwdeveloper.ff.core.injector.api.annotations.Injection;
 import io.github.jwdeveloper.ff.extension.files.api.fluent_files.FluentFile;
 import io.github.jwdeveloper.ff.plugin.implementation.config.options.FluentConfigFile;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileEditor;
 import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileService;
 import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConst;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConfig;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -21,9 +23,12 @@ public class ProfileService implements TikTokProfileService {
     private final FluentConfigFile<TikTokLiveSpigotConfig> config;
     private final FluentFile<ProfilesFileWatcher> fileWatcher;
     private Consumer<List<Profile>> onUpdated;
+    private final TikTokProfileEditor tikTokProfileEditor;
 
     public ProfileService(FluentConfigFile<TikTokLiveSpigotConfig> config,
-                          FluentFile<ProfilesFileWatcher> fileWatcher) {
+                          FluentFile<ProfilesFileWatcher> fileWatcher,
+                          TikTokProfileEditor tikTokProfileEditor) {
+        this.tikTokProfileEditor = tikTokProfileEditor;
         this.profiles = new ArrayList<>();
         this.config = config;
         this.fileWatcher = fileWatcher;
@@ -40,17 +45,17 @@ public class ProfileService implements TikTokProfileService {
     public ActionResult<Profile> setCurrentProfile(String name) {
         var optional = profiles.stream().filter(e -> e.getName().equalsIgnoreCase(name)).findFirst();
         if (optional.isEmpty()) {
-            return ActionResult.failed("Profile "+name+ " not found!");
+            return ActionResult.failed("Profile not found! "+ChatColor.YELLOW+name);
         }
         var profile = optional.get();
 
-        config.get().setProfile(name);
+        config.get().setActiveProfile(name);
         config.save();
-        return ActionResult.success(profile, "Set current profile as " + name);
+        return ActionResult.success(profile, "Active profile changed to " + ChatColor.DARK_GREEN+ name);
     }
 
     public Profile getCurrentProfile() {
-        var currentProfileName = config.get().getProfile();
+        var currentProfileName = config.get().getActiveProfile();
         if (StringUtils.isNullOrEmpty(currentProfileName)) {
             return getDefaultProfile();
         }
@@ -81,10 +86,19 @@ public class ProfileService implements TikTokProfileService {
         return profiles.get(0);
     }
 
-    private void updateProfiles(List<Profile> newProfiles)
+    private void updateProfiles(ProfilesFileWatcher.ProfileUpdateDto updateDto)
     {
         profiles.clear();
-        profiles.addAll(newProfiles);
+        profiles.addAll(updateDto.getProfiles());
+
+        for(var cons : updateDto.getConstances())
+        {
+            tikTokProfileEditor.addConstance(cons);
+        }
+        for(var method : updateDto.getMethodDefinitions())
+        {
+            tikTokProfileEditor.addMethod(method);
+        }
         onUpdated.accept(profiles);
     }
 
