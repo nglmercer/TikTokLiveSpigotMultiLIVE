@@ -36,7 +36,7 @@ public class GenerateDescriptionTest extends GenerateDescriptionTask {
             bannerOptions.setGithubUrl("https://github.com/jwdeveloper/TikTokLiveSpigot");
             bannerOptions.setSpigotUrl("https://www.spigotmc.org/members/jacekwoln.869774/");
             bannerOptions.setDonationUrl("https://www.buymeacoffee.com/jwdev");
-            bannerOptions.setBannerImage("https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.gif");
+            bannerOptions.setBannerImage("https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner_small.gif");
         });
         descriptionDto.setPermissionsClass(PermissionsTemplate.class);
         descriptionDto.setPluginMain(TikTokLiveSpigotConfig.class);

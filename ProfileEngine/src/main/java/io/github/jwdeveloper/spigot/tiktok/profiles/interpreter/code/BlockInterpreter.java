@@ -25,7 +25,7 @@ public class BlockInterpreter extends InterpreterBase {
         this.ifInterpreter = new IfInterpreter(tokenizer, this, literalInterpreter);
         this.switchInterpeter = new SwitchInterpeter(tokenizer, literalInterpreter);
         this.repeatInterpreter = new RepeatInterpreter(tokenizer, literalInterpreter);
-        this.declarationInterpreter = new DeclarationInterpreter(tokenizer, literalInterpreter );
+        this.declarationInterpreter = new DeclarationInterpreter(tokenizer, literalInterpreter);
     }
 
     public CodeBlock getCodeBlock() {

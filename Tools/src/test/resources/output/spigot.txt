@@ -1,6 +1,6 @@
 
 
-[CENTER][URL='https://www.buymeacoffee.com/jwdev'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support_old.gif[/IMG][/URL][URL='https://discord.gg/fk3W4e3K'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/discord.svg[/IMG][/URL][URL='https://github.com/jwdeveloper/TikTokLiveSpigot'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/github.svg[/IMG][/URL][/CENTER]
+[CENTER][URL='https://www.buymeacoffee.com/jwdev'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.svg[/IMG][/URL][URL='https://discord.gg/fk3W4e3K'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/discord.svg[/IMG][/URL][URL='https://github.com/jwdeveloper/TikTokLiveSpigot'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/github.svg[/IMG][/URL][/CENTER]
 
 [IMG]https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.gif[/IMG]
 
@@ -14,13 +14,17 @@ Ever wanted to bring the excitement of TikTok Lives directly into Minecraft? Wit
 [/QUOTE]
 
 
-What's next? Transform Tiktok events into Minecraft commands using[URL='https://github.com/jwdeveloper/TikTokLiveSpigot#events-configuration']event configuration[/URL]
+[URL='https://github.com/jwdeveloper/TikTokLiveSpigot#events-configuration']event configuration[/URL]
 
 
 
 [CENTER][URL='https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW'][IMG]https://img.youtube.com/vi/0KSN7dfi7PQ/0.jpg[/IMG][/URL][/CENTER]
 
 
+
+[CENTER][SIZE=8]Simple and flexible configuration[SIZE=8]Simple and flexible configuration[/SIZE][/SIZE][/CENTER]
+
+Transform Tiktok events into Minecraft commands using custom scripting language.[URL='https://github.com/jwdeveloper/TikTokLiveSpigot/tree/master/Examples']Learn more about it Here[/URL][IMG]https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/e31f033e-0ca1-4929-b1bc-47b99cbea817[/IMG]
 
 [CENTER][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/banners/permissions.svg[/IMG][SPOILER=open permissions]
 
@@ -32,9 +36,6 @@ permissions:
   tiktoklivespigot.*: 
     description: full access
 
-  tiktoklivespigot.commands: 
-    description: default
-
 # ======================================== tiktoklivespigot.gui =====================
   tiktoklivespigot.gui.*: 
     description: full access
@@ -45,6 +46,9 @@ permissions:
 # ======================================== tiktoklivespigot.live ====================
   tiktoklivespigot.live.*: 
     description: full access
+
+  tiktoklivespigot.live.change-host: 
+    description: changes host of tiktok live
 
   tiktoklivespigot.live.connect: 
     description: user can connect to TikTokLive
@@ -66,8 +70,11 @@ permissions:
   tiktoklivespigot.config.*: 
     description: full access
 
-  tiktoklivespigot.config.change: 
-    description: user can update config
+  tiktoklivespigot.config.is-profile-reloading: 
+    description: enable auto reloading profiles
+
+  tiktoklivespigot.config.is-auto-connecting: 
+    description: enable auto connecting to live
 
   tiktoklivespigot.updater: 
     description: Players with this permission can update plugin
@@ -98,7 +105,30 @@ permissions:
 
 
 [LEFT][CODE=yaml]
-# ##<UpdaterConfig>
+# ##<FluentFilesConfig>
+# 
+# plugin.files.saving-frequency
+#  Determinate how frequent data is saved to files, value in minutes
+# 
+# 
+# </FluentFilesConfig>#<TikTokLiveSpigotConfig>
+# 
+# tiktok-live.auto-reload-profiles
+#  Dynamic reloads profiles when `profile.yml` file got changed
+# 
+# 
+# tiktok-live.auto-connect
+#  Connects to live when server starts
+# 
+# 
+# tiktok-live.active-tiktok-user
+#  Active tiktok user
+# 
+# 
+# tiktok-live.active-profile
+#  Active profile
+# 
+# </TikTokLiveSpigotConfig>#<UpdaterConfig>
 # 
 # plugin.updater.force-update
 #  if there is new update, it is downloaded and installed
@@ -115,30 +145,7 @@ permissions:
 # 
 # plugin.updater.check-update.plugin.updater.check-update.send-update-message-to-op
 #  Sends message to op players when update is ready
-# </UpdaterConfig>#<FluentFilesConfig>
-# 
-# plugin.files.saving-frequency
-#  Determinate how frequent data is saved to files, value in minutes
-# 
-# 
-# </FluentFilesConfig>#<TikTokLiveSpigotConfig>
-# 
-# tiktok-live.auto-reload-profiles
-#  Dynamic reloads profiles when `profile.yml` file got changed
-# 
-# 
-# tiktok-live.auto-connect
-#  Connects to live when server starts
-# 
-# 
-# tiktok-live.tiktok-user
-#  Default tiktok user
-# 
-# 
-# tiktok-live.profile
-#  Default  profile
-# 
-# </TikTokLiveSpigotConfig>#<TranslatorConfig>
+# </UpdaterConfig>#<TranslatorConfig>
 # 
 # plugin.translator.language
 #  If you want add your language open `languages` folder copy `en.yml`
@@ -156,6 +163,9 @@ plugin-meta:
 plugin:
   translator:
     language: en
+  files:
+    auto-save: false
+    saving-frequency: ''
   updater:
     force-update: false
     check-update:
@@ -163,14 +173,11 @@ plugin:
       check-every-minutes: 0
       send-update-message-to-console: false
       send-update-message-to-op: false
-  files:
-    auto-save: false
-    saving-frequency: ''
 tiktok-live:
   auto-reload-profiles: false
   auto-connect: false
-  tiktok-user: ''
-  profile: ''
+  active-tiktok-user: ''
+  active-profile: ''
 
 [/CODE][/LEFT]
 
@@ -188,9 +195,9 @@ tiktok-live:
 # /tiktoklive language <language>
 # /tiktoklive connect
 # /tiktoklive profile
-# /tiktoklive disconnect
-# /tiktoklive admin
 # /tiktoklive profile-editor
+# /tiktoklive admin
+# /tiktoklive disconnect
 # /tiktoklive updater
 
 
@@ -201,12 +208,12 @@ commands:
       - language
       - connect
       - profile
-      - disconnect
-      - admin
       - profile-editor
+      - admin
+      - disconnect
       - updater
     permissions: 
-      - tiktoklivespigot
+      - 
     can-use: 
       - command_sender
     usage: /tiktoklive
@@ -236,7 +243,7 @@ commands:
 # /tiktoklive connect
   connect: 
     permissions: 
-      - tiktoklivespigot.connect
+      - tiktoklivespigot.live.connect
     can-use: 
       - command_sender
     arguments: 
@@ -247,7 +254,7 @@ commands:
 # /tiktoklive profile
   profile: 
     permissions: 
-      - tiktoklivespigot.profile.set
+      - tiktoklivespigot.profiles.change
     can-use: 
       - command_sender
     arguments: 
@@ -255,29 +262,29 @@ commands:
           type: text
     usage: /tiktoklive profile
 
-# /tiktoklive disconnect
-  disconnect: 
+# /tiktoklive profile-editor
+  profile-editor: 
     permissions: 
-      - tiktoklivespigot.disconnect
+      - tiktoklivespigot.profiles.profile-editor
     can-use: 
       - command_sender
-    usage: /tiktoklive disconnect
+    usage: /tiktoklive profile-editor
 
 # /tiktoklive admin
   admin: 
     permissions: 
-      - tiktoklivespigotgui.config
+      - tiktoklivespigot.gui.admin
     can-use: 
       - command_sender
     usage: /tiktoklive admin
 
-# /tiktoklive profile-editor
-  profile-editor: 
+# /tiktoklive disconnect
+  disconnect: 
     permissions: 
-      - tiktoklivespigot.editor
+      - tiktoklivespigot.live.disconnect
     can-use: 
       - command_sender
-    usage: /tiktoklive profile-editor
+    usage: /tiktoklive disconnect
 
 # /tiktoklive updater
   updater: 
