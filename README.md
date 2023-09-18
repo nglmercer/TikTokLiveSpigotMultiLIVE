@@ -106,7 +106,7 @@ What's next? Transform Tiktok events into Minecraft commands using[event configu
 <h1>Simple and flexible configuration</h1>
 </div>
 
-[Read Script tutorial](https://github.com/jwdeveloper/TikTokLiveSpigot/tree/master/Examples) 
+Transform Tiktok events into Minecraft commands using custom scripting language.[Learn more about it Here](https://github.com/jwdeveloper/TikTokLiveSpigot/tree/master/Examples) 
 
 <a target="blank" >
 
@@ -334,8 +334,8 @@ tiktok-live:
 # /tiktoklive connect
 # /tiktoklive disconnect
 # /tiktoklive profile
-# /tiktoklive admin
 # /tiktoklive profile-editor
+# /tiktoklive admin
 # /tiktoklive updater
 
 
@@ -347,8 +347,8 @@ commands:
       - connect
       - disconnect
       - profile
-      - admin
       - profile-editor
+      - admin
       - updater
     permissions: 
       - 
@@ -408,14 +408,6 @@ commands:
           type: text
     usage: /tiktoklive profile
 
-# /tiktoklive admin
-  admin: 
-    permissions: 
-      - tiktoklivespigot.gui.admin
-    can-use: 
-      - command_sender
-    usage: /tiktoklive admin
-
 # /tiktoklive profile-editor
   profile-editor: 
     permissions: 
@@ -423,6 +415,14 @@ commands:
     can-use: 
       - command_sender
     usage: /tiktoklive profile-editor
+
+# /tiktoklive admin
+  admin: 
+    permissions: 
+      - tiktoklivespigot.gui.admin
+    can-use: 
+      - command_sender
+    usage: /tiktoklive admin
 
 # /tiktoklive updater
   updater: 
