@@ -1,6 +1,12 @@
 # Tutorial
 
-### Learn how to deal with TikTok events 
+Control server behaviour by custom scripting language `syml` It is yml with code blocks
+You can [download Visual studio code](https://marketplace.visualstudio.com/items?itemName=JWdeveloper.syml) extension for easier editing
+
+![image](https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/994f20bf-c775-4c5e-a1a9-b48595ad7440)
+
+
+## contents
 
 1. [About profiles](https://github.com/jwdeveloper/TikTokLiveSpigot/blob/master/Examples/profiles/1.profiles.md)
 
