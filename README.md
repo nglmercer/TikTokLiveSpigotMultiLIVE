@@ -10,7 +10,7 @@
 
 <a href="https://www.buymeacoffee.com/jwdev" target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support_old.gif" width="30%" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/discord.svg" width="30%" height="100%" >
 </img>
 </a>
 
@@ -36,7 +36,7 @@
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.gif" height="100%" >
+<img src="https://github.com/jwdeveloper/TikTokLiveSpigot/assets/79764581/29961f63-c2e2-4967-83d8-45b7c56b9257" width="100%" height="100%" >
 </img>
 </a>
 
