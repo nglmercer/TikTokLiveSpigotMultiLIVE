@@ -1,7 +1,7 @@
 
 <container>
     <title>
-        Events configuration
+        Simple and flexible configuration
     </title>
 </container>
 
@@ -25,46 +25,7 @@
             - [command]
         </code>
     </div>
-
-
-    <div>
-        <title size="5">How to inject event data?</title>
-        <text>o inject data you need to open create code block ${ }</text>
-        <text>And set as its content property of TikTok event you want to use</text>
-        <text> All available properties can be found  </text>
-        <link link="https://jwdeveloper.github.io/TikTokLiveSpigot/webeditor/" title="here">
-        <code language="yaml">
-            example-profile:
-            onLike:
-            - /say ${event.user.nickName} thank you for like!
-        </code>
-    </div>
-
 </div>
 
 
 
-#
-# 3. How to make conditional: command If statement
-#    Sometimes we need to trigger command only when some condition is meet
-#    To do it use ${if [value1] [operator(==, >, >=, <, <=)] [value2]}. For this example we are checking if nickname of
-#    user that send like is Mark. If it's not then command is ignored
-#
-#  example-profile:
-#   onLike:
-#       - ${if event.user.nickName == "mark"} /say ${event.user.nickName} thank you for like!
-#   onGiftMessage:
-#       - ${if event.gift.diamondCost == 10} /say ${event.user.nickName} Thank you for gift!
-#       - ${if event.gift.diamondCost == 100} /say ${event.user.nickName} Thank you for nice gift!
-#       - ${if event.gift.diamondCost > 1000} /say ${event.user.nickName} That gift is so expensive!
-#
-# 4. How to repeat command: Repeat statement
-#    If case you want to repeat command X times use ${repeat [counter]}
-#
-#  example-profile:
-#   onLike:
-#       - ${repeat 10} /say ${event.user.nickName} thank you for like!
-#   onGiftMessage:
-#       - ${if event.gift.name == "rose"} ${repeat 5}  /say  Thank you for ${event.user.nickName} rose!
-#       - ${if event.gift.name == "cow"} ${repeat 10}  /say  muuuuuuuuuu
-#
