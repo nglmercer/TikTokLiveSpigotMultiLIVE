@@ -3,14 +3,21 @@ package io.github.jwdeveloper.spigot.tiktok.core.profile;
 import io.github.jwdeveloper.ff.core.common.ActionResult;
 import io.github.jwdeveloper.ff.core.common.java.StringUtils;
 import io.github.jwdeveloper.ff.core.injector.api.annotations.Injection;
+import io.github.jwdeveloper.ff.core.logger.plugin.FluentLogger;
+import io.github.jwdeveloper.ff.core.spigot.events.implementation.EventGroup;
 import io.github.jwdeveloper.ff.extension.files.api.fluent_files.FluentFile;
+import io.github.jwdeveloper.ff.plugin.api.logger.PlayerLogger;
 import io.github.jwdeveloper.ff.plugin.implementation.config.options.FluentConfigFile;
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileEditor;
 import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileService;
-import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfilesExecutor;
+import io.github.jwdeveloper.spigot.tiktok.core.profiles.ProfileLoader;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConst;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConfig;
+import io.github.jwdeveloper.spigot.tiktok.profiles.common.exceptions.SymlEngineException;
+import lombok.Getter;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -19,21 +26,28 @@ import java.util.function.Consumer;
 
 @Injection
 public class ProfileService implements TikTokProfileService {
+
+    @Getter
     private final List<Profile> profiles;
     private final FluentConfigFile<TikTokLiveSpigotConfig> config;
     private final FluentFile<ProfilesFileWatcher> fileWatcher;
-    private Consumer<List<Profile>> onUpdated;
-    private final TikTokProfileEditor tikTokProfileEditor;
+    private final EventGroup<List<Profile>> onProfileUpdatedEvent;
+    private final TikTokProfilesExecutor profilesExecutor;
+    private final ProfileLoader profileLoader;
+    private final PlayerLogger playerLogger;
 
     public ProfileService(FluentConfigFile<TikTokLiveSpigotConfig> config,
                           FluentFile<ProfilesFileWatcher> fileWatcher,
-                          TikTokProfileEditor tikTokProfileEditor) {
-        this.tikTokProfileEditor = tikTokProfileEditor;
+                          TikTokProfilesExecutor profilesExecutor,
+                          ProfileLoader profileLoader, PlayerLogger playerLogger) {
+        this.profilesExecutor = profilesExecutor;
+        this.profileLoader = profileLoader;
+        this.playerLogger = playerLogger;
         this.profiles = new ArrayList<>();
         this.config = config;
         this.fileWatcher = fileWatcher;
-        this.fileWatcher.getTarget().onProfilesUpdate(this::updateProfiles);
-        this.onUpdated = (e)-> {};
+        this.fileWatcher.getTarget().getOnFileUpdatedEvent().subscribe(this::onProfileReoladed);
+        this.onProfileUpdatedEvent = new EventGroup<>();
     }
 
     @Override
@@ -66,44 +80,76 @@ public class ProfileService implements TikTokProfileService {
         return optional.get();
     }
 
-    public List<Profile> getProfiles() {
-        return profiles;
+    public void reloadProfiles()
+    {
+       handleReload(fileWatcher.getTarget().getContent());
     }
 
+    private void onProfileReoladed(String content)
+    {
+        if (!config.get().isReloadProfiles()) {
+            return;
+        }
+        handleReload(content);
+    }
 
-    public void reloadProfiles() {
-        fileWatcher.load();
-        var newProfiles = fileWatcher.getTarget().loadProfiles();
-        updateProfiles(newProfiles);
+    public void clearProfiles()
+    {
+        profiles.clear();
+    }
+
+    private void handleReload(String content)
+    {
+
+        try
+        {
+            FluentLogger.LOGGER.info("AAAAAAAAAAAAAA");
+            var yaml = new YamlConfiguration();
+            yaml.loadFromString(content);
+            FluentLogger.LOGGER.info("BBBBBBBBBBBBBBBB");
+            var profile = profileLoader.loadProfile("custom" ,content);
+            FluentLogger.LOGGER.info("CCCCCCCCCCCCCCCCCCCCCC");
+            updateProfiles(profile);
+
+        }
+        catch (SymlEngineException e)
+        {
+            FluentLogger.LOGGER.info("XXXXXXXXXXX");
+            profiles.clear();
+            FluentLogger.LOGGER.error("ERROR WHILE LOADING PROFILES",e);
+        }
+        catch (Exception e)
+        {
+            FluentLogger.LOGGER.info("CCCCCCCCCCCCCCCCCCCCCCCCC");
+        }
     }
 
     private Profile getDefaultProfile()
     {
         if(profiles.isEmpty())
         {
-            return Profile.EMPTY;
+            return Profile.EMPTY();
         }
         return profiles.get(0);
     }
 
-    private void updateProfiles(ProfilesFileWatcher.ProfileUpdateDto updateDto)
+    private void updateProfiles(Profile profile)
     {
         profiles.clear();
-        profiles.addAll(updateDto.getProfiles());
+        profilesExecutor.execute(profile.getIntiBlock());
+        profiles.add(profile);
+        onProfileUpdatedEvent.invoke(profiles);
 
-        for(var cons : updateDto.getConstances())
-        {
-            tikTokProfileEditor.addConstance(cons);
+        playerLogger.success("Profiles loaded successfully").sendToAllPlayer();
+        FluentLogger.LOGGER.success("==============================================");
+        FluentLogger.LOGGER.success("Profiles updated successfully: ");
+        for (var _profile : profiles) {
+            FluentLogger.LOGGER.success("-", _profile.getName());
+            FluentLogger.LOGGER.success("    events:");
+            for (var event : _profile.getEventsBlocks().entrySet()) {
+                FluentLogger.LOGGER.success("      -", event.getKey().getSimpleName(), "-> code lines "+event.getValue().getBody().size());
+            }
         }
-        for(var method : updateDto.getMethodDefinitions())
-        {
-            tikTokProfileEditor.addMethod(method);
-        }
-        onUpdated.accept(profiles);
-    }
-
-    public void onProfilesUpdated(Consumer<List<Profile>> profiles)
-    {
-        onUpdated = profiles;
+        FluentLogger.LOGGER.success("==============================================");
     }
 }

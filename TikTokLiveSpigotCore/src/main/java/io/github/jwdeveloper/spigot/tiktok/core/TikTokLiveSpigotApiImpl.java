@@ -6,8 +6,8 @@ import io.github.jwdeveloper.ff.extension.files.api.fluent_files.FluentFile;
 import io.github.jwdeveloper.ff.extension.gui.api.InventoryApi;
 import io.github.jwdeveloper.ff.plugin.api.logger.PlayerLogger;
 import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileEditor;
-import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfilesExecutor;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotMeta;
 import io.github.jwdeveloper.spigot.tiktok.core.gui.TikTokSpigotLiveAdminGUI;
 import io.github.jwdeveloper.spigot.tiktok.core.profile.ProfileService;
@@ -17,27 +17,28 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
+
 public class TikTokLiveSpigotApiImpl implements TikTokLiveSpigotApi {
     private final ProfileService profileService;
     private final TikTokLiveSpigotClient tikTokSpigotClient;
-    private final TikTokProfileEditor tikTokProfileExecutor;
+    private final TikTokProfilesExecutor tikTokProfileExecutor;
     private final FluentFile<TikTokLiveSpigotMeta> metaFluentFile;
     private final PlayerLogger playerLogger;
     private final InventoryApi inventoryApi;
+
 
     public TikTokLiveSpigotApiImpl(ProfileService profileService,
                                    TikTokLiveSpigotClient tikTokSpigotClient,
                                    FluentFile<TikTokLiveSpigotMeta> metaFluentFile,
                                    PlayerLogger playerLogger,
                                    InventoryApi inventoryApi,
-                                   TikTokProfileEditor tikTokProfileExecutor) {
+                                   TikTokProfilesExecutor tikTokProfileExecutor) {
         this.profileService = profileService;
         this.tikTokSpigotClient = tikTokSpigotClient;
         this.metaFluentFile = metaFluentFile;
         this.playerLogger = playerLogger;
         this.inventoryApi = inventoryApi;
         this.tikTokProfileExecutor = tikTokProfileExecutor;
-        this.profileService.onProfilesUpdated(this::updateProfilesInfo);
     }
 
 
@@ -110,7 +111,7 @@ public class TikTokLiveSpigotApiImpl implements TikTokLiveSpigotApi {
     }
 
     @Override
-    public TikTokProfileEditor getProfileExecutor() {
+    public TikTokProfilesExecutor getProfileExecutor() {
         return tikTokProfileExecutor;
     }
 
@@ -120,18 +121,5 @@ public class TikTokLiveSpigotApiImpl implements TikTokLiveSpigotApi {
         metaFluentFile.save();
     }
 
-    private void updateProfilesInfo(List<Profile> profiles)
-    {
-        playerLogger.success("Profiles reloaded").sendToAllPlayer();
-        FluentLogger.LOGGER.success("==============================================");
-        FluentLogger.LOGGER.success("Profiles updated: ");
-        for (var profile : profiles) {
-            FluentLogger.LOGGER.success("-", profile.getName());
-            FluentLogger.LOGGER.success("    events:");
-            for (var event : profile.getEventsCommands().entrySet()) {
-                FluentLogger.LOGGER.success("      -", event.getKey().getSimpleName(), "-> commands:", event.getValue().size());
-            }
-        }
-        FluentLogger.LOGGER.success("==============================================");
-    }
+
 }

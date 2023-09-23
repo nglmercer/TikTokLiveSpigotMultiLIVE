@@ -1,6 +1,6 @@
 package io.github.jwdeveloper.spigot.tiktok.api.events;
 
-import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
 import io.github.jwdeveloper.tiktok.events.TikTokEvent;
 import io.github.jwdeveloper.tiktok.live.LiveClient;
 import lombok.Getter;

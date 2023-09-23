@@ -5,9 +5,8 @@ import io.github.jwdeveloper.ff.core.logger.plugin.FluentLogger;
 import io.github.jwdeveloper.ff.core.spigot.tasks.api.FluentTaskFactory;
 import io.github.jwdeveloper.ff.plugin.api.logger.PlayerLogger;
 import io.github.jwdeveloper.spigot.tiktok.api.events.TikTokLiveSpigotEvent;
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileEditor;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfilesExecutor;
 import io.github.jwdeveloper.spigot.tiktok.core.commands.MapTest;
-import io.github.jwdeveloper.spigot.tiktok.core.profile.TikTokProfileExecutorImpl;
 import io.github.jwdeveloper.spigot.tiktok.core.profile.ProfileService;
 import io.github.jwdeveloper.tiktok.annotations.TikTokEventHandler;
 import io.github.jwdeveloper.tiktok.events.TikTokEvent;
@@ -19,17 +18,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 
+import java.util.ArrayList;
+
 @Injection
 public class TikTokSpigotEventListener implements TikTokEventListener {
     private final ProfileService profileService;
-    private final TikTokProfileEditor profileExecutor;
+    private final TikTokProfilesExecutor profileExecutor;
     private final FluentTaskFactory fluentTaskFactory;
     private final Plugin plugin;
     private final PlayerLogger playerLogger;
 
 
     public TikTokSpigotEventListener(ProfileService profileService,
-                                     TikTokProfileEditor profileProcessor,
+                                     TikTokProfilesExecutor profileProcessor,
                                      FluentTaskFactory fluentTaskFactory,
                                      Plugin plugin,
                                      PlayerLogger playerLogger) {
@@ -42,24 +43,43 @@ public class TikTokSpigotEventListener implements TikTokEventListener {
 
 
     @TikTokEventHandler
-    public void onEvent(LiveClient liveClient, TikTokEvent tikTokEvent) {
-        var currentProfile = profileService.getCurrentProfile();
-        var commands = profileExecutor.execute(tikTokEvent, currentProfile);
-        if (commands.size() == 0) {
-            return;
-        }
-        if (!plugin.isEnabled()) {
-            return;
-        }
-        fluentTaskFactory.task(() ->
+    public void onEvent(LiveClient liveClient, TikTokEvent tikTokEvent)
+    {
+        try
         {
-            for (var command : commands) {
-                FluentLogger.LOGGER.info(command);
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+            var currentProfile = profileService.getCurrentProfile();
+            var commands = profileExecutor.execute(tikTokEvent, currentProfile);
+            if (commands.size() == 0) {
+                return;
             }
-            var event = new TikTokLiveSpigotEvent(tikTokEvent, liveClient, currentProfile);
-            Bukkit.getServer().getPluginManager().callEvent(event);
-        });
+            if (!plugin.isEnabled()) {
+                return;
+            }
+            var commandsCopy = new ArrayList<>(commands);
+            fluentTaskFactory.task(() ->
+            {
+                for(var i =0;i<commandsCopy.size();i++)
+                {
+                    var command = commandsCopy.get(i);
+                    if(command.startsWith("say"))
+                    {
+                        var cmd = command.substring(4);
+                        Bukkit.getOnlinePlayers().forEach(e -> e.sendMessage(cmd));
+                        continue;
+                    }
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+                }
+                var event = new TikTokLiveSpigotEvent(tikTokEvent, liveClient, currentProfile);
+                Bukkit.getServer().getPluginManager().callEvent(event);
+            });
+        }
+        catch (ClassCastException e)
+        {
+            FluentLogger.LOGGER.error("Error while executing profile",e);
+            profileService.clearProfiles();
+        }
+
+
     }
 
     //@TikTokEventHandler

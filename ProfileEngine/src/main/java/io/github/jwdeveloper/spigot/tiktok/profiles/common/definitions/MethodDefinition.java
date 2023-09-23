@@ -1,6 +1,5 @@
 package io.github.jwdeveloper.spigot.tiktok.profiles.common.definitions;
 
-import lombok.Data;
 import lombok.Value;
 
 import java.util.List;

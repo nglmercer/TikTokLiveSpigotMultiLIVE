@@ -1,0 +1,286 @@
+{
+	"name": "sy",
+	"language": "sy",
+	"scopeName": "source.sy",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#yml-field"
+		}
+	],
+	"repository": {
+		"strings": {
+			"begin": "(\"|')",
+			"end": "(\"|')",
+			"name": "string.quoted.double.sy",
+			"patterns": [
+				{
+					"include": "#code-block-expression"
+				}
+			]
+		},
+		"yml-field": {
+			"begin": "(\\w+:)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.yml"
+				}
+			},
+			"end": "(?=(\\w+:))",
+			"name": "variable",
+			"patterns": [
+				{
+					"include": "#expression"
+				}
+			]
+		},
+		"expression": {
+			"name": "variable",
+			"patterns": [
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#letter"
+				},
+				{
+					"include": "#paren-expression"
+				},
+				{
+					"include": "#numbers"
+				},
+				{
+					"include": "#key-symbols"
+				},
+				{
+					"include": "#code-block-expression"
+				},
+				{
+					"include": "#command"
+				}
+			]
+		},
+		"letter": {
+			"match": "\\b(if|repeat|switch|is|then|else|and|or|default|contains|in|true|false|return|==|!=|case)\\b",
+			"name": "keyword.letter"
+		},
+		"numbers": {
+			"name": "constant.numeric",
+			"match": "\\d+"
+		},
+		"key-symbols": {
+			"name": "spigot.gold.syml",
+			"match": "(>|>=|<|<=|=|,|\\.|\\+|-|\\*|\\^|;)"
+		},
+		"paren-expression": {
+			"begin": "\\(",
+			"end": "\\)",
+			"beginCaptures": {
+				"0": {
+					"name": "spigot.gold.syml"
+				}
+			},
+			"endCaptures": {
+				"0": {
+					"name": "spigot.gold.syml"
+				}
+			},
+			"name": "expression.group",
+			"patterns": [
+				{
+					"include": "#expression"
+				}
+			]
+		},
+		"code-block-expression": {
+			"begin": "\\$\\{",
+			"end": "\\}",
+			"beginCaptures": {
+				"0": {
+					"name": "spigot.gold.syml"
+				}
+			},
+			"endCaptures": {
+				"0": {
+					"name": "spigot.gold.syml"
+				}
+			},
+			"name": "variable",
+			"patterns": [
+				{
+					"include": "#expression"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment",
+					"match": "#.*"
+				}
+			]
+		},
+		"command": {
+			"name": "command.mc",
+			"begin": "/",
+			"end": "$",
+			"patterns": [
+				{
+					"include": "#code-block-expression"
+				},
+				{
+					"include":"#spigot-colors"
+				},
+				{
+					"include":"#spigot-colors-2"
+				}
+			 ]
+		},
+		"spigot-colors": {
+			"patterns": [
+				{
+					"name": "spigot.black.syml",
+					"match": "\\§0(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_blue.syml",
+					"match": "\\§1(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_green.syml",
+					"match": "\\§2(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_aqua.syml",
+					"match": "\\§3(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_red.syml",
+					"match": "\\§4(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_purple.syml",
+					"match": "\\§5(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.gold.syml",
+					"match": "\\§6(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.gray.syml",
+					"match": "\\§7(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_gray.syml",
+					"match": "\\§8(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.blue.syml",
+					"match": "\\§9(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.green.syml",
+					"match": "\\§a(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.aqua.syml",
+					"match": "\\§b(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.red.syml",
+					"match": "\\§c(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.light_purple.syml",
+					"match": "\\§d(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.yellow.syml",
+					"match": "\\§e(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.white.syml",
+					"match": "\\§f(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.bold.syml",
+					"match": "\\§l(.*?)(?=\\&|\\§|\\$|$)"
+				}
+			]
+		},
+		"spigot-colors-2": {
+			"patterns": [
+				{
+					"name": "spigot.black.syml",
+					"match": "\\&0(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_blue.syml",
+					"match": "\\&1(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_green.syml",
+					"match": "\\&2(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_aqua.syml",
+					"match": "\\&3(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_red.syml",
+					"match": "\\&4(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_purple.syml",
+					"match": "\\&5(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.gold.syml",
+					"match": "\\&6(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.gray.syml",
+					"match": "\\&7(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.dark_gray.syml",
+					"match": "\\&8(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.blue.syml",
+					"match": "\\&9(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.green.syml",
+					"match": "\\&a(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.aqua.syml",
+					"match": "\\&b(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.red.syml",
+					"match": "\\&c(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.light_purple.syml",
+					"match": "\\&d(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.yellow.syml",
+					"match": "\\&e(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.white.syml",
+					"match": "\\&f(.*?)(?=\\&|\\§|\\$|$)"
+				},
+				{
+					"name": "spigot.bold.syml",
+					"match": "\\&l(.*?)(?=\\&|\\§|\\$|$)"
+				}
+			]
+		}
+	}
+}

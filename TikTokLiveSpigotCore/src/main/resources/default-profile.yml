@@ -1,0 +1,18 @@
+#Documentation
+#https://github.com/jwdeveloper/TikTokLiveSpigot#events-configuration
+
+
+default:
+  onJoin:
+    - /say §2${event.user.nickName} §7joined to §3Tik§cTok §2Live!
+    -  ${repeat 20 if event.user.nickName == "mark" then "/say siema marek else "/say nara marek"}
+  onLike:
+    - /execute ${event.messageId} at @p run particle minecraft:heart ~1 ~1 ~
+  onGiftMessage:
+    - /title @p clear
+    - /title @p title "§2${event.sender.nickName}"
+    - /title @p subtitle "§7Thank you for ${event.comboCount} §2${event.gift.name}"
+    - /execute at @p run summon minecraft:zombie ~ ~ ~ {CustomName:"{\"text\":\"§2${event.sender.nickName}\"}"}
+empty:
+  onComment:
+

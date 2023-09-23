@@ -4,8 +4,8 @@ import io.github.jwdeveloper.ff.core.spigot.commands.api.enums.ArgumentDisplay;
 import io.github.jwdeveloper.ff.extension.commands.api.annotations.Argument;
 import io.github.jwdeveloper.ff.extension.commands.api.annotations.Command;
 import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotPermissions;
-import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -27,6 +27,7 @@ public class TikTokLiveSpigotCommands {
         tiktokApi.connect(player, name);
     }
 
+
     @Command(name = "disconnect", permissions = {TikTokLiveSpigotPermissions.LIVE.DISCONNECT})
     public void disconnect(Player player) {
         tiktokApi.disconnect(player);
@@ -46,6 +47,7 @@ public class TikTokLiveSpigotCommands {
     private void setProfile(Player player, String name) {
         tiktokApi.setProfile(player, name);
     }
+
 
     @Command(name = "profile-editor", permissions = {TikTokLiveSpigotPermissions.PROFILES.PROFILE_EDITOR})
     public void openEditor(Player player) {

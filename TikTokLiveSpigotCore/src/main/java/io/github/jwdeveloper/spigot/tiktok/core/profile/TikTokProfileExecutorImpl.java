@@ -1,61 +1,41 @@
 package io.github.jwdeveloper.spigot.tiktok.core.profile;
 
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileEditor;
-import io.github.jwdeveloper.spigot.tiktok.profiles.code.ExecutorContext;
-import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
-import io.github.jwdeveloper.spigot.tiktok.profiles.common.definitions.ConstDefinition;
-import io.github.jwdeveloper.spigot.tiktok.profiles.common.definitions.MethodDefinition;
-import io.github.jwdeveloper.spigot.tiktok.profiles.processor.ProfileProcessor;
+import io.github.jwdeveloper.ff.core.logger.plugin.FluentLogger;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfilesExecutor;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
+import io.github.jwdeveloper.spigot.tiktok.profiles.ast.ProgramSYML;
+import io.github.jwdeveloper.spigot.tiktok.profiles.evaluator.Evaliator;
+import io.github.jwdeveloper.spigot.tiktok.profiles.evaluator.EvaluatorFactory;
 import io.github.jwdeveloper.tiktok.events.TikTokEvent;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
-public class TikTokProfileExecutorImpl implements TikTokProfileEditor {
-    private final ProfileProcessor profileExecutor;
-    public Map<String, MethodDefinition> methods;
-    public Map<String, ConstDefinition> constants;
+public class TikTokProfileExecutorImpl implements TikTokProfilesExecutor {
+    private final Evaliator evaliator;
 
-    public TikTokProfileExecutorImpl(ProfileProcessor profileExecutor)
-    {
-        this.profileExecutor = profileExecutor;
-        methods = new HashMap<>();
-        constants = new HashMap<>();
+    public TikTokProfileExecutorImpl() {
+        evaliator = EvaluatorFactory.create();
     }
 
-    @Override
-    public void addConstance(ConstDefinition constDefinition) {
-        constants.put(constDefinition.getName(),constDefinition);
+    public List<String> execute(TikTokEvent tikTokEvent, Profile profile) {
+        if (!profile.getEventsBlocks().containsKey(tikTokEvent.getClass())) {
+            return List.of();
+        }
+
+        try {
+            var eventProgram = profile.getEventsBlocks().get(tikTokEvent.getClass());
+            evaliator.getContext().clearOutput();
+            evaliator.getContext().addVariable("event", tikTokEvent);
+            evaliator.evaluate(eventProgram);
+        } catch (Exception e)
+        {
+            throw e;
+        }
+        return evaliator.getContext().getOutput();
     }
 
-    @Override
-    public void addConstance(String name, Object value) {
-        constants.put(name,new ConstDefinition(name,value));
-    }
-
-    @Override
-    public void addMethod(String name, Function<List<Object>, Object> onInvoke) {
-        methods.put(name,new MethodDefinition(name,onInvoke, false));
-    }
-
-    @Override
-    public void addDefaultMethod(String name, Function<List<Object>, Object> onInvoke) {
-        methods.put(name,new MethodDefinition(name,onInvoke, true));
-    }
-
-    @Override
-    public void addMethod(MethodDefinition methodDefinition) {
-        methods.put(methodDefinition.getName(),methodDefinition);
-    }
-
-
-
-    public List<String> execute(TikTokEvent tikTokEvent, Profile profile)
-    {
-        var context = new ExecutorContext(tikTokEvent,methods,constants);
-        return profileExecutor.processProfile(context, profile).getProcessedCommands();
+    public List<String> execute(ProgramSYML programSYML) {
+        return evaliator.evaluate(programSYML).getContext().getOutput();
     }
 
 }

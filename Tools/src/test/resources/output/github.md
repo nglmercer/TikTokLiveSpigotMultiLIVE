@@ -10,14 +10,6 @@
 
 <a href="https://www.buymeacoffee.com/jwdev" target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.svg" height="100%" >
-</img>
-</a>
-
-
-
-<a href="https://www.buymeacoffee.com/jwdev" target="blank" >
-
 <img src="https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support_old.gif" width="30%" height="100%" >
 </img>
 </a>
@@ -44,7 +36,7 @@
 
 <a target="blank" >
 
-<img src="https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.gif" height="100%" >
+<img src="https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner_small.gif" width="100%" height="100%" >
 </img>
 </a>
 
@@ -57,10 +49,6 @@
 </div>
 
 Ever wanted to bring the excitement of TikTok Lives directly into Minecraft? With TikTokLiveSpigot, now you can!**Integrate your minecraft server with TikTok live in 10 seconds!**It is as simple as using> /tiktoklive connect MyTikTokUser
-
-
-[event configuration](https://github.com/jwdeveloper/TikTokLiveSpigot#events-configuration) 
-
 
 
 <a href="https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW" align="right" target="blank" >
@@ -340,8 +328,8 @@ tiktok-live:
 # /tiktoklive
 # /tiktoklive language <language>
 # /tiktoklive connect
-# /tiktoklive profile
 # /tiktoklive profile-editor
+# /tiktoklive profile
 # /tiktoklive admin
 # /tiktoklive disconnect
 # /tiktoklive updater
@@ -353,8 +341,8 @@ commands:
     children: 
       - language
       - connect
-      - profile
       - profile-editor
+      - profile
       - admin
       - disconnect
       - updater
@@ -397,6 +385,14 @@ commands:
           type: text
     usage: /tiktoklive connect
 
+# /tiktoklive profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.profiles.profile-editor
+    can-use: 
+      - command_sender
+    usage: /tiktoklive profile-editor
+
 # /tiktoklive profile
   profile: 
     permissions: 
@@ -407,14 +403,6 @@ commands:
       - profile-name:
           type: text
     usage: /tiktoklive profile
-
-# /tiktoklive profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.profiles.profile-editor
-    can-use: 
-      - command_sender
-    usage: /tiktoklive profile-editor
 
 # /tiktoklive admin
   admin: 

@@ -1,5 +1,5 @@
 package io.github.jwdeveloper.spigot.tiktok.api.profiles;
-import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
 import org.bukkit.entity.Player;
 
 import java.util.List;

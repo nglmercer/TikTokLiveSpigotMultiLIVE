@@ -14,9 +14,9 @@ import io.github.jwdeveloper.ff.plugin.api.logger.PlayerLogger;
 import io.github.jwdeveloper.ff.plugin.implementation.config.options.FluentConfigFile;
 import io.github.jwdeveloper.ff.plugin.implementation.listeners.ChatInputListener;
 import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConfig;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotPermissions;
-import io.github.jwdeveloper.spigot.tiktok.profiles.common.Profile;
 import io.github.jwdeveloper.tiktok.live.ConnectionState;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -73,7 +73,7 @@ public class TikTokSpigotLiveAdminGUI extends SimpleGUI {
                 tokLiveSpigotApi.setProfile(profileContentSelectionEvent.getPlayer(), profileContentSelectionEvent.getSelectedItem().getName());
             });
             contentListOptions.setContentMapping(Profile::getName);
-            contentListOptions.setSelectedItemObserver(ObserverBag.createObserver(new Profile()));
+            contentListOptions.setSelectedItemObserver(ObserverBag.createObserver(new Profile(null,null,null)));
         });
     }
 

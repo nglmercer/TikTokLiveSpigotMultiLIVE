@@ -2,7 +2,7 @@
 
 [CENTER][URL='https://www.buymeacoffee.com/jwdev'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/support.svg[/IMG][/URL][URL='https://discord.gg/fk3W4e3K'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/discord.svg[/IMG][/URL][URL='https://github.com/jwdeveloper/TikTokLiveSpigot'][IMG]https://raw.githubusercontent.com/jwdeveloper/FluentFramework/master/ff-tools/resources/socials/github.svg[/IMG][/URL][/CENTER]
 
-[IMG]https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner.gif[/IMG]
+[IMG]https://raw.githubusercontent.com/jwdeveloper/TikTokLiveSpigot/master/webeditor/resources/banner_small.gif[/IMG]
 
 
 
@@ -12,10 +12,6 @@ Ever wanted to bring the excitement of TikTok Lives directly into Minecraft? Wit
 [QUOTE]
 /tiktoklive connect MyTikTokUser
 [/QUOTE]
-
-
-[URL='https://github.com/jwdeveloper/TikTokLiveSpigot#events-configuration']event configuration[/URL]
-
 
 
 [CENTER][URL='https://www.youtube.com/watch?v=0KSN7dfi7PQ&t=32s&ab_channel=JW'][IMG]https://img.youtube.com/vi/0KSN7dfi7PQ/0.jpg[/IMG][/URL][/CENTER]
@@ -194,8 +190,8 @@ tiktok-live:
 # /tiktoklive
 # /tiktoklive language <language>
 # /tiktoklive connect
-# /tiktoklive profile
 # /tiktoklive profile-editor
+# /tiktoklive profile
 # /tiktoklive admin
 # /tiktoklive disconnect
 # /tiktoklive updater
@@ -207,8 +203,8 @@ commands:
     children: 
       - language
       - connect
-      - profile
       - profile-editor
+      - profile
       - admin
       - disconnect
       - updater
@@ -251,6 +247,14 @@ commands:
           type: text
     usage: /tiktoklive connect
 
+# /tiktoklive profile-editor
+  profile-editor: 
+    permissions: 
+      - tiktoklivespigot.profiles.profile-editor
+    can-use: 
+      - command_sender
+    usage: /tiktoklive profile-editor
+
 # /tiktoklive profile
   profile: 
     permissions: 
@@ -261,14 +265,6 @@ commands:
       - profile-name:
           type: text
     usage: /tiktoklive profile
-
-# /tiktoklive profile-editor
-  profile-editor: 
-    permissions: 
-      - tiktoklivespigot.profiles.profile-editor
-    can-use: 
-      - command_sender
-    usage: /tiktoklive profile-editor
 
 # /tiktoklive admin
   admin: 

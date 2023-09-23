@@ -1,23 +1,17 @@
 package io.github.jwdeveloper.spigot.tiktok.core;
 
-import io.github.jwdeveloper.ff.core.common.java.StringUtils;
 import io.github.jwdeveloper.ff.core.logger.plugin.FluentLogger;
 import io.github.jwdeveloper.ff.plugin.api.FluentApiSpigotBuilder;
 import io.github.jwdeveloper.ff.plugin.api.extention.FluentApiExtension;
 import io.github.jwdeveloper.ff.plugin.implementation.FluentApiSpigot;
 import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
-import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfileEditor;
+import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfilesExecutor;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConfig;
 import io.github.jwdeveloper.spigot.tiktok.core.profile.ProfileService;
 import io.github.jwdeveloper.spigot.tiktok.core.profile.TikTokProfileExecutorImpl;
-import io.github.jwdeveloper.spigot.tiktok.core.profile_editor.ProfileEditorFunctionsRegistartion;
-import io.github.jwdeveloper.spigot.tiktok.profiles.deserializer.ProfileDeserializer;
-import io.github.jwdeveloper.spigot.tiktok.profiles.interpreter.ProfileInterpreter;
-import io.github.jwdeveloper.spigot.tiktok.profiles.processor.ProfileProcessor;
+import io.github.jwdeveloper.spigot.tiktok.core.profile_editor_old.ProfileEditorFunctionsRegistartion;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
-
-import java.util.Random;
 
 public class TikTokLiveSpigotExtension implements FluentApiExtension {
     @Override
@@ -27,14 +21,10 @@ public class TikTokLiveSpigotExtension implements FluentApiExtension {
         builder.loggerConfiguration();
 
 
+
         var container = builder.container();
-
         container.registerSigleton(TikTokLiveSpigotApi.class, TikTokLiveSpigotApiImpl.class);
-        container.registerSigleton(ProfileDeserializer.class);
-        container.registerSigleton(ProfileInterpreter.class);
-        container.registerSigleton(ProfileProcessor.class);
-
-        container.registerSigleton(TikTokProfileEditor.class, TikTokProfileExecutorImpl.class);
+        container.registerSigleton(TikTokProfilesExecutor.class, TikTokProfileExecutorImpl.class);
     }
 
 

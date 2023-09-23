@@ -397,6 +397,11 @@
     }
   },
   {
+    "javaClassName": "TikTokReconnectingEvent",
+    "name": "onReconnecting",
+    "fields": {}
+  },
+  {
     "javaClassName": "TikTokRoomMessageEvent",
     "name": "onRoomMessage",
     "fields": {
