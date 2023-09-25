@@ -1,6 +1,7 @@
 package io.github.jwdeveloper.spigot.tiktok.profiles.parser.handlers.statements.blocks;
 
 
+import io.github.jwdeveloper.spigot.tiktok.profiles.ast.statements.Statement;
 import io.github.jwdeveloper.spigot.tiktok.profiles.parser.NodeFactory;
 import io.github.jwdeveloper.spigot.tiktok.profiles.parser.ParserHandler;
 import io.github.jwdeveloper.spigot.tiktok.profiles.ast.expressions.Expression;
@@ -26,7 +27,7 @@ public class SwitchBlockStatementHandler implements ParserHandler<SwitchBlockSta
                 tokenizer.nextOrThrow(TokenType.KEYWORLD, "case") != null) {
             var caseCondition = parserFactory.createNode(Expression.class, BinaryExpressionHandler.class);
             tokenizer.nextOrThrow(TokenType.KEYWORLD, "then");
-            var caseAction = parserFactory.createNode(Expression.class, ExpressionHandler.class);
+            var caseAction = parserFactory.createNode(Statement.class);
 
             caseses.add(new SwitchBlockStatement.SwitchCase(caseCondition, caseAction));
         }
@@ -36,7 +37,7 @@ public class SwitchBlockStatementHandler implements ParserHandler<SwitchBlockSta
         }
         tokenizer.nextOrThrow(TokenType.KEYWORLD, "default");
         tokenizer.nextOrThrow(TokenType.KEYWORLD, "then");
-        var caseAction = parserFactory.createNode(Expression.class, ExpressionHandler.class);
+        var caseAction = parserFactory.createNode(Statement.class);
         var defaultCase = new SwitchBlockStatement.SwitchCase(null, caseAction);
         return new SwitchBlockStatement(switchCondition, caseses, defaultCase);
     }

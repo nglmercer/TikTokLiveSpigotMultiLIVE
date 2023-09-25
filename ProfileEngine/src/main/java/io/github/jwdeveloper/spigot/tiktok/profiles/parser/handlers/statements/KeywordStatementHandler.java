@@ -29,8 +29,6 @@ public class KeywordStatementHandler implements ParserHandler<KeywordStatement> 
     private KeywordStatement handleRepeat(Tokenizer tokenizer, NodeFactory parserFactory) {
         tokenizer.nextOrThrow(TokenType.KEYWORLD, "repeat");
         var howManyTimesExpression = parserFactory.createNode(Expression.class, ExpressionHandler.class);
-        tokenizer.next();
-
         var whatToInvoke = parserFactory.createNode(Expression.class, ExpressionHandler.class);
         return new RepeatStatement(howManyTimesExpression, whatToInvoke);
     }

@@ -1,0 +1,18 @@
+
+spawn: (mobName) =>  /execute at @p run summon minecraft:${mobName} ~ ~ ~ {CustomName:'"CustomName"',CustomNameVisible:1}
+mobName: (a)=> "{CustomName:"+${NAME}+"}"
+onJoin:
+   /say &2${event.user.nickName} &7joined to &3Tik&cTok &2Live!
+   /execute at @p run particle minecraft:heart ~1 ~1 ~
+onGift:
+   /title @p clear
+   /title @p title "&2${event.sender.nickName}"
+   /title @p subtitle "&7Thank you for ${event.comboCount} &2${event.gift.name}"
+   spawn("zombie")
+
+   if event.streakFinished is true
+   then repeat event.comboCount spawn("creeper")
+
+
+onComment:
+   /say &2${event.user.nickName} &7said &3 ${event.text}

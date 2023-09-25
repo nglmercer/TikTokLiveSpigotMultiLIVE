@@ -1,5 +1,6 @@
 package io.github.jwdeveloper.spigot.tiktok.profiles.parser.handlers.statements.blocks;
 
+import io.github.jwdeveloper.spigot.tiktok.profiles.ast.statements.Statement;
 import io.github.jwdeveloper.spigot.tiktok.profiles.parser.NodeFactory;
 import io.github.jwdeveloper.spigot.tiktok.profiles.parser.ParserHandler;
 import io.github.jwdeveloper.spigot.tiktok.profiles.ast.expressions.Expression;
@@ -19,13 +20,13 @@ public class IfBlockStatementHandler implements ParserHandler<IfBlockStatement> 
             return new IfBlockStatement(expression);
         }
         tokenizer.nextOrThrow(TokenType.KEYWORLD, "then");
-        var thenStatement = parserFactory.createNode(ExpresionStatement.class);
+        var thenStatement = parserFactory.createNode(Statement.class);
 
         if (!tokenizer.lookupValue("else")) {
             return new IfBlockStatement(expression, thenStatement);
         }
         tokenizer.nextOrThrow(TokenType.KEYWORLD, "else");
-        var elseStatement = parserFactory.createNode(ExpresionStatement.class);
+        var elseStatement = parserFactory.createNode(Statement.class);
         return new IfBlockStatement(expression, thenStatement, elseStatement);
     }
 }

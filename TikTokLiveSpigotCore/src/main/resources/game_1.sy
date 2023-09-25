@@ -1,0 +1,56 @@
+
+
+amount: 2
+
+spawn: (mobType,mobName) then  /execute at @p run summon minecraft:${mobType} ~ ~ ~ {CustomName:'"&a${mobName}"',CustomNameVisible:1}
+
+effect: (effectName) then /effect give @p minecraft:${effectName} infinite
+
+effect2: (effectName)then /effect give @p minecraft:${effectName} 1000000 5 true
+
+particle: (particelName) then /execute at @p run particle minecraft:${particelName} ~1 ~1 ~
+
+wepond: () then /weaponmechanics give @p ak47
+
+reset: () then /kill @e
+
+onLike: 
+   particle("heart") 
+   repeat amount spawn("zombie",event.sender.nickName)  
+   /say &2${event.sender.nickName} &3 spawns X${amount} &2zombie
+   
+onComment: 
+   /title @p title "&2${event.user.nickName}"
+   /title @p subtitle "&7PRZESTAŃ!!"
+   repeat amount spawn("iron_golem",event.user.nickName)
+   /say &2${event.user.nickName} &3 spawns X${amount} &4creeper
+
+onFollow: 
+   /title @p clear
+   /title @p title "&2${event.newFollower.nickName}"
+   /title @p subtitle "&7Dzięki za followek"
+   repeat amount spawn("blaze",event.newFollower.nickName)
+     
+onJoin:
+   
+   repeat 1 spawn("creeper",event.user.nickName)
+   effect("speed")
+   effect2("jump_boost")
+   
+   effect("regeneration")
+   
+   
+
+onGift:
+   /title @p clear
+   /title @p title "&2${event.sender.nickName}"
+   /title @p subtitle "&7Dzięki za gowno ${event.comboCount} &2${event.gift.name}"
+   
+   spawn("tnt","mark")
+   switch event.gift.id
+    case 5655 then repeat 15 spawn("tnt","mark")
+    case 5879 then repeat 3 spawn("ghast","mark")
+    case 5658 then repeat 100 spawn("creeper","mark")
+    case 5879 then repeat 3 spawn("ender_dragon","mark")
+    default then reset()
+

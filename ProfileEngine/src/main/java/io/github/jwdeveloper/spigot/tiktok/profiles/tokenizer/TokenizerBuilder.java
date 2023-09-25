@@ -2,7 +2,10 @@ package io.github.jwdeveloper.spigot.tiktok.profiles.tokenizer;
 
 import io.github.jwdeveloper.ff.core.common.java.StringUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class TokenizerBuilder {
@@ -23,11 +26,10 @@ public class TokenizerBuilder {
     }
 
     public Tokenizer build(String input) {
-        var tokens = getStrings(input).stream().map(this::stringToToken).toList();
-        return new Tokenizer(tokens);
+        return new Tokenizer(getTokens(input));
     }
 
-    private Token stringToToken(String value) {
+    private Token stringToToken(String value, int index) {
         var type = TokenType.IDENTIFIER;
 
         if (mappings.containsKey(value)) {
@@ -44,18 +46,16 @@ public class TokenizerBuilder {
             }
         }
 
-        return new Token(type, value);
+        return new Token(type, value, index, 0, 0);
     }
 
 
-    private List<String> getStrings(String input) {
-        int counter = 1;
+    private List<Token> getTokens(String input) {
         StringBuilder currentToken = new StringBuilder();
         int curlyBraceCount = 0;
         char stringDelimiter = 0; // Will hold the quote character when inside a string
-
         boolean commandMode = false;
-
+        int counter =0;
 
         var specialSymbols = new ArrayList<Character>();
 
@@ -73,14 +73,13 @@ public class TokenizerBuilder {
         specialSymbols.add('*');
         specialSymbols.add('^');
         specialSymbols.add(';');
-        List<String> result = new ArrayList<>();
+        List<Token> result = new ArrayList<>();
         for (int i = 0; i < input.length(); i++) {
             char current = input.charAt(i);
 
 
-            if(current == '&')
-            {
-                current ='§';
+            if (current == '&') {
+                current = '§';
             }
 
             if (current == '\n') {
@@ -89,9 +88,8 @@ public class TokenizerBuilder {
                 }
 
                 var res = currentToken.toString();
-                if(StringUtils.isNotNullOrEmpty(res))
-                {
-                    result.add(res);
+                if (StringUtils.isNotNullOrEmpty(res)) {
+                    result.add(stringToToken(res,i));
                 }
                 currentToken.setLength(0);
                 counter++;
@@ -110,21 +108,18 @@ public class TokenizerBuilder {
             if (specialSymbols.contains(current)) {
                 var value = currentToken.toString();
                 if (!value.equals("")) {
-                    result.add(currentToken.toString());
+                    result.add(stringToToken(value,i));
                 }
-                result.add(current + "");
+                result.add(stringToToken(current + "",i));
                 counter++;
                 currentToken.setLength(0);
                 continue;
             }
 
             if (stringDelimiter != 0) {
-                // We're inside a string
                 currentToken.append(current);
                 if (current == stringDelimiter) {
-                    // End of string
-                    //  System.out.println(counter + " " + currentToken);
-                    result.add(currentToken.toString());
+                    result.add(stringToToken(currentToken.toString(),i));
                     counter++;
                     currentToken.setLength(0);
                     stringDelimiter = 0;
@@ -144,8 +139,7 @@ public class TokenizerBuilder {
             }
 
             if (current == ' ' && curlyBraceCount == 0) {
-                //System.out.println(counter + " " + currentToken);
-                result.add(currentToken.toString());
+                result.add(stringToToken(currentToken.toString(),i));
                 counter++;
                 currentToken.setLength(0);
                 continue;
@@ -163,14 +157,14 @@ public class TokenizerBuilder {
 
 
             if (curlyBraceCount == 0 && current == '}') {
-                result.add(currentToken.toString());
+                result.add(stringToToken(currentToken.toString(),i));
                 counter++;
                 currentToken.setLength(0);
             }
         }
 
         if (currentToken.length() > 0) {
-            result.add(currentToken.toString());
+            result.add(stringToToken(currentToken.toString(),currentToken.length()));
         }
         return result;
     }

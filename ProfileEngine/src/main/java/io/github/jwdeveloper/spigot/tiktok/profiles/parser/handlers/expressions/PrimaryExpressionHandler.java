@@ -20,15 +20,14 @@ public class PrimaryExpressionHandler implements ParserHandler<Expression> {
         return switch (token.getTokenType()) {
 
             case IDENTIFIER -> parserFactory.createNode(Expression.class, IdentifierHandler.class);
-            //default -> parserFactory.createNode(Expression.class, PrimaryExpressionHandler.class);
-            default -> throw new SymlEngineException("Unknown token "+token.toString());
+            default -> throw new SymlEngineException("Unknown token "+token);
         };
     }
 
     private boolean IsLiteral(TokenType token) {
         return token == TokenType.BOOL ||
                 token == TokenType.NUMBER ||
-                token == TokenType.MINECRAFT_COMMENT ||
+                token == TokenType.MINECRAFT_COMMAND ||
                 token == TokenType.CODE_BLOCK ||
                 token == TokenType.STRING;
     }

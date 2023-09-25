@@ -141,7 +141,7 @@
   },
   {
     "javaClassName": "TikTokGiftMessageEvent",
-    "name": "onGiftMessage",
+    "name": "onGift",
     "fields": {
       "event.comboCount": "Long",
       "event.gift.description": "String",

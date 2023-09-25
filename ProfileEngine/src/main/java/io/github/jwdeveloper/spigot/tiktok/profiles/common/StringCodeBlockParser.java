@@ -14,7 +14,7 @@ public class StringCodeBlockParser {
     }
 
 
-    private  Map<Integer, String> findCodeBlocks(String input) {
+    private Map<Integer, String> findCodeBlocks(String input) {
         Map<Integer, String> occurrences = new HashMap<>();
         StringBuilder currentToken = new StringBuilder();
         int curlyBraceCount = 0;
@@ -26,7 +26,7 @@ public class StringCodeBlockParser {
             if (c == '$' && i + 1 < input.length() && input.charAt(i + 1) == '{') {
                 curlyBraceCount++;
                 i++; // Skip the '{' as we already counted it
-                 currentToken.append("${");
+                currentToken.append("${");
             } else if (c == '}') {
                 curlyBraceCount--;
                 currentToken.append("}");
@@ -34,8 +34,7 @@ public class StringCodeBlockParser {
                 currentToken.append(c);
             }
 
-            if (curlyBraceCount == 0 && currentToken.length() > 0)
-            {
+            if (curlyBraceCount == 0 && currentToken.length() > 0) {
                 var current = currentToken.toString();
 
                 //removig ${ from begining and } from end
@@ -58,16 +57,21 @@ public class StringCodeBlockParser {
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
 
-            if (c == '$' && i + 1 < input.length() && input.charAt(i + 1) == '{') {
+            if (c == '$' &&
+                    i + 1 < input.length() &&
+                    input.charAt(i + 1) == '{') {
                 curlyBraceCount++;
-                i++; // Skip the '{' as we already counted it
+                i++;
                 currentToken.append("${");
-            } else if (c == '}') {
+            } else if (c == '}'&& curlyBraceCount > 0)
+            {
                 curlyBraceCount--;
                 currentToken.append("}");
             } else if (curlyBraceCount > 0) {
                 currentToken.append(c);
-            } else {
+            }
+            else
+            {
                 output.append(c);
             }
 
@@ -76,12 +80,21 @@ public class StringCodeBlockParser {
                 index++;
                 currentToken.setLength(0);
             }
+
+
         }
 
-        if(output.charAt(0) == '\'' ||output.charAt(0) == '\"')
+        if ( output.charAt(0) == '\"') {
+            output.deleteCharAt(0);
+
+            var last = output.lastIndexOf( "\"");
+            output.delete(last, output.length());
+        }
+        if(output.charAt(0) == '\'')
         {
             output.deleteCharAt(0);
-            output.deleteCharAt(output.length()-1);
+            var last = output.lastIndexOf("'");
+            output.delete(last, output.length());
         }
 
         return output.toString();

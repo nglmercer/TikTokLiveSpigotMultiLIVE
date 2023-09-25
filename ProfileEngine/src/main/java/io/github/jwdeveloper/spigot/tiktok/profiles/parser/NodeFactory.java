@@ -27,7 +27,6 @@ public class NodeFactory {
             return (T) createNode(nodeType, null, parameters);
         } catch (SymlEngineException e)
         {
-            FluentLogger.LOGGER.info("createNodecreateNodecreateNodecreateNode");
             throw e;
         }
 
@@ -57,7 +56,6 @@ public class NodeFactory {
 
             return (T) handler.handle(_tokenIterator, this, parameters);
         } catch (SymlEngineException e) {
-
             throw e;
         } catch (Exception e) {
             throw new SymlEngineException("Unable to parse for node " + nodeType + " and parser " + parserType, e);

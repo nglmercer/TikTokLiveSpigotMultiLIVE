@@ -25,8 +25,8 @@ public class ExpressionHandler implements ParserHandler<Expression> {
                     tokenIterator.CurrentToken());
         }*/
 
-        var assignmentToken = tokenizer.nextOrThrow(TokenType.ASSIGMENT);
-        if(tokenizer.lookupType(TokenType.OPEN_ARGUMETNS))
+        var assignmentToken = tokenizer.nextOrThrow(TokenType.ASSIGNMENT);
+        if(tokenizer.lookupType(TokenType.OPEN_ARGUMENTS))
         {
             var methodDefinition = parserFactory.createNode(MethodDefinitionStatement.class,null,left);
             return new AssignmentExpression(left, assignmentToken, methodDefinition);
@@ -42,6 +42,6 @@ public class ExpressionHandler implements ParserHandler<Expression> {
     }
 
     private boolean isAssignmentType(Token token) {
-        return token.getTokenType().equals(TokenType.ASSIGMENT) || token.getTokenType().equals(TokenType.COMPLEX_ASSIGMENT);
+        return token.getTokenType().equals(TokenType.ASSIGNMENT) || token.getTokenType().equals(TokenType.COMPLEX_ASSIGNMENT);
     }
 }

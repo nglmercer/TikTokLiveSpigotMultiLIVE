@@ -40,7 +40,8 @@ public class TikTokSpigotLiveAdminGUI extends SimpleGUI {
     }
 
     @Override
-    public void onInit(InventoryDecorator decorator, InventoryApi inventoryApi) {
+    public void onInit(InventoryDecorator decorator, InventoryApi inventoryApi)
+    {
         decorator.withPermissions(TikTokLiveSpigotPermissions.GUI.ADMIN);
         createTitle(decorator, inventoryApi);
         borderComponent = createBorder(decorator, inventoryApi);
@@ -179,7 +180,6 @@ public class TikTokSpigotLiveAdminGUI extends SimpleGUI {
         var observer = new Observer<Boolean>(configFile.get(), fieldName);
         observer.subscribe(aBoolean ->
         {
-            FluentLogger.LOGGER.info("SAVIG VALUE");
             configFile.save();
         });
         return observer;

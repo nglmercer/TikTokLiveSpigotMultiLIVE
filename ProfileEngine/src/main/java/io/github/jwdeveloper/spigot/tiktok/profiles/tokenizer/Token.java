@@ -6,5 +6,12 @@ import lombok.Value;
 public class Token
 {
     TokenType tokenType;
+
     String value;
+
+    int index;
+
+    int line;
+
+    int character;
 }

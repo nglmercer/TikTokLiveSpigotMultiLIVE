@@ -20,12 +20,10 @@ public class Parser {
         }
         catch (SymlEngineException e)
         {
-            FluentLogger.LOGGER.info("SymlEngineExceptionSymlEngineExceptionSymlEngineExceptionSymlEngineExceptionSymlEngineException");
             throw e;
         }
         catch (Exception e)
         {
-            FluentLogger.LOGGER.info("ExceptionExceptionExceptionExceptionException");
             throw e;
         }
 

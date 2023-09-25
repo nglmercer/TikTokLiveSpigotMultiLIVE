@@ -1,0 +1,9 @@
+
+onJoin: 
+    /say hello ${event.user.nickName} on my Live!   
+
+onComment: 
+    /say ${event.user.nickName} said  ${event.user.text}
+
+onGift: 
+    /say Thank you ${event.sender.nickName} for ${event.gift.name}

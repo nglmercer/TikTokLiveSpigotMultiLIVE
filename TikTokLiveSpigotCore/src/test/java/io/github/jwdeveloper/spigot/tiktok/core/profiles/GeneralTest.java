@@ -5,9 +5,9 @@ import common.EvaluatorAssert;
 import common.ProfileTestBase;
 import io.github.jwdeveloper.ff.core.files.FileUtility;
 import io.github.jwdeveloper.ff.core.logger.plugin.SimpleLogger;
+import io.github.jwdeveloper.spigot.tiktok.core.profile.ProfileLoader;
 import io.github.jwdeveloper.spigot.tiktok.profiles.evaluator.EvaluatorFactory;
 import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class GeneralTest extends ProfileTestBase {
 
     @Test
     public void getFromFile() throws IOException, InvalidConfigurationException {
-        var path = "D:\\MC\\spigot_1.19.4\\plugins\\TikTokLiveSpigot\\test.syml";
+        var path = "D:\\Git\\TikTokLiveSpigot\\TikTokLiveSpigotCore\\src\\main\\resources\\default.sy";
         var content = FileUtility.loadFileContent(path);
 
         var loader = new ProfileLoader(new SimpleLogger("Loader: "));
@@ -57,6 +57,28 @@ public class GeneralTest extends ProfileTestBase {
                 .shouldHasOutput("say someone join! jacek")
                 .shouldHasOutput("say someone just comment! string connected adam")
                 .shouldHasOutput("say someone just follow! 22 2");
+
+    }
+
+
+    @Test
+    public void test2()
+    {
+        var input = """
+                spawn: (mobName) =>  /execute at @p run summon minecraft:${mobName} ~ ~ ~ {CustomName:'"${customName}"',CustomNameVisible:1}
+                                
+             
+                onGift:\s
+                     /title @p clear
+                     /title @p title "§2${event.sender.nickName}"
+                     /title @p subtitle "§7Thank you for ${event.comboCount} §2${event.gift.name}"
+                     if event.streakFinished is true
+                     then repeat event.comboCount spawn("creeper")
+                     \s
+             
+                """;
+
+        var result = runProfile(input).print();
 
     }
 

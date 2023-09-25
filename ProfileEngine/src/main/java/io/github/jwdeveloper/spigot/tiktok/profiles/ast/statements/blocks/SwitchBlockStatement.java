@@ -65,7 +65,7 @@ public class SwitchBlockStatement extends Statement {
     public static final class SwitchCase {
         Expression condition;
 
-        Expression action;
+        Statement action;
     }
 
 }

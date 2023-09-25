@@ -1,7 +1,7 @@
 package common;
 
 import io.github.jwdeveloper.ff.core.logger.plugin.SimpleLogger;
-import io.github.jwdeveloper.spigot.tiktok.core.profiles.ProfileLoader;
+import io.github.jwdeveloper.spigot.tiktok.core.profile.ProfileLoader;
 import io.github.jwdeveloper.spigot.tiktok.profiles.evaluator.Evaliator;
 import io.github.jwdeveloper.spigot.tiktok.profiles.evaluator.EvaluatorFactory;
 

@@ -5,11 +5,11 @@ public class TokenizerFactory {
         var builder = new TokenizerBuilder();
 
 
-        builder.addToken(TokenType.ASSIGMENT, ":","=");
+        builder.addToken(TokenType.ASSIGNMENT, ":","=");
         builder.addToken(TokenType.OPEN_BLOCK, "{");
         builder.addToken(TokenType.CLOSE_BLOCK, "}");
 
-        builder.addToken(TokenType.OPEN_ARGUMETNS, "(");
+        builder.addToken(TokenType.OPEN_ARGUMENTS, "(");
         builder.addToken(TokenType.CLOSE_ARGUMENTS, ")");
 
         builder.addToken(TokenType.OPEN_ARRAY, "[");
@@ -20,11 +20,11 @@ public class TokenizerFactory {
         builder.addToken(TokenType.END_OF_LINE, ";");
 
         builder.addToken(TokenType.LOGICAL_OPERATOR, "&&", "and", "||", "or", "!");
-        builder.addToken(TokenType.EQUALITY_OPREATOR,  "is", "not",  ">", ">=", "<", "<=", "contains");
+        builder.addToken(TokenType.EQUALITY_OPERATOR,  "is", "not",  ">", ">=", "<", "<=", "contains");
         builder.addToken(TokenType.BINARY_ADDATIVE_OPERATOR, "+", "-");
         builder.addToken(TokenType.BINARY_MULTIPLICATION_OPERATOR, "*", "/", "^", "%", "mod");
 
-        builder.addTokenRegex(TokenType.MINECRAFT_COMMENT, "^\\/");
+        builder.addTokenRegex(TokenType.MINECRAFT_COMMAND, "^\\/");
         builder.addTokenRegex(TokenType.STRING, "([\"'])(.*?)\\1");
         builder.addTokenRegex(TokenType.NUMBER, "^\\d+$");
         builder.addTokenRegex(TokenType.BOOL, "\\b(true|false)\\b");

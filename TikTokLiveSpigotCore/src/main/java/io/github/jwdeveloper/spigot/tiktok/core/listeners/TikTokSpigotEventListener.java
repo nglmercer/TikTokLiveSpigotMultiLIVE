@@ -12,6 +12,7 @@ import io.github.jwdeveloper.tiktok.annotations.TikTokEventHandler;
 import io.github.jwdeveloper.tiktok.events.TikTokEvent;
 import io.github.jwdeveloper.tiktok.events.messages.*;
 import io.github.jwdeveloper.tiktok.exceptions.TikTokLiveOfflineHostException;
+import io.github.jwdeveloper.tiktok.exceptions.TikTokLiveRequestException;
 import io.github.jwdeveloper.tiktok.listener.TikTokEventListener;
 import io.github.jwdeveloper.tiktok.live.LiveClient;
 import org.bukkit.Bukkit;
@@ -27,18 +28,21 @@ public class TikTokSpigotEventListener implements TikTokEventListener {
     private final FluentTaskFactory fluentTaskFactory;
     private final Plugin plugin;
     private final PlayerLogger playerLogger;
+    private final LoggerListener loggerListener;
 
 
     public TikTokSpigotEventListener(ProfileService profileService,
                                      TikTokProfilesExecutor profileProcessor,
                                      FluentTaskFactory fluentTaskFactory,
                                      Plugin plugin,
-                                     PlayerLogger playerLogger) {
+                                     PlayerLogger playerLogger,
+                                     LoggerListener loggerListener) {
         this.profileService = profileService;
         this.profileExecutor = profileProcessor;
         this.fluentTaskFactory = fluentTaskFactory;
         this.plugin = plugin;
         this.playerLogger = playerLogger;
+        this.loggerListener = loggerListener;
     }
 
 
@@ -56,6 +60,7 @@ public class TikTokSpigotEventListener implements TikTokEventListener {
                 return;
             }
             var commandsCopy = new ArrayList<>(commands);
+
             fluentTaskFactory.task(() ->
             {
                 for(var i =0;i<commandsCopy.size();i++)
@@ -65,15 +70,17 @@ public class TikTokSpigotEventListener implements TikTokEventListener {
                     {
                         var cmd = command.substring(4);
                         Bukkit.getOnlinePlayers().forEach(e -> e.sendMessage(cmd));
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"execute at @p run particle minecraft:heart ~1 ~1 ~");
                         continue;
                     }
+                    loggerListener.addMessageToIgnore();
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
                 }
                 var event = new TikTokLiveSpigotEvent(tikTokEvent, liveClient, currentProfile);
                 Bukkit.getServer().getPluginManager().callEvent(event);
             });
         }
-        catch (ClassCastException e)
+        catch (Exception e)
         {
             FluentLogger.LOGGER.error("Error while executing profile",e);
             profileService.clearProfiles();
@@ -120,8 +127,28 @@ public class TikTokSpigotEventListener implements TikTokEventListener {
 
 
     @TikTokEventHandler
-    public void onError(LiveClient liveClient, TikTokErrorEvent tikTokEvent) {
-        if (tikTokEvent.getException() instanceof TikTokLiveOfflineHostException) {
+    public void onError(LiveClient liveClient, TikTokErrorEvent tikTokEvent)
+    {
+
+        if(tikTokEvent.getException() instanceof TikTokLiveRequestException)
+        {
+            try
+            {
+              Thread.sleep(500);
+                playerLogger
+                        .warning(tikTokEvent.getException(), liveClient.getRoomInfo().getUserName(), "connection failed, reconnecting again")
+                        .sendToAllPlayer();
+              liveClient.connect();
+            }
+            catch (Exception e)
+            {
+
+            }
+            return;
+        }
+
+        if (tikTokEvent.getException() instanceof TikTokLiveOfflineHostException)
+        {
             playerLogger
                     .error(tikTokEvent.getException(), liveClient.getRoomInfo().getUserName(), "could be offline or name is misspelled")
                     .sendToAllPlayer();

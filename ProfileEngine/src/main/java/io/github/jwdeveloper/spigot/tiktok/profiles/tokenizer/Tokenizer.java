@@ -15,7 +15,7 @@ public class Tokenizer implements Iterator<Token> {
     @Getter
     private int currentIndex = -1;
 
-    private Token current = new Token(TokenType.BEGIN, "");
+    private Token current = new Token(TokenType.BEGIN, "",0,0,0);
 
 
     public Tokenizer(List<Token> tokens) {

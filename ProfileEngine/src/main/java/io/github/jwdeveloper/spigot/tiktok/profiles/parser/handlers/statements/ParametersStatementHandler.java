@@ -14,7 +14,7 @@ public class ParametersStatementHandler implements ParserHandler<ParametersState
     @Override
     public ParametersStatement handle(Tokenizer tokenizer, NodeFactory parserFactory, Object... parameters) {
 
-        var openType = TokenType.OPEN_ARGUMETNS;
+        var openType = TokenType.OPEN_ARGUMENTS;
         var closeType = TokenType.CLOSE_ARGUMENTS;
         if(parameters.length == 2)
         {

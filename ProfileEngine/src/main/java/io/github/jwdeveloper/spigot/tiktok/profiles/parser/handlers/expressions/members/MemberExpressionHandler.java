@@ -15,7 +15,7 @@ public class MemberExpressionHandler implements ParserHandler<Expression> {
         var objectTarget = parserFactory.createNode(Expression.class, PrimaryExpressionHandler.class);
         while (tokenizer.lookupType(TokenType.DOT) ||
                 tokenizer.lookupType(TokenType.OPEN_ARRAY) ||
-                tokenizer.lookupType(TokenType.OPEN_ARGUMETNS)) {
+                tokenizer.lookupType(TokenType.OPEN_ARGUMENTS)) {
 
 
            if (tokenizer.lookupType(TokenType.DOT)) {

@@ -26,7 +26,7 @@ public class IdentifierHandler implements ParserHandler<Expression> {
 
 
         var type= tokenizer.lookup().getTokenType();
-        if (type == TokenType.OPEN_ARGUMETNS)
+        if (type == TokenType.OPEN_ARGUMENTS)
         {
             return parserFactory.createNode(Expression.class,
                     MethodCallExpressionHandler.class,

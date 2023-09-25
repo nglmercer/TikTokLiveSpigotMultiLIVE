@@ -8,11 +8,13 @@ import io.github.jwdeveloper.ff.plugin.api.logger.PlayerLogger;
 import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
 import io.github.jwdeveloper.spigot.tiktok.api.profiles.TikTokProfilesExecutor;
 import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
+import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotConst;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotMeta;
 import io.github.jwdeveloper.spigot.tiktok.core.gui.TikTokSpigotLiveAdminGUI;
 import io.github.jwdeveloper.spigot.tiktok.core.profile.ProfileService;
 import io.github.jwdeveloper.tiktok.live.ConnectionState;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -79,6 +81,10 @@ public class TikTokLiveSpigotApiImpl implements TikTokLiveSpigotApi {
     public void openProfileEditor(Player player) {
         var url = profileService.getWebEditorUrl(player);
         playerLogger.link("to open web editor", url).send(player);
+    }
+
+    public void openHelp(CommandSender player) {
+        playerLogger.link("More information here", TikTokLiveSpigotConst.PROFILE_EDITOR_HELP).send(player);
     }
 
     @Override

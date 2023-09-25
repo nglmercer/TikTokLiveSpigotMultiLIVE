@@ -61,7 +61,7 @@ public class BinaryExpressionHandler implements ParserHandler<Expression>
             Supplier<Expression> f1 = () -> getGenericExpression(TokenType.BINARY_ADDATIVE_OPERATOR, then);
             Supplier<Expression> f2 = () -> getGenericExpression(TokenType.BINARY_MULTIPLICATION_OPERATOR, f1);
             Supplier<Expression> f3 = () -> getGenericExpression(TokenType.LOGICAL_OPERATOR, f2);
-            Supplier<Expression> f4 = () -> getGenericExpression(TokenType.EQUALITY_OPREATOR, f3);
+            Supplier<Expression> f4 = () -> getGenericExpression(TokenType.EQUALITY_OPERATOR, f3);
             return f4.get();
         }
 

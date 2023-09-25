@@ -7,7 +7,7 @@ public class CommandLiteral extends Literal{
     private final StringLiteral stringLiteral;
     public CommandLiteral(Object value, StringLiteral stringLiteral)
     {
-        super(value, TokenType.MINECRAFT_COMMENT);
+        super(value, TokenType.MINECRAFT_COMMAND);
         this.stringLiteral = stringLiteral;
     }
 

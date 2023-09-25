@@ -8,6 +8,7 @@ import io.github.jwdeveloper.ff.plugin.FluentPluginBuilder;
 import io.github.jwdeveloper.ff.tools.FluentFrameworkTask;
 import io.github.jwdeveloper.ff.tools.FluentTaskAction;
 import io.github.jwdeveloper.tiktok.events.TikTokEvent;
+import io.github.jwdeveloper.tiktok.events.messages.TikTokGiftMessageEvent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,9 @@ public class GenerateEventsSchemaTest extends FluentTaskAction {
     @FluentFrameworkTask
     public void invokeTest()
     {
+        var outputName = "TikTokEventsSchema.json";
         var outputDirectory = "D:\\Git\\TikTokLiveSpigot\\webeditor\\resources";
+        var outputDirectory2 = "D:\\Git\\TikTokLiveSpigot\\vsc-extension\\syml\\out";
         var gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
@@ -45,7 +48,8 @@ public class GenerateEventsSchemaTest extends FluentTaskAction {
         }
 
         var json = gson.toJson(classInfoList);
-        FileUtility.save(json, outputDirectory, "TikTokEventsSchema.json");
+        FileUtility.save(json, outputDirectory, outputName);
+        FileUtility.save(json, outputDirectory2, outputName);
     }
 
 
@@ -59,12 +63,15 @@ public class GenerateEventsSchemaTest extends FluentTaskAction {
 
 
     public static TikTokEventMetaClass handleSingleClass(Class clazz) {
-
         var fields = getFieldsNames(clazz, "event");
         var name = clazz.getSimpleName()
                 .replace("TikTok", StringUtils.EMPTY)
                 .replace("Event", StringUtils.EMPTY);
         name = "on" + name;
+        if(clazz.equals(TikTokGiftMessageEvent.class))
+        {
+            name = "onGift";
+        }
         return new TikTokEventMetaClass(clazz.getSimpleName(), name, fields);
     }
 

@@ -1,6 +1,7 @@
 package io.github.jwdeveloper.spigot.tiktok.profiles.parser.handlers;
 
 import io.github.jwdeveloper.spigot.tiktok.profiles.ast.statements.ExpresionStatement;
+import io.github.jwdeveloper.spigot.tiktok.profiles.common.exceptions.SymlEngineException;
 import io.github.jwdeveloper.spigot.tiktok.profiles.parser.NodeFactory;
 import io.github.jwdeveloper.spigot.tiktok.profiles.parser.ParserHandler;
 import io.github.jwdeveloper.spigot.tiktok.profiles.ast.Node;
@@ -46,9 +47,12 @@ public class ProgramSYMLHandler implements ParserHandler<ProgramSYML>
 
             }
         }
+        catch (SymlEngineException e)
+        {
+            throw e;
+        }
         catch (Exception e)
         {
-            e.printStackTrace();
             return new ProgramSYML(statements);
         }
         return new ProgramSYML(statements);

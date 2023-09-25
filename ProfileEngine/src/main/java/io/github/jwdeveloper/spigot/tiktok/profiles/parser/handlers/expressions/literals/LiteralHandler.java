@@ -29,7 +29,7 @@ public class LiteralHandler implements ParserHandler<Literal> {
         return switch (token.getTokenType()) {
             case BOOL -> new Literal(Boolean.parseBoolean(token.getValue()), token.getTokenType());
             case STRING, CODE_BLOCK -> handleStringLiteral(token);
-            case MINECRAFT_COMMENT -> handleMinecraftCommand(token);
+            case MINECRAFT_COMMAND -> handleMinecraftCommand(token);
             case NUMBER -> new Literal(Integer.parseInt(token.getValue()), token.getTokenType());
             default -> throw new SymlEngineException("Unexpected literal " + token);
         };

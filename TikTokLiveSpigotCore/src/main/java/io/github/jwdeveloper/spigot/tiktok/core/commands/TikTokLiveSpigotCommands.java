@@ -6,6 +6,7 @@ import io.github.jwdeveloper.ff.extension.commands.api.annotations.Command;
 import io.github.jwdeveloper.spigot.tiktok.api.TikTokLiveSpigotApi;
 import io.github.jwdeveloper.spigot.tiktok.api.profiles.models.Profile;
 import io.github.jwdeveloper.spigot.tiktok.core.common.TikTokLiveSpigotPermissions;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -18,6 +19,12 @@ public class TikTokLiveSpigotCommands {
         this.tiktokApi = profileService;
     }
 
+
+    @Command
+    public void onCommand(CommandSender commandSender)
+    {
+        tiktokApi.openHelp(commandSender);
+    }
 
     @Argument(name = "tiktok-user",
             displayMode = ArgumentDisplay.TAB_COMPLETE,
@@ -49,7 +56,7 @@ public class TikTokLiveSpigotCommands {
     }
 
 
-    @Command(name = "profile-editor", permissions = {TikTokLiveSpigotPermissions.PROFILES.PROFILE_EDITOR})
+   // @Command(name = "profile-editor", permissions = {TikTokLiveSpigotPermissions.PROFILES.PROFILE_EDITOR})
     public void openEditor(Player player) {
         tiktokApi.openProfileEditor(player);
     }
