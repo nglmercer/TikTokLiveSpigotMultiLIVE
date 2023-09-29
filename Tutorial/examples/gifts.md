@@ -14,10 +14,10 @@ onGift:
     then /say Thank you for Rose
   
     case "Bravo"                
-    then /adicionarpontos 100 GTA-5
+    then /say Thank you for Bravo
   
     case "TikTok"               
-    then /adicionarpontos 100 APEX-LEGENDS
+    then /say Thank you for TikTok
   
     default                    
     then /say this is some undefined gift!
