@@ -120,7 +120,7 @@ public class TikTokSpigotLiveAdminGUI extends SimpleGUI {
         btn.withOnLeftClick(event ->
         {
             if (tokLiveSpigotApi.getClientState() == ConnectionState.CONNECTED) {
-                tokLiveSpigotApi.disconnect(event.getPlayer());
+                tokLiveSpigotApi.connect(event.getPlayer());
                 return;
             }
 
